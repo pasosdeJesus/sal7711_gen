@@ -1,0 +1,143 @@
+
+es:
+  attributes:
+    fechacreacion: Creación
+    fechadeshabilitacion: Deshabilitación 
+    formatoregex: Formato (exp. reg)
+    id_municipio: Municipio
+    id_departamento: Departamento/Estado
+    id_tclase: Tipo de Centro Poblado
+    id_pais: País
+    id_supracategoria: Supracategoria
+    id_tviolencia: Tipo de Violencia
+    limiteinferior: Límite Inferior
+    limitesuperior: Límite Superior
+  will_paginate:
+    previous_label: "&#8592; Anterior"
+    next_label: "&#8594; Siguiente"
+    page_gap: "&hellip;"
+  activerecord:
+    attributes:
+      "sivel2_gen/actividadarea": 
+        Actividadarea: Área de Actividad
+        Actividadareas: Áreas de Actividades
+      "sivel2_gen/actividadoficio":
+        Actividadoficios: Actividades y Oficios
+        Actividadoficio: Actividad u Oficio
+      "sivel2_gen/acto":
+        presponsable: Presunto Responsable
+      "sivel2_gen/actividad": 
+        id: Identificación
+        numero: Número
+        minutos: Minutos
+        nombre:  Nombre
+        areas:  Áreas
+        objetivo: Objetivo
+        proyecto:  Proyecto
+        resultado: Resultado
+        fecha: Fecha
+        actividad:  Actividad
+        observaciones: Observaciones
+        created_at: Creado en
+      "sivel2_gen/casosjr":
+        fecharec: F. Recepción
+        regionsjr: Oficina
+        contacto: Solicitante Principal
+      "sivel2_gen/caso":
+        memo: Descripción
+        created_at: F. Creación
+        fecha: F. Hecho
+      "sivel2_gen/categoria":
+        Categoria: Categoria
+        Categorias: Categorias
+        tipocat: Tipo de Categoria
+        contadaen: Contada en
+      "sivel2_gen/causaref":
+        Causaref: Causa de Refugio
+        Causasref: Causas de Refugio
+      "sivel2_gen/clase":
+        Clase: Centro Poblado
+        Clases: Centros Poblados
+      "sivel2_gen/departamento":
+        Departamento: Departamento/Estado
+        Departamentos: Departamentos/Estados
+      "sivel2_gen/escolaridad":
+        Escolaridad: Nivel de Escolaridad
+        Escolaridades: Niveles de Escolaridad
+      "sivel2_gen/estadocivil":
+        Estadocivil: Estado Civil
+        Estadosciviles: Estados Civiles
+      "sivel2_gen/iglesia":
+        Iglesia: Iglesia
+        Iglesias: Iglesias
+      "sivel2_gen/motivosjr": 
+        Motivosjr: Servicio o Asesoria del SJR
+        Motivossjr: Servicios y Asesorias del SJR
+      "sivel2_gen/municipio":
+        Municipio: Municipio
+        Municipios: Municipios
+      "sivel2_gen/pais":
+        Pais: Pais
+        Paises: Paises
+      "sivel2_gen/pconsolidado":
+        Pconsolidado: Parámetro reporte consolidado
+        Pconsolidados: Parámetros reporte consolidado
+      "sivel2_gen/presponsable":
+        Presponsable: Presunto Responsable
+        Presponsables: Presuntos Responsables
+      "sivel2_gen/profesion":
+        Profesion: Profesión
+        Profesiones: Profesiones
+      "sivel2_gen/progestado":
+        Progestado: Programa o Respuesta  del Estado
+        Progsestado: Programas y Respuestas del Estado
+      "sivel2_gen/proteccion":
+        Proteccion: Medida de Protección
+        Protecciones: Medidas de Protección
+      "sivel2_gen/rangoedadac":
+        Rangoedadac: Rango de Edad para Actividad
+        Rangosedadac: Rangos de Edad para Actividades
+      "sivel2_gen/rangoedad":
+        Rangoedad: Rango de Edad
+        Rangosedad: Rangos de Edad
+      "sivel2_gen/region":
+        Region: Región
+        Regiones: Regiones
+      "sivel2_gen/regionsjr":
+        Regionsjr: Oficina
+        Regionessjr: Oficinas
+      "sivel2_gen/rolfamilia":
+        Rolfamilia: Rol en familia
+        Rolesfamilia: Roles en familia
+      "sivel2_gen/sectorsocial":
+        Sectorsocial: Sector Social
+        Sectoressociales: Sectores Sociales
+      "sivel2_gen/supracategoria": 
+        Supracategoria: Supracategoria
+        Supracategorias: Supracategorias
+        id_tviolencia: Tipo de Violencia
+      "sivel2_gen/tclase":
+        Tclase: Tipo de Centro Poblado
+        Tclases: Tipos de Centros Poblados
+      "sivel2_gen/tdocumento":
+        Tdocumento: Tipo de Documento
+        Tdocumentos: Tipos de Documentos
+      "sivel2_gen/tsitio": 
+        Tsitio: Tipo de Sitios
+        Tsitios: Tipos de Sitios
+      "sivel2_gen/tviolencia": 
+        Tviolencia: Tipo de Violencia
+        Tviolencias: Tipos de Violencia
+        nomcorto: Nombre Corto
+      "sivel2_gen/ubicacion":
+        Ubicacion: Ubicación
+      "sivel2_gen/usuario":
+        nusuario: Usuario
+        regionsjr: Oficina
+        descripcion: Descripción
+        encrypted_password: Clave
+        created_at: Fecha Registro
+      "sivel2_gen/vinculoestado":
+        Vinculoestado: Vínculo con el Estado
+        Vinculosestado: Vínculos con el Estado
+
