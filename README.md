@@ -6,12 +6,13 @@ Archivo de Prensa
 
 
 ### Requerimientos
-* Ruby version >= 2.1
-* PostgreSQL >= 9.3 con extensión unaccent disponible
-* Recomendado sobre adJ 5.5p2 (que incluye todos los componentes mencionados).  
+* Ruby version >= 2.2
+* PostgreSQL >= 9.4 con extensión unaccent disponible
+* Recomendado sobre adJ 5.6 (que incluye todos los componentes mencionados).  
   Las siguientes instrucciones suponen que opera en este ambiente.
 
 Puede consultar como instalar estos componentes en: http://dhobsd.pasosdejesus.org/index.php?id=Ruby+on+Rails+en+OpenBSD
 
-Es como otros motores, se recomienda ver sivel2_gen
+Es como otros motores, se recomienda ver cor1440_gen en
+https://github.com/pasosdeJesus/cor1440_gen
 
