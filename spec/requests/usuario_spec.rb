@@ -6,7 +6,6 @@ describe "Usuarios" do
 
   describe "inicio de sesion" do
     it "no autentica con clave errada a usuario existente" do
-		  #usuario = FactoryGirl.create(:usuario)
 		  usuario = Usuario.find_by(nusuario: 'sal7711')
       visit new_usuario_session_path 
 			fill_in "Usuario", with: usuario.nusuario

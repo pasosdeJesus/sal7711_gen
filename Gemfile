@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby "2.1.5"
+#ruby "2.2.2"
 
 # Rails (internacionalización)
 gem "rails", '~> 4.2.0'
@@ -8,6 +8,8 @@ gem "rails-i18n"
 
 # Postgresql
 gem "pg"
+
+gem "sass"
 
 # API JSON facil. Ver: https://github.com/rails/jbuilder
 gem "jbuilder"
@@ -57,8 +59,8 @@ gem "tzinfo"
 gem "tzinfo-data"
 
 # Motor de sistemas de información estilo Pasos de Jesús
-#gem 'sip', github: 'pasosdeJesus/sip'
-gem 'sip', path: '../sip'
+gem 'sip', github: 'pasosdeJesus/sip'
+#gem 'sip', path: '../sip'
 
 group :doc do
     # Genera documentación en doc/api con bundle exec rake doc:rails
@@ -82,7 +84,7 @@ group :development, :test do
   gem "launchy"
 
   # Depurar
-  gem 'byebug'
+  #gem 'byebug'
 
   # Consola irb en páginas con excepciones o usando <%= console %> en vistas
   gem 'web-console'
@@ -100,7 +102,7 @@ group :test do
   gem "capybara"
   
   # Pruebas de regresión que requieren javascript
-  gem "capybara-webkit"
+  gem "capybara-webkit", '1.4.1'
 
   # Envia resultados de pruebas desde travis a codeclimate
   gem "codeclimate-test-reporter", require: nil

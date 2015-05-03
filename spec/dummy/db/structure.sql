@@ -215,18 +215,17 @@ CREATE SEQUENCE sip_clase_id_seq
 --
 
 CREATE TABLE sip_clase (
-    id integer DEFAULT nextval('sip_clase_id_seq'::regclass) NOT NULL,
+    id_clalocal integer,
     nombre character varying(500) COLLATE public.es_co_utf_8 NOT NULL,
-    id_departamento integer NOT NULL,
-    id_municipio integer NOT NULL,
-    id_tclase character varying(10),
+    id_tclase character varying(10) DEFAULT 'CP'::character varying NOT NULL,
     latitud double precision,
     longitud double precision,
     fechacreacion date NOT NULL,
     fechadeshabilitacion date,
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
-    id_pais integer NOT NULL,
+    id_municipio integer,
+    id integer DEFAULT nextval('sip_clase_id_seq'::regclass) NOT NULL,
     CONSTRAINT clase_check CHECK (((fechadeshabilitacion IS NULL) OR (fechadeshabilitacion >= fechacreacion)))
 );
 
@@ -248,7 +247,7 @@ CREATE SEQUENCE sip_departamento_id_seq
 --
 
 CREATE TABLE sip_departamento (
-    id integer DEFAULT nextval('sip_departamento_id_seq'::regclass) NOT NULL,
+    id_deplocal integer,
     nombre character varying(500) COLLATE public.es_co_utf_8 NOT NULL,
     latitud double precision,
     longitud double precision,
@@ -257,6 +256,7 @@ CREATE TABLE sip_departamento (
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
     id_pais integer NOT NULL,
+    id integer DEFAULT nextval('sip_departamento_id_seq'::regclass) NOT NULL,
     CONSTRAINT departamento_check CHECK (((fechadeshabilitacion IS NULL) OR (fechadeshabilitacion >= fechacreacion)))
 );
 
@@ -306,17 +306,44 @@ CREATE SEQUENCE sip_municipio_id_seq
 --
 
 CREATE TABLE sip_municipio (
-    id integer DEFAULT nextval('sip_municipio_id_seq'::regclass) NOT NULL,
+    id_munlocal integer,
     nombre character varying(500) COLLATE public.es_co_utf_8 NOT NULL,
-    id_departamento integer NOT NULL,
     latitud double precision,
     longitud double precision,
     fechacreacion date DEFAULT ('now'::text)::date NOT NULL,
     fechadeshabilitacion date,
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
-    id_pais integer NOT NULL,
+    id_departamento integer,
+    id integer DEFAULT nextval('sip_municipio_id_seq'::regclass) NOT NULL,
     CONSTRAINT municipio_check CHECK (((fechadeshabilitacion IS NULL) OR (fechadeshabilitacion >= fechacreacion)))
+);
+
+
+--
+-- Name: sip_oficina_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE sip_oficina_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: sip_oficina; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE sip_oficina (
+    id integer DEFAULT nextval('sip_oficina_id_seq'::regclass) NOT NULL,
+    nombre character varying(50) NOT NULL,
+    fechacreacion date DEFAULT ('now'::text)::date NOT NULL,
+    fechadeshabilitacion date,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone,
+    CONSTRAINT oficina_check CHECK (((fechadeshabilitacion IS NULL) OR (fechadeshabilitacion >= fechacreacion)))
 );
 
 
@@ -379,15 +406,15 @@ CREATE TABLE sip_persona (
     mesnac integer,
     dianac integer,
     sexo character(1) NOT NULL,
-    id_departamento integer,
-    id_municipio integer,
-    id_clase integer,
     numerodocumento character varying(100),
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
     id_pais integer,
     nacionalde integer,
     tdocumento_id integer,
+    id_departamento integer,
+    id_municipio integer,
+    id_clase integer,
     CONSTRAINT persona_check CHECK (((dianac IS NULL) OR ((((dianac >= 1) AND ((((((((mesnac = 1) OR (mesnac = 3)) OR (mesnac = 5)) OR (mesnac = 7)) OR (mesnac = 8)) OR (mesnac = 10)) OR (mesnac = 12)) AND (dianac <= 31))) OR (((((mesnac = 4) OR (mesnac = 6)) OR (mesnac = 9)) OR (mesnac = 11)) AND (dianac <= 30))) OR ((mesnac = 2) AND (dianac <= 29))))),
     CONSTRAINT persona_mesnac_check CHECK (((mesnac IS NULL) OR ((mesnac >= 1) AND (mesnac <= 12)))),
     CONSTRAINT persona_sexo_check CHECK ((((sexo = 'S'::bpchar) OR (sexo = 'F'::bpchar)) OR (sexo = 'M'::bpchar)))
@@ -522,15 +549,15 @@ CREATE TABLE sip_ubicacion (
     id integer DEFAULT nextval('sip_ubicacion_id_seq'::regclass) NOT NULL,
     lugar character varying(500) COLLATE public.es_co_utf_8,
     sitio character varying(500) COLLATE public.es_co_utf_8,
-    id_clase integer,
-    id_municipio integer,
-    id_departamento integer,
     id_tsitio integer DEFAULT 1 NOT NULL,
     latitud double precision,
     longitud double precision,
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
-    id_pais integer
+    id_pais integer,
+    id_departamento integer,
+    id_municipio integer,
+    id_clase integer
 );
 
 
@@ -597,35 +624,11 @@ ALTER TABLE ONLY sip_anexo
 
 
 --
--- Name: clase_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY sip_clase
-    ADD CONSTRAINT clase_pkey PRIMARY KEY (id, id_municipio, id_departamento, id_pais);
-
-
---
--- Name: departamento_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY sip_departamento
-    ADD CONSTRAINT departamento_pkey PRIMARY KEY (id, id_pais);
-
-
---
 -- Name: etiqueta_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY sip_etiqueta
     ADD CONSTRAINT etiqueta_pkey PRIMARY KEY (id);
-
-
---
--- Name: municipio_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY sip_municipio
-    ADD CONSTRAINT municipio_pkey PRIMARY KEY (id, id_departamento, id_pais);
 
 
 --
@@ -650,6 +653,78 @@ ALTER TABLE ONLY sip_persona
 
 ALTER TABLE ONLY sip_persona_trelacion
     ADD CONSTRAINT persona_trelacion_pkey PRIMARY KEY (persona1, persona2, id_trelacion);
+
+
+--
+-- Name: sip_clase_id_key; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY sip_clase
+    ADD CONSTRAINT sip_clase_id_key UNIQUE (id);
+
+
+--
+-- Name: sip_clase_id_municipio_id_clalocal_key; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY sip_clase
+    ADD CONSTRAINT sip_clase_id_municipio_id_clalocal_key UNIQUE (id_municipio, id_clalocal);
+
+
+--
+-- Name: sip_clase_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY sip_clase
+    ADD CONSTRAINT sip_clase_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: sip_departamento_id_key; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY sip_departamento
+    ADD CONSTRAINT sip_departamento_id_key UNIQUE (id);
+
+
+--
+-- Name: sip_departamento_id_pais_id_deplocal_key; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY sip_departamento
+    ADD CONSTRAINT sip_departamento_id_pais_id_deplocal_key UNIQUE (id_pais, id_deplocal);
+
+
+--
+-- Name: sip_departamento_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY sip_departamento
+    ADD CONSTRAINT sip_departamento_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: sip_municipio_id_departamento_id_munlocal_key; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY sip_municipio
+    ADD CONSTRAINT sip_municipio_id_departamento_id_munlocal_key UNIQUE (id_departamento, id_munlocal);
+
+
+--
+-- Name: sip_municipio_id_key; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY sip_municipio
+    ADD CONSTRAINT sip_municipio_id_key UNIQUE (id);
+
+
+--
+-- Name: sip_municipio_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY sip_municipio
+    ADD CONSTRAINT sip_municipio_pkey PRIMARY KEY (id);
 
 
 --
@@ -715,30 +790,6 @@ CREATE UNIQUE INDEX unique_schema_migrations ON schema_migrations USING btree (v
 
 
 --
--- Name: clase_id_departamento_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY sip_clase
-    ADD CONSTRAINT clase_id_departamento_fkey FOREIGN KEY (id_departamento, id_pais) REFERENCES sip_departamento(id, id_pais);
-
-
---
--- Name: clase_id_municipio_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY sip_clase
-    ADD CONSTRAINT clase_id_municipio_fkey FOREIGN KEY (id_municipio, id_departamento, id_pais) REFERENCES sip_municipio(id, id_departamento, id_pais);
-
-
---
--- Name: clase_id_pais_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY sip_clase
-    ADD CONSTRAINT clase_id_pais_fkey FOREIGN KEY (id_pais) REFERENCES sip_pais(id);
-
-
---
 -- Name: clase_id_tclase_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -752,46 +803,6 @@ ALTER TABLE ONLY sip_clase
 
 ALTER TABLE ONLY sip_departamento
     ADD CONSTRAINT departamento_id_pais_fkey FOREIGN KEY (id_pais) REFERENCES sip_pais(id);
-
-
---
--- Name: municipio_id_departamento_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY sip_municipio
-    ADD CONSTRAINT municipio_id_departamento_fkey FOREIGN KEY (id_departamento, id_pais) REFERENCES sip_departamento(id, id_pais);
-
-
---
--- Name: municipio_id_pais_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY sip_municipio
-    ADD CONSTRAINT municipio_id_pais_fkey FOREIGN KEY (id_pais) REFERENCES sip_pais(id);
-
-
---
--- Name: persona_id_clase_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY sip_persona
-    ADD CONSTRAINT persona_id_clase_fkey FOREIGN KEY (id_clase, id_municipio, id_departamento, id_pais) REFERENCES sip_clase(id, id_municipio, id_departamento, id_pais);
-
-
---
--- Name: persona_id_departamento_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY sip_persona
-    ADD CONSTRAINT persona_id_departamento_fkey FOREIGN KEY (id_departamento, id_pais) REFERENCES sip_departamento(id, id_pais);
-
-
---
--- Name: persona_id_municipio_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY sip_persona
-    ADD CONSTRAINT persona_id_municipio_fkey FOREIGN KEY (id_municipio, id_departamento, id_pais) REFERENCES sip_municipio(id, id_departamento, id_pais);
 
 
 --
@@ -843,27 +854,67 @@ ALTER TABLE ONLY sip_persona_trelacion
 
 
 --
--- Name: ubicacion_id_clase_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: sip_clase_id_municipio_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY sip_clase
+    ADD CONSTRAINT sip_clase_id_municipio_fkey FOREIGN KEY (id_municipio) REFERENCES sip_municipio(id);
+
+
+--
+-- Name: sip_municipio_id_departamento_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY sip_municipio
+    ADD CONSTRAINT sip_municipio_id_departamento_fkey FOREIGN KEY (id_departamento) REFERENCES sip_departamento(id);
+
+
+--
+-- Name: sip_persona_id_clase_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY sip_persona
+    ADD CONSTRAINT sip_persona_id_clase_fkey FOREIGN KEY (id_clase) REFERENCES sip_clase(id);
+
+
+--
+-- Name: sip_persona_id_departamento_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY sip_persona
+    ADD CONSTRAINT sip_persona_id_departamento_fkey FOREIGN KEY (id_departamento) REFERENCES sip_departamento(id);
+
+
+--
+-- Name: sip_persona_id_municipio_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY sip_persona
+    ADD CONSTRAINT sip_persona_id_municipio_fkey FOREIGN KEY (id_municipio) REFERENCES sip_municipio(id);
+
+
+--
+-- Name: sip_ubicacion_id_clase_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY sip_ubicacion
-    ADD CONSTRAINT ubicacion_id_clase_fkey FOREIGN KEY (id_clase, id_municipio, id_departamento, id_pais) REFERENCES sip_clase(id, id_municipio, id_departamento, id_pais);
+    ADD CONSTRAINT sip_ubicacion_id_clase_fkey FOREIGN KEY (id_clase) REFERENCES sip_clase(id);
 
 
 --
--- Name: ubicacion_id_departamento_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY sip_ubicacion
-    ADD CONSTRAINT ubicacion_id_departamento_fkey FOREIGN KEY (id_departamento, id_pais) REFERENCES sip_departamento(id, id_pais);
-
-
---
--- Name: ubicacion_id_municipio_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: sip_ubicacion_id_departamento_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY sip_ubicacion
-    ADD CONSTRAINT ubicacion_id_municipio_fkey FOREIGN KEY (id_municipio, id_departamento, id_pais) REFERENCES sip_municipio(id, id_departamento, id_pais);
+    ADD CONSTRAINT sip_ubicacion_id_departamento_fkey FOREIGN KEY (id_departamento) REFERENCES sip_departamento(id);
+
+
+--
+-- Name: sip_ubicacion_id_municipio_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY sip_ubicacion
+    ADD CONSTRAINT sip_ubicacion_id_municipio_fkey FOREIGN KEY (id_municipio) REFERENCES sip_municipio(id);
 
 
 --
@@ -886,7 +937,15 @@ ALTER TABLE ONLY sip_ubicacion
 -- PostgreSQL database dump complete
 --
 
-SET search_path TO public, pg_catalog;
+SET search_path TO "$user",public;
 
+INSERT INTO schema_migrations (version) VALUES ('20150413160156');
 
+INSERT INTO schema_migrations (version) VALUES ('20150413160157');
+
+INSERT INTO schema_migrations (version) VALUES ('20150413160158');
+
+INSERT INTO schema_migrations (version) VALUES ('20150416074423');
+
+INSERT INTO schema_migrations (version) VALUES ('20150503110048');
 

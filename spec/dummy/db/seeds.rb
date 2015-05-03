@@ -22,9 +22,9 @@ end
 
 # Usuario para primer ingreso
 connection.execute("INSERT INTO usuario 
-	(nusuario, email, encrypted_password, password, 
-  fechacreacion, created_at, updated_at, rol) 
-	VALUES ('sal7711gen', 'sal7711gen@localhost', 
-	'$2a$10$uMAciEcJuUXDnpelfSH6He7BxW0yBeq6VMemlWc5xEl6NZRDYVA3G', 
-	'', '2014-08-14', '2014-08-14', '2014-08-14', 1);")
+  (nusuario, email, encrypted_password, password, 
+    fechacreacion, created_at, updated_at, rol) 
+  VALUES ('sal7711', 'sal7711@localhost', 
+    '$2a$10$RzZB8e0HK/RF4jTnTB7kiOEa7Hc/pI.xBGaXqhjTm1YFHVFEPFKEG', 
+    '', '2014-08-26', '2014-08-26', '2014-08-26', 1);")
 
