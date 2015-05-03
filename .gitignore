@@ -16,6 +16,7 @@ config/database.yml
 /log/*.log
 /tmp
 *~
+*.log
 spec/dummy/config/database.yml
 spec/dummy/log/development.log
 spec/dummy/tmp/
