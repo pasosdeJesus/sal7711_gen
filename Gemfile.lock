@@ -1,8 +1,8 @@
 GIT
   remote: git://github.com/pasosdeJesus/sip.git
-  revision: 372e36a4557b35ac3189dcaa671493e713d66b9e
+  revision: 7c221a4ed21ca4ccff85f182b3748521712e08b6
   specs:
-    sip (2.0.a4)
+    sip (2.0.a5)
       devise
       jquery-rails
       rails
@@ -127,7 +127,7 @@ GEM
     kgio (2.9.3)
     launchy (2.4.3)
       addressable (~> 2.3)
-    loofah (2.0.1)
+    loofah (2.0.2)
       nokogiri (>= 1.5.9)
     mail (2.6.3)
       mime-types (>= 1.16, < 3)
@@ -149,13 +149,13 @@ GEM
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
       slop (~> 3.4)
-    pry-rescue (1.4.1)
+    pry-rescue (1.4.2)
       interception (>= 0.5)
       pry
     pry-stack_explorer (0.4.9.2)
       binding_of_caller (>= 0.7)
       pry (>= 0.9.11)
-    rack (1.6.0)
+    rack (1.6.1)
     rack-test (0.6.3)
       rack (>= 1.0)
     rails (4.2.1)
@@ -225,12 +225,12 @@ GEM
       simplecov-html (~> 0.10.0)
     simplecov-html (0.10.0)
     slop (3.6.0)
-    spring (1.3.5)
+    spring (1.3.6)
     spring-commands-rspec (1.0.4)
       spring (>= 0.9.1)
-    sprockets (3.0.3)
+    sprockets (3.1.0)
       rack (~> 1.0)
-    sprockets-rails (2.2.4)
+    sprockets-rails (2.3.0)
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       sprockets (>= 2.8, < 4.0)

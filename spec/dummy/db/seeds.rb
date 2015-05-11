@@ -15,8 +15,8 @@ if File.exists?("../../db/cambios-basicas.sql")
 end
 
 # Nuevas basicas de motor Sal7711Gen
-if File.exists?("../../db/datos-basicasn.sql")
-	l = File.readlines("../../db/datos-basicasn.sql")
+if File.exists?("../../db/datos-basicas.sql")
+	l = File.readlines("../../db/datos-basicas.sql")
 	connection.execute(l.join("\n"));
 end
 
