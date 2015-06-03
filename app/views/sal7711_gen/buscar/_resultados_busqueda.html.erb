@@ -1,0 +1,21 @@
+<div class="panel panel-default">
+  <div class="panel-heading">Artículos: <%= @numregistros %> </div>
+  <div class="panel-body">
+
+    <table class="table table-striped">
+      <tbody>
+      <% @entradas.try(:each) do |fila| %>
+        <tr><td>
+          <%= link_to CGI.escapeHTML(fila['itemname'].to_s), 
+            "/buscar/#{CGI.escapeHTML(fila['itemnum'].to_s)}", 
+          class: 'muestra-imagen', remote: true
+        %>
+    </td></tr>
+    <% end %>
+      </tbody>
+    </table>
+    <div id="enlaces_paginacion">
+      <!--%= pagina @entradas, { param_name: :pag } %-->
+    </div>
+  </div>
+</div>

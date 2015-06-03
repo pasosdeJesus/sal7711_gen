@@ -160,6 +160,41 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
+-- Name: sal7711_gen_articulo; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE sal7711_gen_articulo (
+    id integer NOT NULL,
+    departamento_id integer,
+    municipio_id integer,
+    fuenteprensa_id integer NOT NULL,
+    fecha date NOT NULL,
+    pagina character varying(20) NOT NULL,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: sal7711_gen_articulo_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE sal7711_gen_articulo_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: sal7711_gen_articulo_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE sal7711_gen_articulo_id_seq OWNED BY sal7711_gen_articulo.id;
+
+
+--
 -- Name: sal7711_gen_categoriaprensa; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -261,6 +296,7 @@ CREATE TABLE sip_clase (
     updated_at timestamp without time zone,
     id_municipio integer,
     id integer DEFAULT nextval('sip_clase_id_seq'::regclass) NOT NULL,
+    observaciones character varying(5000),
     CONSTRAINT clase_check CHECK (((fechadeshabilitacion IS NULL) OR (fechadeshabilitacion >= fechacreacion)))
 );
 
@@ -292,6 +328,7 @@ CREATE TABLE sip_departamento (
     updated_at timestamp without time zone,
     id_pais integer NOT NULL,
     id integer DEFAULT nextval('sip_departamento_id_seq'::regclass) NOT NULL,
+    observaciones character varying(5000),
     CONSTRAINT departamento_check CHECK (((fechadeshabilitacion IS NULL) OR (fechadeshabilitacion >= fechacreacion)))
 );
 
@@ -385,6 +422,7 @@ CREATE TABLE sip_municipio (
     updated_at timestamp without time zone,
     id_departamento integer,
     id integer DEFAULT nextval('sip_municipio_id_seq'::regclass) NOT NULL,
+    observaciones character varying(5000),
     CONSTRAINT municipio_check CHECK (((fechadeshabilitacion IS NULL) OR (fechadeshabilitacion >= fechacreacion)))
 );
 
@@ -448,7 +486,8 @@ CREATE TABLE sip_pais (
     fechacreacion date,
     fechadeshabilitacion date,
     created_at timestamp without time zone,
-    updated_at timestamp without time zone
+    updated_at timestamp without time zone,
+    observaciones character varying(5000)
 );
 
 
@@ -516,6 +555,7 @@ CREATE TABLE sip_tclase (
     fechadeshabilitacion date,
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
+    observaciones character varying(5000),
     CONSTRAINT tclase_check CHECK (((fechadeshabilitacion IS NULL) OR (fechadeshabilitacion >= fechacreacion)))
 );
 
@@ -532,7 +572,8 @@ CREATE TABLE sip_tdocumento (
     fechacreacion date NOT NULL,
     fechadeshabilitacion date,
     created_at timestamp without time zone,
-    updated_at timestamp without time zone
+    updated_at timestamp without time zone,
+    observaciones character varying(5000)
 );
 
 
@@ -595,6 +636,7 @@ CREATE TABLE sip_tsitio (
     fechadeshabilitacion date,
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
+    observaciones character varying(5000),
     CONSTRAINT tsitio_check CHECK (((fechadeshabilitacion IS NULL) OR (fechadeshabilitacion >= fechacreacion)))
 );
 
@@ -682,6 +724,13 @@ CREATE TABLE usuario (
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY sal7711_gen_articulo ALTER COLUMN id SET DEFAULT nextval('sal7711_gen_articulo_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY sal7711_gen_categoriaprensa ALTER COLUMN id SET DEFAULT nextval('sal7711_gen_categoriaprensa_id_seq'::regclass);
 
 
@@ -737,6 +786,14 @@ ALTER TABLE ONLY sip_persona
 
 ALTER TABLE ONLY sip_persona_trelacion
     ADD CONSTRAINT persona_trelacion_pkey PRIMARY KEY (persona1, persona2, id_trelacion);
+
+
+--
+-- Name: sal7711_gen_articulo_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY sal7711_gen_articulo
+    ADD CONSTRAINT sal7711_gen_articulo_pkey PRIMARY KEY (id);
 
 
 --
@@ -828,6 +885,14 @@ ALTER TABLE ONLY sip_municipio
 
 
 --
+-- Name: sip_oficina_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY sip_oficina
+    ADD CONSTRAINT sip_oficina_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: tclase_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -903,6 +968,30 @@ ALTER TABLE ONLY sip_clase
 
 ALTER TABLE ONLY sip_departamento
     ADD CONSTRAINT departamento_id_pais_fkey FOREIGN KEY (id_pais) REFERENCES sip_pais(id);
+
+
+--
+-- Name: fk_rails_65eae7449f; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY sal7711_gen_articulo
+    ADD CONSTRAINT fk_rails_65eae7449f FOREIGN KEY (departamento_id) REFERENCES sip_departamento(id);
+
+
+--
+-- Name: fk_rails_8e3e0703f9; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY sal7711_gen_articulo
+    ADD CONSTRAINT fk_rails_8e3e0703f9 FOREIGN KEY (municipio_id) REFERENCES sip_municipio(id);
+
+
+--
+-- Name: fk_rails_d3b628101f; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY sal7711_gen_articulo
+    ADD CONSTRAINT fk_rails_d3b628101f FOREIGN KEY (fuenteprensa_id) REFERENCES sip_fuenteprensa(id);
 
 
 --
@@ -1054,4 +1143,8 @@ INSERT INTO schema_migrations (version) VALUES ('20150503120915');
 INSERT INTO schema_migrations (version) VALUES ('20150510125926');
 
 INSERT INTO schema_migrations (version) VALUES ('20150510130031');
+
+INSERT INTO schema_migrations (version) VALUES ('20150521181918');
+
+INSERT INTO schema_migrations (version) VALUES ('20150603181900');
 

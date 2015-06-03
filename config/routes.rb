@@ -1,8 +1,7 @@
 Sal7711Gen::Engine.routes.draw do
 	get '/buscar' => 'buscar#index'
-	get '/resultados' => 'buscar#resultados'
 
-  #resources :casos, path_names: { new: 'nuevo', edit: 'edita' }
+  resources :articulos, path_names: { new: 'nuevo', edit: 'edita' }
 
   namespace :admin do
     Ability.tablasbasicas.each do |t|

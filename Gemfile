@@ -59,8 +59,8 @@ gem "tzinfo"
 gem "tzinfo-data"
 
 # Motor de sistemas de información estilo Pasos de Jesús
-gem 'sip', github: 'pasosdeJesus/sip'
-#gem 'sip', path: '../sip'
+#gem 'sip', github: 'pasosdeJesus/sip'
+gem 'sip', path: '../sip'
 
 group :doc do
     # Genera documentación en doc/api con bundle exec rake doc:rails
@@ -84,7 +84,7 @@ group :development, :test do
   gem "launchy"
 
   # Depurar
-  #gem 'byebug'
+  gem 'byebug'
 
   # Consola irb en páginas con excepciones o usando <%= console %> en vistas
   gem 'web-console'
