@@ -9,7 +9,22 @@ gem "rails-i18n"
 # Postgresql
 gem "pg"
 
+# Para generar CSS
 gem "sass"
+gem "sass-rails"
+gem "compass-rails"
+
+# Cuadros de selección para búsquedas
+gem 'chosen-rails'
+
+# Dialogo modal
+gem 'lazybox'
+
+# Para convertir de tiff a jpg
+gem "rmagick"
+
+# Para generar PDF
+gem "prawn"
 
 # API JSON facil. Ver: https://github.com/rails/jbuilder
 gem "jbuilder"
@@ -59,8 +74,8 @@ gem "tzinfo"
 gem "tzinfo-data"
 
 # Motor de sistemas de información estilo Pasos de Jesús
-#gem 'sip', github: 'pasosdeJesus/sip'
-gem 'sip', path: '../sip'
+gem 'sip', github: 'pasosdeJesus/sip'
+#gem 'sip', path: '../sip'
 
 group :doc do
     # Genera documentación en doc/api con bundle exec rake doc:rails
@@ -84,7 +99,7 @@ group :development, :test do
   gem "launchy"
 
   # Depurar
-  gem 'byebug'
+  #gem 'byebug'
 
   # Consola irb en páginas con excepciones o usando <%= console %> en vistas
   gem 'web-console'

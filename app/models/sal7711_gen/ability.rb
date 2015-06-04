@@ -2,7 +2,16 @@
 module Sal7711Gen
 	class Ability  < Sip::Ability
 
-    @@tablasbasicas = Sip::Ability::TABLAS_SIP + [
+    @@tablasbasicas = Sip::Ability::TABLAS_SIP - [
+      ['Sip', 'tdocumento'],
+      ['Sip', 'clase'],
+      ['Sip', 'etiqueta'],
+      ['Sip', 'oficina'],
+      ['Sip', 'tclase'],
+      ['Sip', 'tdocumento'],
+      ['Sip', 'trelacione'],
+      ['Sip', 'tsitio'],
+    ] + [
       ['Sal7711Gen', 'categoriaprensa']
     ]
 

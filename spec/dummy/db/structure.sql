@@ -160,6 +160,16 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
+-- Name: sal7711_gen_anexo_articulo; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE sal7711_gen_anexo_articulo (
+    anexo_id integer NOT NULL,
+    articulo_id integer NOT NULL
+);
+
+
+--
 -- Name: sal7711_gen_articulo; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -172,6 +182,16 @@ CREATE TABLE sal7711_gen_articulo (
     pagina character varying(20) NOT NULL,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: sal7711_gen_articulo_categoriaprensa; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE sal7711_gen_articulo_categoriaprensa (
+    articulo_id integer NOT NULL,
+    categoriaprensa_id integer NOT NULL
 );
 
 
@@ -971,11 +991,35 @@ ALTER TABLE ONLY sip_departamento
 
 
 --
+-- Name: fk_rails_65786b3a64; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY sal7711_gen_anexo_articulo
+    ADD CONSTRAINT fk_rails_65786b3a64 FOREIGN KEY (articulo_id) REFERENCES sal7711_gen_articulo(id);
+
+
+--
 -- Name: fk_rails_65eae7449f; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY sal7711_gen_articulo
     ADD CONSTRAINT fk_rails_65eae7449f FOREIGN KEY (departamento_id) REFERENCES sip_departamento(id);
+
+
+--
+-- Name: fk_rails_77343eac24; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY sal7711_gen_anexo_articulo
+    ADD CONSTRAINT fk_rails_77343eac24 FOREIGN KEY (anexo_id) REFERENCES sip_anexo(id);
+
+
+--
+-- Name: fk_rails_7d1213c35b; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY sal7711_gen_articulo_categoriaprensa
+    ADD CONSTRAINT fk_rails_7d1213c35b FOREIGN KEY (articulo_id) REFERENCES sal7711_gen_articulo(id);
 
 
 --
@@ -992,6 +1036,14 @@ ALTER TABLE ONLY sal7711_gen_articulo
 
 ALTER TABLE ONLY sal7711_gen_articulo
     ADD CONSTRAINT fk_rails_d3b628101f FOREIGN KEY (fuenteprensa_id) REFERENCES sip_fuenteprensa(id);
+
+
+--
+-- Name: fk_rails_fcf649bab3; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY sal7711_gen_articulo_categoriaprensa
+    ADD CONSTRAINT fk_rails_fcf649bab3 FOREIGN KEY (categoriaprensa_id) REFERENCES sal7711_gen_categoriaprensa(id);
 
 
 --
@@ -1147,4 +1199,8 @@ INSERT INTO schema_migrations (version) VALUES ('20150510130031');
 INSERT INTO schema_migrations (version) VALUES ('20150521181918');
 
 INSERT INTO schema_migrations (version) VALUES ('20150603181900');
+
+INSERT INTO schema_migrations (version) VALUES ('20150604101858');
+
+INSERT INTO schema_migrations (version) VALUES ('20150604102321');
 

@@ -28,7 +28,6 @@ module Sal7711Gen
       @articulo = Sal7711Gen::Articulo.new(articulo_params)
 
       respond_to do |format|
-        byebug
         if @articulo.save
           format.html { redirect_to '/articulos', notice: 'Sal7711 gen articulo was successfully created.' }
           format.json { render :show, status: :created, location: @articulo }

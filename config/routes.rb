@@ -1,5 +1,9 @@
 Sal7711Gen::Engine.routes.draw do
-	get '/buscar' => 'buscar#index'
+
+  get 'buscar/:id', to: 'buscar#mostraruno'
+  get 'buscar' => 'buscar#index'
+  get 'mundep' => 'buscar#mundep'
+  get 'codigo' => 'admin/categoriaprensa#busca'
 
   resources :articulos, path_names: { new: 'nuevo', edit: 'edita' }
 

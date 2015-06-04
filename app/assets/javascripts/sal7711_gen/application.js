@@ -11,6 +11,8 @@
 // about supported directives.
 //
 //= require sip/application
+//= require lazybox
+//= require chosen-jquery
 //= require_tree .
 
 
