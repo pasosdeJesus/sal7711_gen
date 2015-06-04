@@ -8,17 +8,16 @@ module Sal7711Gen
       validate: true, class_name: "Sip::Municipio"
     belongs_to :fuenteprensa, foreign_key: "fuenteprensa_id",
       validate: true, class_name: "Sip::Fuenteprensa", required: true
+    belongs_to :anexo, foreign_key: "anexo_id", class_name: 'Sip::Anexo',
+      validate: true,  required: true
+    accepts_nested_attributes_for :anexo, reject_if: :all_blank, 
+      allow_destroy: true, update_only: true
 
     has_many :articulo_categoriaprensa, 
       class_name: 'Sal7711Gen::ArticuloCategoriaprensa',
       dependent: :delete_all, foreign_key: 'articulo_id'
     has_many :categoriaprensa, class_name: 'Sal7711Gen::Categoriaprensa',
       through: :articulo_categoriaprensa
-    has_many :anexo_articulo, 
-      class_name: 'Sal7711Gen::AnexoArticulo',
-      dependent: :delete_all, foreign_key: 'articulo_id'
-    has_many :anexo, class_name: 'Sip::Anexo',
-      through: :anexo_articulo
 
     validates :fuenteprensa_id, presence: true
     validates :fecha, presence: true

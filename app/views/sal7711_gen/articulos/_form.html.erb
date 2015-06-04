@@ -1,9 +1,10 @@
 <!--% byebug %-->
-<%= form_for(@articulo) do |f| %>
+<%= simple_form_for @articulo, 
+  :html => { :class => 'form-horizontal' } do |f| 
+%>
   <% if @articulo.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@articulo.errors.count, "error") %> prohibited this articulo from being saved:</h2>
-
       <ul>
       <% @articulo.errors.full_messages.each do |message| %>
         <li><%= message %></li>
@@ -11,36 +12,51 @@
       </ul>
     </div>
   <% end %>
+  <%= f.input :fecha, 
+    :input_html => { "data-behaviour" => "datepicker"}, 
+    :as => :string 
+  %>
 
-  <div class="field">
-    <%= f.label :departamento_id %><br>
-    <%= f.number_field :departamento_id %>
-  </div>
-  <div class="field">
-    <%= f.label :municipio_id %><br>
-    <%= f.number_field :municipio_id %>
-  </div>
-  <div class="field">
-    <%= f.label :fuenteprensa_id %><br>
-    <%= f.number_field :fuenteprensa_id %>
-  </div>
-  <div class="field">
-    <%= f.label :fecha %><br>
-    <%= f.date_select :fecha %>
-  </div>
-  <div class="field">
-    <%= f.label :pagina %><br>
-    <%= f.text_field :pagina %>
-  </div>
-  <div class="field">
-    <%= f.label :created_at %><br>
-    <%= f.date_select :created_at %>
-  </div>
-  <div class="field">
-    <%= f.label :updated_at %><br>
-    <%= f.date_select :updated_at %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
+  <%= f.association :departamento,
+    collection: Sip::Departamento.habilitados.where(id_pais: 170),
+    label_method: :nombre, 
+    value_method: :id
+  %>
+  <%= f.association :municipio,
+    collection: Sip::Municipio.habilitados.joins(:departamento).where("sip_departamento.id_pais = '170'"),
+    label_method: :nombre, 
+    value_method: :id
+  %>
+  <%= f.association :categoriaprensa, 
+    collection: Sal7711Gen::Categoriaprensa.habilitados,
+    label_method: lambda {|t| t.presenta_nombre },
+    value_method: :id
+  %>
+  <%= f.association :fuenteprensa,
+    collection: Sip::Fuenteprensa.habilitados,
+    label_method: :nombre, 
+    value_method: :id,
+    include_blank: false
+  %>
+  <%= f.input :pagina %> 
+
+  <%= f.simple_fields_for :anexo do |a| %>
+
+    <% if !a.object|| !a.object.adjunto_file_name %>
+      <%= a.input :adjunto, as: :file, label: 'Archivo' %>
+    <% else %>
+      <div class="actividad_sip_anexo_adjunto">
+         <label for="actividad_sip_anexo_attributes_<%=a.object.id%>_adjunto">Archivo</label>
+         <a id="actividad_sip_anexo_attributes_<%=a.object.id%>_adjunto" href="<%= sip.descarga_anexo_path(a.object.id) %>", style="text-decoration:none"><%= a.object.adjunto_file_name %></a>
+      </div>
+    <% end %>
+
+  <% end %>
+
+  <div class="form-actions">
+    <%= f.button :submit, :class => 'btn-primary' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+      sal7711_gen.articulos_path, :class => 'btn' 
+    %>
   </div>
 <% end %>

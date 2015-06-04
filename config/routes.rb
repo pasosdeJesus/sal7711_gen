@@ -4,8 +4,11 @@ Sal7711Gen::Engine.routes.draw do
   get 'buscar' => 'buscar#index'
   get 'mundep' => 'buscar#mundep'
   get 'codigo' => 'admin/categoriaprensa#busca'
+  get 'articulos' => 'buscar#index'
 
-  resources :articulos, path_names: { new: 'nuevo', edit: 'edita' }
+  resources :articulos, path_names: { new: 'nuevo', edit: 'edita' },
+    only: [:edit, :update, :new, :create, :destroy]
+  
 
   namespace :admin do
     Ability.tablasbasicas.each do |t|

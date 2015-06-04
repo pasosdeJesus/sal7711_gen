@@ -8,6 +8,11 @@ module Sal7711Gen
         include Sip::Basica
 
         included do
+
+          def presenta_nombre
+            self.codigo + ' ' + self.nombre
+          end          
+
           # Para búsquedas tipo autocompletacion en base de datos campos a observar
           def self.busca_etiqueta_campos
             ['codigo', 'nombre']

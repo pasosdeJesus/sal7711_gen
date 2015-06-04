@@ -46,9 +46,11 @@ module Sal7711Gen
           @articulos.from(:sal7711_gen_articulo_categoriaprensa).where("CAST(pagina = ?", params[:categoria_id])
         end
       end
-      @articulos.order("fecha").select("id, fecha")
+      @articulos.order("fecha").select("id as itemnum, fecha as itemname")
       cons = @articulos.to_sql
   		@numregistros = @articulos.count
+      @coltexto = "fecha"
+      @colid = "id"
       pag = 1
       if (params[:pag])
         pag = params[:pag].to_i
@@ -135,53 +137,34 @@ module Sal7711Gen
   
     def mostraruno
       if (params[:id] && params[:id].to_i > 0)
-        conecta
-        id = params[:id]
-        c="SELECT filepath, itemdata.itemname 
-        FROM itemdata INNER JOIN itemdatapage 
-          ON itemdata.itemnum=itemdatapage.itemnum 
-        WHERE itemdata.itemnum='#{id}'";
-        rutar = @client.execute(c)
-        fila = rutar.first
-        ruta = fila["filepath"].strip
-        @titulo = titulo = fila["itemname"].strip
-        smbc = Sambal::Client.new(@@parsmb)
+        id = params[:id].to_i
+        a = Articulo.joins(:anexo).where("sal7711_gen_articulo.id = ?", id).take
+        ruta = a.anexo.adjunto_file_name
+        n = sprintf(Sip.ruta_anexos + "/%d_%s", a.anexo.id.to_i, 
+                  File.basename(ruta))
+        @titulo = titulo = a.fecha
         dirl = Rails.root.join('public').to_s
         FileUtils.mkdir_p(dirl + "/assets/images/cache-articulos/")
         @rutadescarga = "/assets/images/cache-articulos/" + 
           File.basename(ruta.gsub("\\", "/"))
         rlocal = dirl + image_path(@rutadescarga)
         puts "OJO rlocal=#{rlocal}"
-        g = smbc.get(ruta, rlocal)
-        smbc.close
-        m = g.message.to_s.chomp
-        puts "m=#{m}"
-        is = m.index(" of size ")
-        if (is <= 0)
-          return
-        end
-        fs = m.index(" as #{dirl}")
-        s=m[is+9..fs].to_i
-        arr = []
-        #byebug
+        FileUtils.cp(n, rlocal)
         system("convert #{rlocal} #{rlocal}.jpg")
         if !File.exists?("#{rlocal}.jpg")
           return
         end
         # Genera PDF
-        Prawn::Document.generate("#{rlocal}.pdf") do
-          w = 550
-          h = 700
-          text titulo
-          bounding_box([0, cursor], :width => w, :height => h) do
-            image "#{rlocal}.jpg", :fit => [w, h]
-            stroke_bounds
-          end
-        end
+        #Prawn::Document.generate("#{rlocal}.pdf") do
+        #  w = 550
+        #  h = 700
+        #  text titulo
+        #  bounding_box([0, cursor], :width => w, :height => h) do
+        #    image "#{rlocal}.jpg", :fit => [w, h]
+        #    stroke_bounds
+        #  end
+        #end
   
-        #img = Magick::Image.read(rlocal).first
-        #img.write ""
-        # Image.read falla para algunas imagenes con  Null count for "Tag 34026" (type 1, writecount │-3, passcount 1). `_TIFFVSetField' @ error/tiff.c/TIFFErrors/508):
         respond_to do |format|
           format.html { head :no_content }
           format.json { head :no_content }

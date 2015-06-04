@@ -160,16 +160,6 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
--- Name: sal7711_gen_anexo_articulo; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE sal7711_gen_anexo_articulo (
-    anexo_id integer NOT NULL,
-    articulo_id integer NOT NULL
-);
-
-
---
 -- Name: sal7711_gen_articulo; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -181,7 +171,8 @@ CREATE TABLE sal7711_gen_articulo (
     fecha date NOT NULL,
     pagina character varying(20) NOT NULL,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    anexo_id integer NOT NULL
 );
 
 
@@ -991,27 +982,11 @@ ALTER TABLE ONLY sip_departamento
 
 
 --
--- Name: fk_rails_65786b3a64; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY sal7711_gen_anexo_articulo
-    ADD CONSTRAINT fk_rails_65786b3a64 FOREIGN KEY (articulo_id) REFERENCES sal7711_gen_articulo(id);
-
-
---
 -- Name: fk_rails_65eae7449f; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY sal7711_gen_articulo
     ADD CONSTRAINT fk_rails_65eae7449f FOREIGN KEY (departamento_id) REFERENCES sip_departamento(id);
-
-
---
--- Name: fk_rails_77343eac24; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY sal7711_gen_anexo_articulo
-    ADD CONSTRAINT fk_rails_77343eac24 FOREIGN KEY (anexo_id) REFERENCES sip_anexo(id);
 
 
 --
@@ -1028,6 +1003,14 @@ ALTER TABLE ONLY sal7711_gen_articulo_categoriaprensa
 
 ALTER TABLE ONLY sal7711_gen_articulo
     ADD CONSTRAINT fk_rails_8e3e0703f9 FOREIGN KEY (municipio_id) REFERENCES sip_municipio(id);
+
+
+--
+-- Name: fk_rails_bdb4c828f9; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY sal7711_gen_articulo
+    ADD CONSTRAINT fk_rails_bdb4c828f9 FOREIGN KEY (anexo_id) REFERENCES sip_anexo(id);
 
 
 --
@@ -1178,7 +1161,7 @@ ALTER TABLE ONLY sip_ubicacion
 -- PostgreSQL database dump complete
 --
 
-SET search_path TO "$user",public;
+SET search_path TO public, pg_catalog;
 
 INSERT INTO schema_migrations (version) VALUES ('20150413160156');
 
