@@ -15,7 +15,6 @@ module Sal7711Gen
     def create
       @articulo = Sal7711Gen::Articulo.new(articulo_params)
       @articulo.anexo.descripcion = "J"
-      @articulo.anexo.fecha = @articulo.fecha
       @articulo.anexo.save
 
       respond_to do |format|

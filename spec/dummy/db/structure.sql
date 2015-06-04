@@ -267,7 +267,6 @@ CREATE SEQUENCE sip_anexo_id_seq
 
 CREATE TABLE sip_anexo (
     id integer DEFAULT nextval('sip_anexo_id_seq'::regclass) NOT NULL,
-    fecha date NOT NULL,
     descripcion character varying(1500) NOT NULL,
     archivo character varying(255),
     created_at timestamp without time zone,
@@ -1161,7 +1160,7 @@ ALTER TABLE ONLY sip_ubicacion
 -- PostgreSQL database dump complete
 --
 
-SET search_path TO public, pg_catalog;
+SET search_path TO "$user",public;
 
 INSERT INTO schema_migrations (version) VALUES ('20150413160156');
 
@@ -1186,4 +1185,6 @@ INSERT INTO schema_migrations (version) VALUES ('20150603181900');
 INSERT INTO schema_migrations (version) VALUES ('20150604101858');
 
 INSERT INTO schema_migrations (version) VALUES ('20150604102321');
+
+INSERT INTO schema_migrations (version) VALUES ('20150604155923');
 
