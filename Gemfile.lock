@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/pasosdeJesus/sip.git
-  revision: ad1e4696d624f008c19ecb55641470c10a2a3f8a
+  revision: 247a2d72aa2de90748ab5fc3920abd76ab60d79d
   specs:
     sip (2.0.a6)
       devise
@@ -98,6 +98,7 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.9.1.1)
+    colorize (0.7.7)
     compass (1.0.3)
       chunky_png (~> 1.2)
       compass-core (~> 1.0.2)
@@ -160,11 +161,11 @@ GEM
     mime-types (2.6.1)
     mini_portile (0.6.2)
     minitest (5.7.0)
-    multi_json (1.11.0)
+    multi_json (1.11.1)
     nokogiri (1.6.6.2)
       mini_portile (~> 0.6.0)
     orm_adapter (0.5.0)
-    paperclip (4.2.1)
+    paperclip (4.2.2)
       activemodel (>= 3.0.0)
       activesupport (>= 3.0.0)
       cocaine (~> 0.5.3)
@@ -236,7 +237,7 @@ GEM
     rspec-mocks (3.2.1)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.2.0)
-    rspec-rails (3.2.2)
+    rspec-rails (3.2.3)
       actionpack (>= 3.0, < 4.3)
       activesupport (>= 3.0, < 4.3)
       railties (>= 3.0, < 4.3)
@@ -327,6 +328,7 @@ DEPENDENCIES
   cocoon!
   codeclimate-test-reporter
   coffee-rails (~> 4.1.0)
+  colorize
   compass-rails
   devise
   devise-i18n

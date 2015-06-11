@@ -9,6 +9,9 @@ gem "rails-i18n"
 # Postgresql
 gem "pg"
 
+# Colores en consola
+gem "colorize"
+
 # Para generar CSS
 gem "sass"
 gem "sass-rails"
