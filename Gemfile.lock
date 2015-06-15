@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/pasosdeJesus/sip.git
-  revision: 263291a6f7e4558b1c2da639fa95b1e8a88c160c
+  revision: 9940e638c8ea8885ebed41aefa874db4ba2a259d
   specs:
     sip (2.0.a6)
       devise
@@ -66,6 +66,7 @@ GEM
     bootstrap-datepicker-rails (1.4.0)
       railties (>= 3.0)
     builder (3.2.2)
+    callsite (0.0.11)
     camertron-eprun (1.1.0)
     cancancan (1.10.1)
     capybara (2.4.4)
@@ -139,7 +140,7 @@ GEM
     hike (1.2.3)
     i18n (0.7.0)
     interception (0.5)
-    jbuilder (2.2.16)
+    jbuilder (2.3.0)
       activesupport (>= 3.0.0, < 5)
       multi_json (~> 1.2)
     jquery-rails (4.0.3)
@@ -157,6 +158,10 @@ GEM
       nokogiri (>= 1.5.9)
     mail (2.6.3)
       mime-types (>= 1.16, < 3)
+    meta_request (0.3.4)
+      callsite (~> 0.0, >= 0.0.11)
+      rack-contrib (~> 1.1)
+      railties (>= 3.0.0, < 5.0.0)
     method_source (0.8.2)
     mime-types (2.6.1)
     mini_portile (0.6.2)
@@ -186,6 +191,8 @@ GEM
       binding_of_caller (>= 0.7)
       pry (>= 0.9.11)
     rack (1.6.1)
+    rack-contrib (1.2.0)
+      rack (>= 0.9.1)
     rack-test (0.6.3)
       rack (>= 1.0)
     rails (4.2.1)
@@ -228,7 +235,6 @@ GEM
     rdoc (4.2.0)
     responders (2.1.0)
       railties (>= 4.2.0, < 5)
-    rmagick (2.15.2)
     rspec-core (3.3.0)
       rspec-support (~> 3.3.0)
     rspec-expectations (3.3.0)
@@ -237,7 +243,7 @@ GEM
     rspec-mocks (3.3.0)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.3.0)
-    rspec-rails (3.3.0)
+    rspec-rails (3.3.1)
       actionpack (>= 3.0, < 4.3)
       activesupport (>= 3.0, < 4.3)
       railties (>= 3.0, < 4.3)
@@ -295,7 +301,7 @@ GEM
       tzinfo
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
-    tzinfo-data (1.2015.4)
+    tzinfo-data (1.2015.5)
       tzinfo (>= 1.0.0)
     uglifier (2.7.1)
       execjs (>= 0.3.0)
@@ -339,6 +345,7 @@ DEPENDENCIES
   jquery-ui-rails
   launchy
   lazybox
+  meta_request
   paperclip (~> 4.1)
   pg
   prawn
@@ -347,7 +354,6 @@ DEPENDENCIES
   rails (~> 4.2.0)
   rails-i18n
   rails_12factor
-  rmagick
   rspec-rails
   sass
   sass-rails

@@ -10,9 +10,18 @@
 // Read Sprockets README (https://github.com/sstephenson/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= require sip/application
+//= require sip/motor
+//= require sal7711_gen/motor
 //= require lazybox
 //= require chosen-jquery
 //= require_tree .
+
+$(document).on('ready page:load', function() {
+	var root;
+	root = typeof exports !== "undefined" && exports !== null ? 
+		exports : this;	
+	sip_prepara_eventos_comunes(root);
+	sal7711_gen_prepara_eventos_comunes(root);
+});
 
 

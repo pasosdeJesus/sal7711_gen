@@ -35,14 +35,14 @@
   })
   return
 
-
-$(document).on 'ready page:load',  -> 
-  $('[data-behaviour~=datepicker]').datepicker({
-    format: 'dd-mm-yyyy'
-    autoclose: true
-    todayHighlight: true
-    language: 'es'	
-  });
+@sal7711_gen_prepara_eventos_comunes = (root) ->
+#  $(document).on 'ready page:load',  -> 
+#    $('[data-behaviour~=datepicker]').datepicker({
+#      format: 'dd-mm-yyyy'
+#      autoclose: true
+#      todayHighlight: true
+#      language: 'es'	
+#    });
 
   $('.chosen-select').chosen
     allow_single_deselect: true

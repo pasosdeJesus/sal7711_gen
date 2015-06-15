@@ -12,6 +12,7 @@ module Sal7711Gen
           # entradas por página
           @@porpag = 20 
 
+
           # Prepara una página de resultados
           def prepara_pagina
             @articulos = Articulo.all
@@ -33,7 +34,7 @@ module Sal7711Gen
                 @articulos.where("municipio_id = ?", pmd[1])
               end
             end
-
+        
             if(params[:fuente] && params[:fuente][:nombre] != '')
               @articulos.where("fuente_id = ?", params[:fuente])
             end
@@ -44,15 +45,15 @@ module Sal7711Gen
               cat = Sal7711Gen::Categoriaprensa.find(params[:categoria_id]);
               if cat.supracategoria
                 @articulos.where("CAST(pagina = ?", params[:categoria_id])
-                op = ' LIKE ';
-                cod = "#{cat.codigo}%"
               else
                 @articulos.from(:sal7711_gen_articulo_categoriaprensa).where("CAST(pagina = ?", params[:categoria_id])
               end
             end
-            @articulos.order("fecha").select("id, fecha")
-            cons = @articulos.to_sql
-            @numregistros = @articulos.count
+            @articulos.order("fecha").select("id as itemnum, fecha as itemname")
+            #cons = @articulos.to_sql
+        		@numregistros = @articulos.count
+            @coltexto = "fecha"
+            @colid = "id"
             pag = 1
             if (params[:pag])
               pag = params[:pag].to_i
@@ -60,7 +61,7 @@ module Sal7711Gen
             @entradas = WillPaginate::Collection.create(
               pag, @@porpag, @numregistros
             ) do |paginador|
-
+        
               c = @articulos.to_sql 
               c += " LIMIT #{paginador.per_page} OFFSET #{paginador.offset}"
               puts "OJO c=#{c}"
@@ -77,7 +78,7 @@ module Sal7711Gen
               end
             end
           end
-
+        
           # Resultado de aplicar filtro
           def index
             if !current_usuario
@@ -106,68 +107,52 @@ module Sal7711Gen
               format.json { head :no_content }
               format.js   { render 'resultados' }
             end
-
+        
           end
-
+        
           # Para responder a solicitudes AJAX de autocompletación de
           # municipio / departamento
           def mundep
-            if !params[:term]
-              respond_to do |format|
-                format.html { render inline: 'Falta variable term' }
-                format.json { render inline: 'Falta variable term' }
+              if !params[:term]
+                respond_to do |format|
+                  format.html { render inline: 'Falta variable term' }
+                  format.json { render inline: 'Falta variable term' }
+                end
+              else
+                term = Sip::Municipio.connection.quote_string(params[:term])
+                consNom = term.downcase.strip #sin_tildes
+                consNom.gsub!(/ +/, ":* & ")
+                if consNom.length > 0
+                  consNom += ":*"
+                end
+                where = " mundep  @@ to_tsquery('spanish', '#{consNom}')";
+                # autocomplete de jquery requiere label, val
+                qstring = "SELECT nombre as label, idlocal as value
+                FROM sip_mundep 
+                WHERE #{where} ORDER BY 1;"
+        
+                r = ActiveRecord::Base.connection.select_all qstring
+                respond_to do |format|
+                  format.json { render :json, inline: r.to_json }
+                end
               end
-            else
-              term = Sip::Municipio.connection.quote_string(params[:term])
-              consNom = term.downcase.strip #sin_tildes
-              consNom.gsub!(/ +/, ":* & ")
-              if consNom.length > 0
-                consNom += ":*"
-              end
-              where = " mundep  @@ to_tsquery('spanish', '#{consNom}')";
-              # autocomplete de jquery requiere label, val
-              qstring = "SELECT nombre as label, idlocal as value
-          FROM sip_mundep 
-          WHERE #{where} ORDER BY 1;"
-
-              r = ActiveRecord::Base.connection.select_all qstring
-              respond_to do |format|
-                format.json { render :json, inline: r.to_json }
-              end
-            end
           end
-
+        
           def mostraruno
             if (params[:id] && params[:id].to_i > 0)
-              conecta
-              id = params[:id]
-              c="SELECT filepath, itemdata.itemname 
-        FROM itemdata INNER JOIN itemdatapage 
-          ON itemdata.itemnum=itemdatapage.itemnum 
-        WHERE itemdata.itemnum='#{id}'";
-              rutar = @client.execute(c)
-              fila = rutar.first
-              ruta = fila["filepath"].strip
-              @titulo = titulo = fila["itemname"].strip
-              smbc = Sambal::Client.new(@@parsmb)
+              id = params[:id].to_i
+              a = Articulo.joins(:anexo).where("sal7711_gen_articulo.id = ?", id).take
+              ruta = a.anexo.adjunto_file_name
+              n = sprintf(Sip.ruta_anexos + "/%d_%s", a.anexo.id.to_i, 
+                        File.basename(ruta))
+              @titulo = titulo = a.fecha.to_s
               dirl = Rails.root.join('public').to_s
               FileUtils.mkdir_p(dirl + "/assets/images/cache-articulos/")
               @rutadescarga = "/assets/images/cache-articulos/" + 
                 File.basename(ruta.gsub("\\", "/"))
               rlocal = dirl + image_path(@rutadescarga)
               puts "OJO rlocal=#{rlocal}"
-              g = smbc.get(ruta, rlocal)
-              smbc.close
-              m = g.message.to_s.chomp
-              puts "m=#{m}"
-              is = m.index(" of size ")
-              if (is <= 0)
-                return
-              end
-              fs = m.index(" as #{dirl}")
-              s=m[is+9..fs].to_i
-              arr = []
-              #byebug
+              FileUtils.cp(n, rlocal)
               system("convert #{rlocal} #{rlocal}.jpg")
               if !File.exists?("#{rlocal}.jpg")
                 return
@@ -182,13 +167,14 @@ module Sal7711Gen
                   stroke_bounds
                 end
               end
-
-              format.html { head :no_content }
-              format.json { head :no_content }
-              format.js   { render action: :mostraruno }
+        
+              respond_to do |format|
+                format.html { head :no_content }
+                format.json { head :no_content }
+                format.js   { render action: :mostraruno }
+              end
             end
           end
-
         end
 
       end

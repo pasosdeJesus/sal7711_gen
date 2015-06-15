@@ -9,7 +9,7 @@ module Sal7711Gen
       ['Sip', 'oficina'],
       ['Sip', 'tclase'],
       ['Sip', 'tdocumento'],
-      ['Sip', 'trelacione'],
+      ['Sip', 'trelaciones'],
       ['Sip', 'tsitio'],
     ] + [
       ['Sal7711Gen', 'categoriaprensa']

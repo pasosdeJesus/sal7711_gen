@@ -24,7 +24,7 @@ gem 'chosen-rails'
 gem 'lazybox'
 
 # Para convertir de tiff a jpg
-gem "rmagick"
+#gem "rmagick"
 
 # Para generar PDF
 gem "prawn"
@@ -111,7 +111,7 @@ group :development, :test do
   gem 'pry-rescue'
   gem 'pry-stack_explorer'
 
-
+  gem 'meta_request'
 end
 
 # Los siguientes son para pruebas y no tiene generadores requeridos en desarrollo

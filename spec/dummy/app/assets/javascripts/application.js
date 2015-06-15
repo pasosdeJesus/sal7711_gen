@@ -12,3 +12,13 @@
 //
 //= require sal7711_gen/application
 //= require_tree .
+
+$(document).on('ready page:load',  function () {
+	$('[data-behaviour~=datepicker]').datepicker({
+	format: 'yyyy-mm-dd',
+	autoclose: true,
+	todayHighlight: true,
+	language: 'es'	
+	});
+})
+
