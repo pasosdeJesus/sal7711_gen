@@ -1,18 +1,16 @@
 <div style="overflow:scroll; width:auto; height: 400px;">
-  <%= @titulo %>
-  <hr>
-  <%= image_tag @rutadescarga + ".jpg", class: "img-responsive", width: "90%" %>
-  <div style="
-    position: absolute;
-    bottom: 10px;
-    background-color: rgba(0,0,0,.7);
-    left: 0;
-    right: 0;
-    z-index: 30;
-    height: 30px;
-    ">
-    <p style="text-align: center; width: 100%; color: white">
-    <%= link_to "Descarga PDF", @rutadescarga + ".pdf", target: "_blank", class: "presenta_articulo_descarga" %>
+  <div class="imagen-titulo">
+    <p><%= @titulo %></p>
+  </div>
+  <div class="imagen-contenido">
+    <%= image_tag @descargajpg, class: "img-responsive", width: "90%" 
+    %>
+  </div>
+  <div class="imagen-descarga">
+    <p style="width: 100%">
+      <%= link_to "Descarga PDF", @descargapdf, 
+        target: "_blank", class: "presenta_articulo_descarga" 
+      %>
     </p>
   </div>
 </div>

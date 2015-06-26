@@ -6,8 +6,9 @@
       <tbody>
       <% @entradas.try(:each) do |fila| %>
         <tr><td>
-          <%= link_to CGI.escapeHTML(fila[@coltexto].to_s), 
-            "/buscar/#{CGI.escapeHTML(fila[@colid].to_s)}", 
+          <%= link_to CGI.escapeHTML(truncate(
+            fila[@coltexto].to_s, length: 95, separator: '-')), 
+          "/buscar/#{CGI.escapeHTML(fila[@colid].to_s)}", 
           class: 'muestra-imagen', remote: true
         %>
     </td></tr>
@@ -15,7 +16,7 @@
       </tbody>
     </table>
     <div id="enlaces_paginacion">
-      <!--%= pagina @entradas, { param_name: :pag } %-->
+      <%= pagina @entradas, { param_name: :pag } %>
     </div>
   </div>
 </div>

@@ -137,39 +137,68 @@ module Sal7711Gen
                 end
               end
           end
-        
+      
+          def descarga(id, rutacache) 
+            a = Articulo.joins(:anexo).where(
+              "sal7711_gen_articulo.id = ?", id).take
+            ruta = a.anexo.adjunto_file_name
+            n = sprintf(Sip.ruta_anexos + "/%d_%s", a.anexo.id.to_i, 
+                        File.basename(ruta))
+            titulo = a.fecha.to_s
+#            dirl = Rails.root.join('public').to_s
+#            rutadescarga = "/assets/images/cache-articulos/" + 
+#              File.basename(ruta.gsub("\\", "/"))
+#            rlocal = dirl + image_path(rutadescarga)
+#            puts "OJO rlocal=#{rlocal}"
+#            if !File.exists? rlocal
+#              FileUtils.mkdir_p(dirl + "/assets/images/cache-articulos/")
+#              FileUtils.cp(n, rlocal)
+#            end
+            return [titulo, n]
+          end
+
           def mostraruno
             if (params[:id] && params[:id].to_i > 0)
+              #byebug
               id = params[:id].to_i
-              a = Articulo.joins(:anexo).where("sal7711_gen_articulo.id = ?", id).take
-              ruta = a.anexo.adjunto_file_name
-              n = sprintf(Sip.ruta_anexos + "/%d_%s", a.anexo.id.to_i, 
-                        File.basename(ruta))
-              @titulo = titulo = a.fecha.to_s
-              dirl = Rails.root.join('public').to_s
-              FileUtils.mkdir_p(dirl + "/assets/images/cache-articulos/")
-              @rutadescarga = "/assets/images/cache-articulos/" + 
-                File.basename(ruta.gsub("\\", "/"))
-              rlocal = dirl + image_path(@rutadescarga)
-              puts "OJO rlocal=#{rlocal}"
-              FileUtils.cp(n, rlocal)
-              system("convert #{rlocal} #{rlocal}.jpg")
-              if !File.exists?("#{rlocal}.jpg")
+              rutapublic = Rails.root.join('public').to_s
+              urlcache = '/assets/images/cache-articulos/'
+              rutacache = rutapublic + urlcache
+              if (!File.exists? rutacache)
+                raise "Crear directorio #{rutacache}"
+              end
+              titulo, rlocal = descarga(id, rutacache)
+              @titulo = titulo
+              # Convierte a jpg
+              nomar = titulo.gsub(/[^0-9A-Za-z.\-]/, '_')  + "-" + id.to_s
+              @descargajpg = urlcache + nomar + ".jpg"
+              rutajpg = rutacache + nomar + ".jpg"
+              #img = Magick::Image.read(rlocal).first
+              #img.write ""
+              # Image.read falla para algunas imagenes con  Null count for "Tag 34026" (type 1, writecount │-3, passcount 1). `_TIFFVSetField' @ error/tiff.c/TIFFErrors/508):
+              if !File.exists? "#{rutajpg}"
+                system("convert #{rlocal} #{rutajpg}")
+              end
+              if !File.exists? "#{rutajpg}"
                 return
               end
               # Genera PDF
-              Prawn::Document.generate("#{rlocal}.pdf") do
-                w = 550
-                h = 700
-                text titulo
-                bounding_box([0, cursor], :width => w, :height => h) do
-                  image "#{rlocal}.jpg", :fit => [w, h]
-                  stroke_bounds
+              @descargapdf= urlcache + nomar + ".pdf"
+              rutapdf = rutacache + nomar + ".pdf"
+              puts "rutapdf=#{rutapdf}"
+              if !File.exists? "#{rutapdf}"
+                Prawn::Document.generate("#{rutapdf}") do
+                  w = 550
+                  h = 700
+                  text titulo
+                  bounding_box([0, cursor], :width => w, :height => h) do
+                    image "#{rutajpg}", :fit => [w, h]
+                    stroke_bounds
+                  end
                 end
               end
-        
               respond_to do |format|
-                format.html { head :no_content }
+                format.html { render 'sal7711_gen/articulos/show', layout: nil}
                 format.json { head :no_content }
                 format.js   { render action: :mostraruno }
               end

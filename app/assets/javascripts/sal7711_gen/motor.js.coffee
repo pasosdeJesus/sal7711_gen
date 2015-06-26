@@ -2,6 +2,9 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
+//= require chosen-jquery
+//= require lazybox
+
 # Basado en
 # http://stackoverflow.com/questions/1184334/get-number-days-in-a-specified-month-using-javascript
 # Mes inicial es 1
