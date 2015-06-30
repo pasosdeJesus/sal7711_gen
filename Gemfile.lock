@@ -333,7 +333,6 @@ DEPENDENCIES
   codeclimate-test-reporter
   coffee-rails (~> 4.1.0)
   colorize
-  compass-rails
   devise
   devise-i18n
   factory_girl_rails (~> 4.0)
