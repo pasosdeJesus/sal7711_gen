@@ -2,8 +2,8 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
-//= require chosen-jquery
-//= require lazybox
+#//= require chosen-jquery
+#//= require lazybox
 
 # Basado en
 # http://stackoverflow.com/questions/1184334/get-number-days-in-a-specified-month-using-javascript
@@ -57,6 +57,23 @@
     busca_gen($(this), "#mundep_id", "mundep.json")
 
   $('#categoria').on 'focusin', (e) ->
+# Otro método para autocompletar, usable cuando son pocas opciones para elegir
+#    este=$(this)
+#    $.ajax({
+#      url: "admin/categoriasprensa.json",
+#      dataType: "json",
+#      data: {
+#        term: ''
+#      }
+#    }).done( (d) -> 
+#        a = d.map( (f) -> 
+#           return { 
+#             value: f["id"],
+#             label: f["codigo"] + " " + f["nombre"]
+#           }
+#        )
+#        busca_gen(este, "#categoria_id", a)
+#    )
     busca_gen($(this), "#categoria_id", (request, response) ->
       $.ajax({
         url: "admin/categoriasprensa.json",
@@ -66,9 +83,20 @@
           labelvalue: 1
         },
         success: ( data ) -> 
-          response( data )
+          a = data.map( (f) -> 
+             return { 
+               value: f["id"],
+               label: f["codigo"] + " " + f["nombre"]
+             }
+          )
+          response( a )
       })
     )
+  # Ilumina la última vista
+  $(document).on('click', 'a.muestra-imagen', (e) ->
+    $('a.muestra-imagen').removeClass('ultimo-visto')
+    $(this).addClass('ultimo-visto') 
+  )
 
   $('#meses_rapido').on 'change', ->
     max = -1
