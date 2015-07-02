@@ -55,7 +55,7 @@ gem "bootstrap-datepicker-rails"
 gem "simple_form"
 
 # Formularios anidados (algunos con ajax)
-gem "cocoon", github: "vtamara/cocoon"
+#gem "cocoon", github: "vtamara/cocoon"
 
 # Autenticación y roles
 gem "devise"

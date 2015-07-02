@@ -41,3 +41,7 @@
 .ultimo-visto {
 	background-color: #A0A0FF;
 }
+
+.current {
+	font-weight: bold;
+}
