@@ -18,41 +18,70 @@ module Sal7711Gen
             @articulos = Articulo.all
             if (params[:fechaini] && params[:fechaini] != '')
               pfi = params[:fechaini]
-              pfid = Date.strptime(pfi, '%d-%m-%Y')
-              @articulos.where("fecha >= ?", pfid.strftime('%Y-%m-%d'))
+              if Rails.application.config.formato_fecha == 'dd-mm-yyyy'
+                pfid = Date.strptime(pfi, '%d-%m-%Y')
+              else
+                pfid = Date.strptime(pfi, '%Y-%m-%d')
+              end
+              @articulos = @articulos.where("fecha >= ?", pfid.strftime('%Y-%m-%d'))
             end
             if(params[:fechafin] && params[:fechafin] != '')
               pff = params[:fechafin]
-              pffd = Date.strptime(pff, '%d-%m-%Y')
-              @articulos.where("fecha <= ?", pffd.strftime('%Y-%m-%d'))
+              if Rails.application.config.formato_fecha == 'dd-mm-yyyy'
+                pffd = Date.strptime(pff, '%d-%m-%Y')
+              else
+                pffd = Date.strptime(pff, '%Y-%m-%d')
+              end
+              @articulos = @articulos.where("fecha <= ?", pffd.strftime('%Y-%m-%d'))
             end
             if (params[:mundep] && params[:mundep] != '')
               pmd = params[:mundep].split(" / ")
               if pmd.length == 1 # solo departamento
-                @articulos.where("departamento_id = ?", pmd[0])
+                dep = Sip::Departamento.all.where('nombre=?', pmd[0]).take
+                if dep
+                  @articulos = @articulos.where("departamento_id = ?", dep.id)
+                else
+                  @articulos = @articulos.where("departamento_id = '-1'")
+                end
               else # departamento y municipio
-                @articulos.where("municipio_id = ?", pmd[1])
+                dep = Sip::Departamento.all.where('nombre=?', pmd[1]).take
+                if dep
+                  mun = Sip::Municipio.all.where(
+                    'nombre=? AND id_departamento=?', pmd[0], dep.id).take
+                  if mun
+                    @articulos = @articulos.where("municipio_id = ?", mun.id)
+                  else
+                    @articulos = @articulos.where("municipio_id = '-1'")
+                  end
+                end
               end
             end
         
-            if(params[:fuente] && params[:fuente][:nombre] != '')
-              @articulos.where("fuente_id = ?", params[:fuente])
-            end
-            if(params[:pagina] && params[:pagina] != '')
-              @articulos.where("pagina = ?", params[:pagina])
-            end
-            if(params[:categoria_id] && params[:categoria_id] != '')
-              cat = Sal7711Gen::Categoriaprensa.find(params[:categoria_id]);
-              if cat.supracategoria
-                @articulos.where("CAST(pagina = ?", params[:categoria_id])
+            if(params[:fuente] && params[:fuente][:nombre] &&
+               params[:fuente][:nombre]  != '')
+              fu = Sip::Fuenteprensa.all.where(
+                'nombre=?', params[:fuente][:nombre]).take
+              if fu
+                @articulos = @articulos.where("fuenteprensa_id = ?", fu.id)
               else
-                @articulos.from(:sal7711_gen_articulo_categoriaprensa).where("CAST(pagina = ?", params[:categoria_id])
+                @articulos = @articulos.where("fuenteprensa_id = '-1'")
               end
             end
-            @articulos.order("fecha").select("id as itemnum, fecha as itemname")
-            #cons = @articulos.to_sql
-        		@numregistros = @articulos.count
-            @coltexto = "fecha"
+            if(params[:pagina] && params[:pagina] != '')
+              @articulos = @articulos.where("pagina = ?", params[:pagina])
+            end
+            if(params[:categoria] && params[:categoria] != '')
+              ccat = params[:categoria].upcase.split(' ')[0]
+              cat = Sal7711Gen::Categoriaprensa.where('codigo=?', ccat).take;
+              if cat
+                @articulos = @articulos.joins(:articulo_categoriaprensa).where(
+                  "categoriaprensa_id=?", cat)
+              end
+            end
+            @numregistros = @articulos.count
+            @articulos = @articulos.order("fecha").select(
+              "id AS id, fecha AS titulo")
+            @coltexto = "titulo"
             @colid = "id"
             pag = 1
             if (params[:pag])
@@ -69,7 +98,8 @@ module Sal7711Gen
               puts result
               arr = []
               result.try(:each) do |fila|
-                puts fila["itemname"]
+                byebug
+                puts fila[@coltexto]
                 arr.push(fila)
               end
               paginador.replace(arr)
@@ -90,9 +120,13 @@ module Sal7711Gen
               anio = Date.today.strftime("%Y").to_i
               @meses = []
               (0..23).each do |n|
+                if Rails.application.config.formato_fecha == 'dd-mm-yyyy'
+                  estem = mes.to_s.rjust(2, "0") + "-" + anio.to_s
+                else
+                  estem = anio.to_s + "-" + mes.to_s.rjust(2, "0")
+                end
                 @meses += [
-                  [I18n.t("date.month_names")[mes] + " " + anio.to_s, 
-                   mes.to_s.rjust(2, "0") + "-" + anio.to_s]
+                  [I18n.t("date.month_names")[mes] + " " + anio.to_s, estem]
                 ]
                 mes-=1
                 if mes == 0 
@@ -102,6 +136,12 @@ module Sal7711Gen
               end
             end
             prepara_pagina 
+            if params.count > 2
+              # 2 params que siempre estan son controller y action si hay
+              # más sería una consulta iniciada por usuario
+              Sal7711Gen::Bitacora.a( request.remote_ip, current_usuario, 
+                                     'index', params)
+            end
             respond_to do |format|
               format.html { }
               format.json { head :no_content }
@@ -144,7 +184,11 @@ module Sal7711Gen
             ruta = a.anexo.adjunto_file_name
             n = sprintf(Sip.ruta_anexos + "/%d_%s", a.anexo.id.to_i, 
                         File.basename(ruta))
-            titulo = a.fecha.to_s
+            if Rails.application.config.formato_fecha == 'dd-mm-yyyy'
+              titulo = a.fecha.strftime('%d-%m-%Y')
+            else
+              titulo = a.fecha.to_s
+            end
 #            dirl = Rails.root.join('public').to_s
 #            rutadescarga = "/assets/images/cache-articulos/" + 
 #              File.basename(ruta.gsub("\\", "/"))
@@ -197,6 +241,8 @@ module Sal7711Gen
                   end
                 end
               end
+              Sal7711Gen::Bitacora.a( request.remote_ip, current_usuario, 
+                         'mostraruno', rlocal)
               respond_to do |format|
                 format.html { render 'sal7711_gen/articulos/show', layout: nil}
                 format.json { head :no_content }

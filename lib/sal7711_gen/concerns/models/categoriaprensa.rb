@@ -9,6 +9,8 @@ module Sal7711Gen
 
         included do
 
+          validates :codigo, presence: true, allow_blank: false
+
           def presenta_nombre
             self.codigo + ' ' + self.nombre
           end          
