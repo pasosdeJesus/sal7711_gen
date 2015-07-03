@@ -206,6 +206,39 @@ ALTER SEQUENCE sal7711_gen_articulo_id_seq OWNED BY sal7711_gen_articulo.id;
 
 
 --
+-- Name: sal7711_gen_bitacora; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE sal7711_gen_bitacora (
+    id integer NOT NULL,
+    fecha timestamp without time zone,
+    ip character varying(100),
+    usuario_id integer,
+    operacion character varying(50),
+    detalle character varying(5000)
+);
+
+
+--
+-- Name: sal7711_gen_bitacora_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE sal7711_gen_bitacora_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: sal7711_gen_bitacora_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE sal7711_gen_bitacora_id_seq OWNED BY sal7711_gen_bitacora.id;
+
+
+--
 -- Name: sal7711_gen_categoriaprensa; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -435,6 +468,36 @@ CREATE TABLE sip_municipio (
     observaciones character varying(5000),
     CONSTRAINT municipio_check CHECK (((fechadeshabilitacion IS NULL) OR (fechadeshabilitacion >= fechacreacion)))
 );
+
+
+--
+-- Name: sip_mundep_sinorden; Type: VIEW; Schema: public; Owner: -
+--
+
+CREATE VIEW sip_mundep_sinorden AS
+ SELECT ((sip_departamento.id_deplocal * 1000) + sip_municipio.id_munlocal) AS idlocal,
+    (((sip_municipio.nombre)::text || ' / '::text) || (sip_departamento.nombre)::text) AS nombre
+   FROM (sip_municipio
+     JOIN sip_departamento ON ((sip_municipio.id_departamento = sip_departamento.id)))
+  WHERE (sip_departamento.id_pais = 170)
+UNION
+ SELECT sip_departamento.id_deplocal AS idlocal,
+    sip_departamento.nombre
+   FROM sip_departamento
+  WHERE (sip_departamento.id_pais = 170);
+
+
+--
+-- Name: sip_mundep; Type: MATERIALIZED VIEW; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE MATERIALIZED VIEW sip_mundep AS
+ SELECT sip_mundep_sinorden.idlocal,
+    sip_mundep_sinorden.nombre,
+    to_tsvector('spanish'::regconfig, unaccent(sip_mundep_sinorden.nombre)) AS mundep
+   FROM sip_mundep_sinorden
+  ORDER BY (sip_mundep_sinorden.nombre COLLATE es_co_utf_8)
+  WITH NO DATA;
 
 
 --
@@ -741,6 +804,13 @@ ALTER TABLE ONLY sal7711_gen_articulo ALTER COLUMN id SET DEFAULT nextval('sal77
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY sal7711_gen_bitacora ALTER COLUMN id SET DEFAULT nextval('sal7711_gen_bitacora_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY sal7711_gen_categoriaprensa ALTER COLUMN id SET DEFAULT nextval('sal7711_gen_categoriaprensa_id_seq'::regclass);
 
 
@@ -804,6 +874,14 @@ ALTER TABLE ONLY sip_persona_trelacion
 
 ALTER TABLE ONLY sal7711_gen_articulo
     ADD CONSTRAINT sal7711_gen_articulo_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: sal7711_gen_bitacora_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY sal7711_gen_bitacora
+    ADD CONSTRAINT sal7711_gen_bitacora_pkey PRIMARY KEY (id);
 
 
 --
@@ -958,6 +1036,13 @@ CREATE UNIQUE INDEX index_usuario_on_email ON usuario USING btree (email);
 
 
 --
+-- Name: sip_busca_mundep; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX sip_busca_mundep ON sip_mundep USING gin (mundep);
+
+
+--
 -- Name: unique_schema_migrations; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -978,6 +1063,14 @@ ALTER TABLE ONLY sip_clase
 
 ALTER TABLE ONLY sip_departamento
     ADD CONSTRAINT departamento_id_pais_fkey FOREIGN KEY (id_pais) REFERENCES sip_pais(id);
+
+
+--
+-- Name: fk_rails_52d9d2f700; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY sal7711_gen_bitacora
+    ADD CONSTRAINT fk_rails_52d9d2f700 FOREIGN KEY (usuario_id) REFERENCES usuario(id);
 
 
 --
@@ -1160,7 +1253,7 @@ ALTER TABLE ONLY sip_ubicacion
 -- PostgreSQL database dump complete
 --
 
-SET search_path TO "$user",public;
+SET search_path TO public, pg_catalog;
 
 INSERT INTO schema_migrations (version) VALUES ('20150413160156');
 
@@ -1182,6 +1275,8 @@ INSERT INTO schema_migrations (version) VALUES ('20150510130031');
 
 INSERT INTO schema_migrations (version) VALUES ('20150521181918');
 
+INSERT INTO schema_migrations (version) VALUES ('20150528100944');
+
 INSERT INTO schema_migrations (version) VALUES ('20150603181900');
 
 INSERT INTO schema_migrations (version) VALUES ('20150604101858');
@@ -1189,4 +1284,6 @@ INSERT INTO schema_migrations (version) VALUES ('20150604101858');
 INSERT INTO schema_migrations (version) VALUES ('20150604102321');
 
 INSERT INTO schema_migrations (version) VALUES ('20150604155923');
+
+INSERT INTO schema_migrations (version) VALUES ('20150702224217');
 
