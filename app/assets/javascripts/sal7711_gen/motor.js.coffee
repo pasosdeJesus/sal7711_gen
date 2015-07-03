@@ -98,6 +98,14 @@
     $(this).addClass('ultimo-visto') 
   )
 
+  $('#historial').on('click', (e) ->
+    e.stopPropagation()
+    e.preventDefault()
+    $.get('bitacorausuario', (d) ->
+      $('#resultados').html(d)
+    )
+  )
+
   $('#meses_rapido').on 'change', ->
     max = -1
     min = -1
@@ -107,8 +115,13 @@
       min = $(this).val()
       return
     )
-    $("#fechaini").val("01-" + min)
-    $("#fechafin").val(diasEnMes(max) + "-" + max)
+    f = $('[data-behaviour~=datepicker]').first().data('datepicker').o.format
+    if f == 'dd-mm-yyyy' 
+      $("#fechaini").val("01-" + min)
+      $("#fechafin").val(diasEnMes(max) + "-" + max)
+    else
+      $("#fechaini").val(min + "-01")
+      $("#fechafin").val(max + "-" + diasEnMes(max))
     marca = false
     op=[]
     $("#meses_rapido option").each( ->

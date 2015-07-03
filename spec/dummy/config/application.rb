@@ -27,6 +27,8 @@ module Dummy
 
     config.active_record.schema_format = :sql
 
+    config.formato_fecha = 'yyyy-mm-dd'
+
     FactoryGirl.definition_file_paths << Pathname.new("../factories") 
     FactoryGirl.definition_file_paths.uniq! 
     FactoryGirl.find_definitions

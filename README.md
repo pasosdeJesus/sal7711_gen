@@ -16,3 +16,11 @@ Puede consultar como instalar estos componentes en: http://dhobsd.pasosdejesus.o
 Es como otros motores, se recomienda ver cor1440_gen en
 https://github.com/pasosdeJesus/cor1440_gen
 
+### Configuración 
+
+* Configure el formato de la fecha en config/application.rb bien con ```config.formato_fecha = 'yyyy-mm-dd'``` o  bien con ```config.formato_fecha = 'dd-mm-yyyy'```
+* En el layout general que utilize asegurese de agregar:
+```
+<meta name="formato_fecha" content="<%= Rails.application.config.formato_fecha  ? Rails.application.config.formato_fecha : 'yyyy-mm-dd' %>">
+```
+
