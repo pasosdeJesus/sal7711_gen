@@ -98,7 +98,7 @@ module Sal7711Gen
               puts result
               arr = []
               result.try(:each) do |fila|
-                byebug
+                #byebug
                 puts fila[@coltexto]
                 arr.push(fila)
               end
