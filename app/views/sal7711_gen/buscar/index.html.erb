@@ -9,14 +9,14 @@
       <div class="panel-heading">Filtro</div>
       <div class="panel-body">
         <div class="input">
-          <label for="fechaini" class="control-label">Rango de Fechas:</label>
+          <label for="fechaini" class="control-label">De:</label>
           <%= text_field_tag 'fechaini', @fechaini, maxlength: 10, size: 12, 
             "data-behaviour" => "datepicker", "data-contarautomatico" => "",
             value: @fechaini
           %> 
-          -
-            <%= text_field_tag 'fechafin', @fechafin, maxlength: 10, size: 12, 
-            "data-behaviour" => "datepicker", "data-contarautomatico" => "" 
+          <label for="fechafin" class="control-label">Hasta:</label>
+          <%= text_field_tag 'fechafin', @fechafin, maxlength: 10, size: 12, 
+          "data-behaviour" => "datepicker", "data-contarautomatico" => "" 
           %>
         </div>
         <div class="input string">
@@ -58,6 +58,7 @@
 
         <%= submit_tag "Buscar", {class: 'btn'} %>
         <%= button_tag "Limpiar", type: :reset, class: 'btn' %>
+        <%= button_tag "Historial", {id: 'historial', class: 'btn'} %>
       </div>
     </div>
 
