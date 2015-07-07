@@ -7,7 +7,6 @@ script: CODECLIMATE_REPO_TOKEN=a428acc14864346a703c3514c241e97f21c24a69ae6f6f25f
 env:
         global:
                 - NOKOGIRI_USE_SYSTEM_LIBRARIES=true
-                - JRUBY_OPTS=-Xcext.enabled=true
 before_install: 
         - sudo apt-add-repository -y ppa:ubuntu-sdk-team/ppa
         - sudo apt-get update
