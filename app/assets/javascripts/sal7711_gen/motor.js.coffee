@@ -118,7 +118,9 @@
     f = $('[data-behaviour~=datepicker]').first().data('datepicker').o.format
     if f == 'dd-mm-yyyy' 
       $("#fechaini").val("01-" + min)
+      $("#fechaini").datepicker("update", "01-" + min)
       $("#fechafin").val(diasEnMes(max) + "-" + max)
+      $("#fechafin").datepicker("update", diasEnMes(max) + "-" + max)
     else
       $("#fechaini").val(min + "-01")
       $("#fechafin").val(max + "-" + diasEnMes(max))
