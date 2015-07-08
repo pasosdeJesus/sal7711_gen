@@ -6,7 +6,7 @@ module Sal7711Gen
       ['Sal7711Gen', 'categoriaprensa']
     ]
 
-    @@tablasbasicas = Sip::Ability::TABLAS_SIP - [
+    @@tablasbasicas -= [
       ['Sip', 'tdocumento'],
       ['Sip', 'clase'],
       ['Sip', 'etiqueta'],
@@ -15,13 +15,14 @@ module Sal7711Gen
       ['Sip', 'tdocumento'],
       ['Sip', 'trelaciones'],
       ['Sip', 'tsitio'],
-    ] + BASICAS_NUEVAS
+    ] 
+    @@tablasbasicas += BASICAS_NUEVAS
 
     BASICAS_SID_NUEVAS = [
       ['Sal7711Gen', 'categoriaprensa']
     ]
 
-    @@basicas_seq_con_id = Sip::Ability::TABLAS_SIP_SEQID + BASICAS_SID_NUEVAS
+    @@basicas_seq_con_id += BASICAS_SID_NUEVAS
 
 	end
 end
