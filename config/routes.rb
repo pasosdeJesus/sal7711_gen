@@ -1,10 +1,10 @@
 Sal7711Gen::Engine.routes.draw do
 
-  get 'buscar/:id', to: 'buscar#mostraruno'
-  get 'buscar' => 'buscar#index'
-  get 'mundep' => 'buscar#mundep'
-  get 'codigo' => 'admin/categoriaprensa#busca'
-  get 'articulos' => 'buscar#index'
+  get 'buscar/:id', to: 'buscar#mostraruno', as: 'buscar_mostraruno'
+  get 'buscar' => 'buscar#index', as: 'buscar'
+  get 'mundep' => 'buscar#mundep', as: 'buscar_mundep'
+  get 'codigo' => 'admin/categoriaprensa#busca', as: 'categoriaprensa_busca'
+  get 'articulos' => 'buscar#index', as: 'articulos'
   get 'bitacorausuario' => 'bitacora#usuario', as: 'bitacora_usuario'
 
   resources :articulos, path_names: { new: 'nuevo', edit: 'edita' },
