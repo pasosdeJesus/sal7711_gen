@@ -6,7 +6,7 @@ module Sal7711Gen
     serialize :detalle
 
     def self.a(ip, usuario, operacion, detalle)
-      b = Bitacora.new(fecha: Date.today,
+      b = Bitacora.new(fecha: Time.now.utc.iso8601,
                    ip: ip,
                    usuario_id: usuario.id,
                    operacion: operacion,
