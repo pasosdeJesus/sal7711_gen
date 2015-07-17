@@ -9,7 +9,12 @@ module Sal7711Gen
 
         included do
 
-          validates :codigo, presence: true, allow_blank: false
+          validates :codigo, presence: true, allow_blank: false, 
+            uniqueness: { case_senstivie: false }
+
+          def codigo=(val)
+            self[:codigo] = val.upcase.squish
+          end
 
           def presenta_nombre
             self.codigo + ' ' + self.nombre
