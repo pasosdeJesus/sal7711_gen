@@ -13,7 +13,7 @@ module Sal7711Gen
       ['Sip', 'oficina'],
       ['Sip', 'tclase'],
       ['Sip', 'tdocumento'],
-      ['Sip', 'trelaciones'],
+      ['Sip', 'trelacion'],
       ['Sip', 'tsitio']
     ] 
 
