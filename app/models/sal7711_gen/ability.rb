@@ -5,9 +5,7 @@ module Sal7711Gen
     BASICAS_PROPIAS = [
       ['Sal7711Gen', 'categoriaprensa']
     ]
-
     @@tablasbasicas = Sip::Ability::BASICAS_PROPIAS + BASICAS_PROPIAS - [
-      ['Sip', 'tdocumento'],
       ['Sip', 'clase'],
       ['Sip', 'etiqueta'],
       ['Sip', 'oficina'],
@@ -16,6 +14,15 @@ module Sal7711Gen
       ['Sip', 'trelacion'],
       ['Sip', 'tsitio']
     ] 
+
+    BASICAS_ID_NOAUTO = []
+    # Hereda @@basicas_id_noauto de sip
+   
+    NOBASICAS_INDSEQID =  []
+    # Hereda @@nobasicas_indice_seq_con_id de sip
+   
+    BASICAS_PRIO = []
+    # Hereda @@tablasbasicas_prio de sip
 
 	end
 end
