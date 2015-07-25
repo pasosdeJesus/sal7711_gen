@@ -1,7 +1,7 @@
 #!/bin/sh
 # Hace pruebas, pruebas de regresión y envia a github
 
-grep "^ *gem.*sip.*, *path:" Gemfile > /dev/null 2> /dev/null
+grep "^ *gem.*sip.*,.*path:" Gemfile > /dev/null 2> /dev/null
 if (test "$?" = "0") then {
 	echo "Gemfile incluye un sip cableado al sistema de archivos"
 	exit 1;
