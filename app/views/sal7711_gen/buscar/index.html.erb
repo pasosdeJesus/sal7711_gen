@@ -23,14 +23,14 @@
         </div>
         <div class="input string">
           <label for="mundep">Municipio/Departamento:</label>
-          <%= text_field_tag 'mundep', nil, maxlength: 20, size: 20, 
+          <%= text_field_tag 'mundep', nil, maxlength: 150, 
             class: 'form-control' 
           %>
           <%= hidden_field_tag 'mundep_id' %>
         </div>
         <div class="input string">
           <label for="categoria">Categoria:</label>
-          <%= text_field_tag 'categoria', nil, maxlength: 20, size: 20, 
+          <%= text_field_tag 'categoria', nil, maxlength: 1500,  
             class: 'form-control' 
           %>
           <%= hidden_field_tag 'categoria_id' %>
@@ -47,7 +47,7 @@
         </div>
         <div class="input string">
           <label for="pagina">Página Fuente:</label>
-          <%= text_field_tag 'pagina', @pagina, maxlength: 20, size: 20, 
+          <%= text_field_tag 'pagina', @pagina, maxlength: 20,
             class: 'form-control'
           %>
         </div>
