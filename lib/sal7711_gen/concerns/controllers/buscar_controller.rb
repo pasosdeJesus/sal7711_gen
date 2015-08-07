@@ -12,12 +12,12 @@ module Sal7711Gen
           # entradas por página
           @@porpag = 20 
 
-
           # Prepara una página de resultados
           def prepara_pagina
+            #byebug
             @articulos = Articulo.all
-            if (params[:fechaini] && params[:fechaini] != '')
-              pfi = params[:fechaini]
+            if (params[:buscar] && params[:buscar][:fechaini] && params[:buscar][:fechaini] != '')
+              pfi = params[:buscar][:fechaini]
               if Rails.application.config.formato_fecha == 'dd-mm-yyyy'
                 pfid = Date.strptime(pfi, '%d-%m-%Y')
               else
@@ -25,8 +25,8 @@ module Sal7711Gen
               end
               @articulos = @articulos.where("fecha >= ?", pfid.strftime('%Y-%m-%d'))
             end
-            if(params[:fechafin] && params[:fechafin] != '')
-              pff = params[:fechafin]
+            if(params[:buscar] && params[:buscar][:fechafin] && params[:buscar][:fechafin] != '')
+              pff = params[:buscar][:fechafin]
               if Rails.application.config.formato_fecha == 'dd-mm-yyyy'
                 pffd = Date.strptime(pff, '%d-%m-%Y')
               else
@@ -34,8 +34,8 @@ module Sal7711Gen
               end
               @articulos = @articulos.where("fecha <= ?", pffd.strftime('%Y-%m-%d'))
             end
-            if (params[:mundep] && params[:mundep] != '')
-              pmd = params[:mundep].split(" / ")
+            if (params[:buscar] && params[:buscar][:mundep] && params[:buscar][:mundep] != '')
+              pmd = params[:buscar][:mundep].split(" / ")
               if pmd.length == 1 # solo departamento
                 dep = Sip::Departamento.all.where('nombre=?', pmd[0]).take
                 if dep
@@ -57,30 +57,32 @@ module Sal7711Gen
               end
             end
         
-            if(params[:fuente] && params[:fuente][:nombre] &&
-               params[:fuente][:nombre]  != '')
-              fu = Sip::Fuenteprensa.all.where(
-                'nombre=?', params[:fuente][:nombre]).take
+            if(params[:buscar] && params[:buscar][:fuente] && 
+               params[:buscar][:fuente]  != '')
+              fu = Sip::Fuenteprensa.all.find(params[:buscar][:fuente])
               if fu
                 @articulos = @articulos.where("fuenteprensa_id = ?", fu.id)
               else
                 @articulos = @articulos.where("fuenteprensa_id = '-1'")
               end
             end
-            if(params[:pagina] && params[:pagina] != '')
-              @articulos = @articulos.where("pagina = ?", params[:pagina])
+            if(params[:buscar] && params[:buscar][:pagina] && 
+               params[:buscar][:pagina] != '')
+              @articulos = @articulos.where("pagina = ?", params[:buscar][:pagina])
             end
-            if(params[:categoria] && params[:categoria] != '')
-              ccat = params[:categoria].upcase.split(' ')[0]
+            if(params[:buscar] && params[:buscar][:categoria] && 
+               params[:buscar][:categoria] != '')
+              ccat = params[:buscar][:categoria].upcase.split(' ')[0]
               cat = Sal7711Gen::Categoriaprensa.where('codigo=?', ccat).take;
               if cat
-                @articulos = @articulos.joins(:articulo_categoriaprensa).where(
-                  "categoriaprensa_id=?", cat)
+                @articulos = @articulos.joins(
+                  :articulo_categoriaprensa).where(
+                    "categoriaprensa_id=?", cat)
               end
             end
             @numregistros = @articulos.count
-            @articulos = @articulos.order("fecha").select(
-              "id AS id, fecha AS titulo")
+            @articulos = @articulos.joins(:anexo).order("fecha").select(
+              "sal7711_gen_articulo.id AS id, sip_anexo.descripcion AS titulo")
             @coltexto = "titulo"
             @colid = "id"
             pag = 1

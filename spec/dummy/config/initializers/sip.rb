@@ -7,5 +7,5 @@ Sip.setup do |config|
       if ENV["HEROKU_POSTGRESQL_MAUVE_URL"]
         config.ruta_anexos = "#{Rails.root}/tmp/"
       end
-      config.titulo = "Sal7711 - Versión " + Sal7711Gen::VERSION
+      config.titulo = "Sal7711 Ver. " + Sal7711Gen::VERSION
 end

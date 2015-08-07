@@ -1,69 +1,134 @@
-<div id="filtro" class="pull-left">
-  <%= form_tag(buscar_path, method: "get", remote: true) do %>
-
+<div id="filtro" class="col-xs-offset-0 col-xs-5 col-md-4">
+  <!--%= form_tag(buscar_path, method: "get", remote: true) do %-->
+  <%= simple_form_for :buscar, 
+    { url: buscar_path, method: "get", remote: true } do |f| 
+  %>
     <div class="panel panel-default">
       <div class="panel-heading">Filtro</div>
       <div class="panel-body">
-        <div class="input">
-          <label for="fechaini" class="control-label">De:</label>
-          <%= text_field_tag 'fechaini', @fechaini, maxlength: 10, size: 12, 
-            "data-behaviour" => "datepicker", "data-contarautomatico" => "",
-            value: @fechaini
-          %> 
-          <label for="fechafin" class="control-label">Hasta:</label>
-          <%= text_field_tag 'fechafin', @fechafin, maxlength: 10, size: 12, 
-          "data-behaviour" => "datepicker", "data-contarautomatico" => "" 
-          %>
-        </div>
-        <div class="input string">
-          <label for="meses_rapido">Meses:</label>
-          <%= select_tag "meses_rapido", options_for_select(@meses), 
+        <div class="rango-fechas">
+          <div class="col-md-6">
+            <%= f.input :fechaini,
+              maxlength: 10,
+              size: 12,
+              label: false,
+              placeholder: 'Desde',
+              value: @fechaini, 
+              input_html: {
+                "data-behaviour": "datepicker",
+                "data-contarautomatic": ""
+              }
+            %>
+            <!-- label for="fechaini" class="control-label">De:</label-->
+            <!--%= text_field_tag 'fechaini', @fechaini, maxlength: 10, size: 12, 
+              "data-behaviour" => "datepicker", "data-contarautomatico" => "",
+              value: @fechaini
+            %--> 
+          </div>
+          <div class="col-md-6">
+            <%= f.input :fechafin,
+              maxlength: 10,
+              size: 12,
+              label: false,
+              placeholder: 'Hasta',
+              required: false,
+              value: @fechafin,
+              input_html: {
+                "data-behaviour": "datepicker",
+                "data-contarautomatic": ""
+              }
+            %>
+            <!--label for="fechafin" class="control-label">Hasta:</label-->
+            <!-- %= text_field_tag 'fechafin', @fechafin, maxlength: 10, size: 12, 
+              "data-behaviour" => "datepicker", "data-contarautomatico" => "" 
+            %-->
+          </div>
+        <!--div class="input string"!-->
+            <%= f.input :meses_rapido, 
+              collection: @meses,
+              label: 'Meses',
+              input_html: { class: 'multiselectuser', multiple: true},
+              size: 7,
+              required: false
+            %>
+          <!--label for="meses_rapido">Meses:</label-->
+          <!--%= select_tag "meses_rapido", options_for_select(@meses), 
             {multiple: true, size: 7, class: 'form-control'}
-          %>
+          %-->
         </div>
-        <div class="input string">
-          <label for="mundep">Municipio/Departamento:</label>
-          <%= text_field_tag 'mundep', nil, maxlength: 150, 
+        <%= f.input :mundep,
+          label: 'Municipio / Departamento',
+          required: false,
+          maxlength: 150
+        %>
+
+          <!--label for="mundep">Municipio/Departamento:</label-->
+          <!--%= text_field_tag 'mundep', nil, maxlength: 150, 
             class: 'form-control' 
-          %>
+          %-->
           <%= hidden_field_tag 'mundep_id' %>
-        </div>
-        <div class="input string">
-          <label for="categoria">Categoria:</label>
-          <%= text_field_tag 'categoria', nil, maxlength: 1500,  
+
+        <%= f.input :categoria,
+          label: 'Categoria',
+          required: false,
+          maxlength: 1500
+        %>
+        <!--div class="input string">
+          <label for="categoria">Categoria:</label-->
+          <!--%= text_field_tag 'categoria', nil, maxlength: 1500,  
             class: 'form-control' 
-          %>
+          %-->
           <%= hidden_field_tag 'categoria_id' %>
-        </div>
-        <div class="input string">
+          <!--/div-->
+        <%= f.input :fuente,
+          collection: Sip::Fuenteprensa.habilitados,
+          label: 'Fuente',
+          label_method: :nombre,
+          value_method: :id,
+          include_blank: '',
+          input_html: { class: 'chosen-select'},
+          required: false
+        %>
+
+        <!--div class="input string">
           <label for="fuente">Fuente:</label>
-          <div class="form-control">
-            <%= collection_select :fuente, :nombre, 
+          <div class="form-control"-->
+            <!--%= collection_select :fuente, :nombre, 
               Sip::Fuenteprensa.habilitados, 
               :nombre, :nombre, { :include_blank => "" }, 
               { class: 'chosen-select' }
-            %>
-          </div>
-        </div>
-        <div class="input string">
-          <label for="pagina">Página Fuente:</label>
-          <%= text_field_tag 'pagina', @pagina, maxlength: 20,
-            class: 'form-control'
-          %>
-        </div>
+            %-->
+          <!--/div>
+        </div-->
+        <%= f.input :pagina,
+          label: 'Página en Fuente:',
+          required: false,
+          maxlength: 150
+        %>
 
-        <%= submit_tag "Buscar", {class: 'btn'} %>
-        <%= button_tag "Limpiar", type: :reset, class: 'btn' %>
-        <%= button_tag "Historial", {id: 'historial', class: 'btn'} %>
+
+        <!--div class="input string">
+          <label for="pagina">Página Fuente:</label-->
+          <!--%= text_field_tag 'pagina', @pagina, maxlength: 20,
+            class: 'form-control'
+          %-->
+        <!--/div-->
+
+        <%= f.button :submit, 'Buscar' %>
+        <!--%= submit_tag "Buscar", {class: 'btn'} %-->
+        <%= f.button :button, 'Limpiar', type: :reset %>
+        <!--%= button_tag "Limpiar", type: :reset, class: 'btn' %-->
+        <%= f.button :button, 'Historial', id: 'historial' %>
+        <!--%= button_tag "Historial", {id: 'historial', class: 'btn'} %-->
+        <br>
       </div>
     </div>
 
   <% end %>
 </div>
 
-<div id="resultados" class="pull-right">
+<div id="resultados" class="col-xs-offset-0 col-xs-7 col-md-8">
   <% if @entradas %>
     <%= render 'resultados_busqueda' %>
   <% end %>
 </div> <!-- id: resultados -->
-

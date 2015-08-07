@@ -51,12 +51,12 @@
     allow_single_deselect: true
     no_results_text: 'No hay resultados',
     placeholder_text_single: 'Elija una opción',
-    width: '300px'
+    width: '100%'
 
-  $('#mundep').on 'focusin', (e) ->
-    busca_gen($(this), "#mundep_id", "mundep.json")
+  $('#buscar_mundep').on 'focusin', (e) ->
+    busca_gen($(this), "#buscar_mundep_id", "mundep.json")
 
-  $('#categoria').on 'focusin', (e) ->
+  $('#buscar_categoria').on 'focusin', (e) ->
 # Otro método para autocompletar, usable cuando son pocas opciones para elegir
 #    este=$(this)
 #    $.ajax({
@@ -72,9 +72,9 @@
 #             label: f["codigo"] + " " + f["nombre"]
 #           }
 #        )
-#        busca_gen(este, "#categoria_id", a)
+#        busca_gen(este, "#buscar_categoria_id", a)
 #    )
-    busca_gen($(this), "#categoria_id", (request, response) ->
+    busca_gen($(this), "#buscar_categoria_id", (request, response) ->
       $.ajax({
         url: "admin/categoriasprensa.json",
         dataType: "json",
@@ -98,7 +98,7 @@
     $(this).addClass('ultimo-visto') 
   )
 
-  $('#historial').on('click', (e) ->
+  $('#buscar_historial').on('click', (e) ->
     e.stopPropagation()
     e.preventDefault()
     $.get('bitacorausuario', (d) ->
@@ -106,10 +106,10 @@
     )
   )
 
-  $('#meses_rapido').on 'change', ->
+  $('#buscar_meses_rapido').on 'change', ->
     max = -1
     min = -1
-    $("#meses_rapido option:selected").each( ->
+    $("#buscar_meses_rapido option:selected").each( ->
       if max==-1 
         max = $(this).val()
       min = $(this).val()
@@ -117,16 +117,16 @@
     )
     f = $('[data-behaviour~=datepicker]').first().data('datepicker').o.format
     if f == 'dd-mm-yyyy' 
-      $("#fechaini").val("01-" + min)
-      $("#fechaini").datepicker("update", "01-" + min)
-      $("#fechafin").val(diasEnMes(max) + "-" + max)
-      $("#fechafin").datepicker("update", diasEnMes(max) + "-" + max)
+      $("#buscar_fechaini").val("01-" + min)
+      $("#buscar_fechaini").datepicker("update", "01-" + min)
+      $("#buscar_fechafin").val(diasEnMes(max) + "-" + max)
+      $("#buscar_fechafin").datepicker("update", diasEnMes(max) + "-" + max)
     else
-      $("#fechaini").val(min + "-01")
-      $("#fechafin").val(max + "-" + diasEnMes(max))
+      $("#buscar_fechaini").val(min + "-01")
+      $("#buscar_fechafin").val(max + "-" + diasEnMes(max))
     marca = false
     op=[]
-    $("#meses_rapido option").each( ->
+    $("#buscar_meses_rapido option").each( ->
       if $(this).val() == max
         marca = true
       if marca
@@ -135,7 +135,7 @@
         marca = false
       return
     )
-    $("#meses_rapido").val(op)
+    $("#buscar_meses_rapido").val(op)
     return
   return
 
