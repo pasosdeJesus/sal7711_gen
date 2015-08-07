@@ -10,11 +10,45 @@ module Sal7711Gen
       #logger.debug "Anexo salvado: #{@articulo.anexo.inspect}"
     end
 
+    def gen_descripcion(articulos_params)
+      ndep = '';
+      if articulo_params['departamento_id'] && 
+        articulo_params['departamento_id'] != ''
+        dep = Sip::Departamento.find(articulo_params['departamento_id'])
+        ndep = dep.nombre;
+      end
+      nmun = '';
+      if articulo_params['municipio_id'] && 
+        articulo_params['municipio_id'] != ''
+        mun= Sip::Municipio.find(articulo_params['municipio_id'])
+        nmun= mun.nombre;
+      end
+      nfuente = '';
+      if articulo_params['fuenteprensa_id'] && 
+        articulo_params['fuenteprensa_id'] != ''
+        fu = Sip::Fuenteprensa.find(articulo_params['fuenteprensa_id'])
+        nfuente = fu.nombre;
+      end
+      ncat = '';
+      if articulo_params['categoriaprensa_ids'] && 
+        articulo_params['categoriaprensa_ids'].count > 0
+        articulo_params['categoriaprensa_ids'].sort.each { |i|
+          if i != ''
+            cat = Sal7711Gen::Categoriaprensa.find(i)
+            ncat += (ncat == "" ? "" : ", ") + cat.codigo
+          end
+        }
+      end
+      return articulo_params['fecha'] + " | " + ncat + " | " +
+        " | " + nmun+ " / " + ndep + " | " + nfuente + " | " + 
+        articulo_params['pagina']
+    end
+
     # POST /articulos
     # POST /articulos.json
     def create
       @articulo = Sal7711Gen::Articulo.new(articulo_params)
-      @articulo.anexo.descripcion = "J"
+      @articulo.anexo.descripcion = gen_descripcion(articulo_params)
       @articulo.anexo.save
 
       respond_to do |format|
@@ -35,6 +69,7 @@ module Sal7711Gen
     # PATCH/PUT /articulos/1
     # PATCH/PUT /articulos/1.json
     def update
+      @articulo.anexo.descripcion = gen_descripcion(articulo_params)
       respond_to do |format|
         if @articulo.update(articulo_params)
           format.html { redirect_to @articulo, notice: 'Artículo actualizado.' }
