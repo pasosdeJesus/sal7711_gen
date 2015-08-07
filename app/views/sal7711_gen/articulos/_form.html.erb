@@ -42,7 +42,7 @@
 
   <%= f.simple_fields_for :anexo do |a| %>
 
-    <% if !a.object|| !a.object.adjunto_file_name %>
+    <% if !a.object || !a.object.id || !a.object.adjunto_file_name %>
       <%= a.input :adjunto, as: :file, label: 'Archivo' %>
     <% else %>
       <div class="actividad_sip_anexo_adjunto">
