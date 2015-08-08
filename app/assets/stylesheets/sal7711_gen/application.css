@@ -11,8 +11,8 @@
  * file per style scope.
  *
  *= require_self
- *= require lazybox
  *= require chosen
+ *= require font-awesome 
  *= require sip/application.css
  *= require_tree .
  */
