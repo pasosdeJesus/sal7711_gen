@@ -47,3 +47,10 @@ body {
 .current {
 	font-weight: bold;
 }
+
+.modal-title {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+}
