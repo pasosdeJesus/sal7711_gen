@@ -105,6 +105,25 @@
     )
   )
 
+  $(document).on 'click', '#imagen-acercar', (e) ->
+    e.preventDefault();
+    e.stopPropagation();
+    cp = $('#imagen-detalle').width()*100/$('#imagen-detalle').parent().width();
+    np = Math.floor(cp + 10)
+    $('#imagen-detalle').width(np + "%");
+    return
+
+  $(document).on 'click', '#imagen-alejar', (e) ->
+    e.preventDefault();
+    e.stopPropagation();
+    cp = $('#imagen-detalle').width()*100/$('#imagen-detalle').parent().width();
+    if cp > 10
+      np = Math.floor(cp - 10)
+    else
+      np = 0
+    $('#imagen-detalle').width(np + "%");
+    return
+
   $('#buscar_meses_rapido').on 'change', ->
     max = -1
     min = -1
