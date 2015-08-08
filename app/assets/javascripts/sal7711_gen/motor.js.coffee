@@ -3,7 +3,6 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 #//= require chosen-jquery
-#//= require lazybox
 
 # Basado en
 # http://stackoverflow.com/questions/1184334/get-number-days-in-a-specified-month-using-javascript
