@@ -191,15 +191,7 @@ module Sal7711Gen
             else
               titulo = a.fecha.to_s
             end
-#            dirl = Rails.root.join('public').to_s
-#            rutadescarga = "/assets/images/cache-articulos/" + 
-#              File.basename(ruta.gsub("\\", "/"))
-#            rlocal = dirl + image_path(rutadescarga)
-#            puts "OJO rlocal=#{rlocal}"
-#            if !File.exists? rlocal
-#              FileUtils.mkdir_p(dirl + "/assets/images/cache-articulos/")
-#              FileUtils.cp(n, rlocal)
-#            end
+            titulo = a.anexo.descripcion
             return [titulo, n]
           end
 
@@ -215,6 +207,7 @@ module Sal7711Gen
               end
               titulo, rlocal = descarga(id, rutacache)
               @titulo = titulo
+              @id = id
               # Convierte a jpg
               nomar = titulo.gsub(/[^0-9A-Za-z.\-]/, '_')  + "-" + id.to_s
               @descargajpg = urlcache + nomar + ".jpg"

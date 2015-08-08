@@ -1,2 +1,7 @@
-$.lazybox("<%= j(render 'imagen') %>", { klass: 'lazybox' })
-
+$('.modal-title').text("<%= @titulo %>")
+$('#imagen-nueva-ventana').prop('href', '/buscar/' +
+                                '<%= CGI.escapeHTML(@id.to_s) %>')
+$('.modal-body').html("<%= j(render 'imagen') %>")
+av = window.innerHeight*0.9 - 100;
+$('.modal-body').css('max-height', av)
+$('#modal-imagen').modal('show')

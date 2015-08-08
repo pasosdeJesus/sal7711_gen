@@ -1,5 +1,4 @@
 <div id="filtro" class="col-sm-offset-0 col-sm-5 col-md-4">
-  <!--%= form_tag(buscar_path, method: "get", remote: true) do %-->
   <%= simple_form_for :buscar, 
     { url: buscar_path, method: "get", remote: true } do |f| 
   %>
@@ -19,11 +18,6 @@
                 "data-contarautomatic": ""
               }
             %>
-            <!-- label for="fechaini" class="control-label">De:</label-->
-            <!--%= text_field_tag 'fechaini', @fechaini, maxlength: 10, size: 12, 
-              "data-behaviour" => "datepicker", "data-contarautomatico" => "",
-              value: @fechaini
-            %--> 
           </div>
           <div class="col-md-6">
             <%= f.input :fechafin,
@@ -38,48 +32,30 @@
                 "data-contarautomatic": ""
               }
             %>
-            <!--label for="fechafin" class="control-label">Hasta:</label-->
-            <!-- %= text_field_tag 'fechafin', @fechafin, maxlength: 10, size: 12, 
-              "data-behaviour" => "datepicker", "data-contarautomatico" => "" 
-            %-->
           </div>
-        <!--div class="input string"!-->
-            <%= f.input :meses_rapido, 
-              collection: @meses,
-              label: 'Meses',
-              input_html: { class: 'multiselectuser', multiple: true},
-              size: 7,
-              required: false
-            %>
-          <!--label for="meses_rapido">Meses:</label-->
-          <!--%= select_tag "meses_rapido", options_for_select(@meses), 
-            {multiple: true, size: 7, class: 'form-control'}
-          %-->
+          <%= f.input :meses_rapido, 
+            collection: @meses,
+            label: 'Meses',
+            input_html: { class: 'multiselectuser', multiple: true},
+            size: 7,
+            required: false
+          %>
         </div>
+
         <%= f.input :mundep,
           label: 'Municipio / Departamento',
           required: false,
           maxlength: 150
         %>
-
-          <!--label for="mundep">Municipio/Departamento:</label-->
-          <!--%= text_field_tag 'mundep', nil, maxlength: 150, 
-            class: 'form-control' 
-          %-->
-          <%= hidden_field_tag 'mundep_id' %>
+        <%= hidden_field_tag 'mundep_id' %>
 
         <%= f.input :categoria,
           label: 'Categoria',
           required: false,
           maxlength: 1500
         %>
-        <!--div class="input string">
-          <label for="categoria">Categoria:</label-->
-          <!--%= text_field_tag 'categoria', nil, maxlength: 1500,  
-            class: 'form-control' 
-          %-->
-          <%= hidden_field_tag 'categoria_id' %>
-          <!--/div-->
+        <%= hidden_field_tag 'categoria_id' %>
+
         <%= f.input :fuente,
           collection: Sip::Fuenteprensa.habilitados,
           label: 'Fuente',
@@ -90,36 +66,21 @@
           required: false
         %>
 
-        <!--div class="input string">
-          <label for="fuente">Fuente:</label>
-          <div class="form-control"-->
-            <!--%= collection_select :fuente, :nombre, 
-              Sip::Fuenteprensa.habilitados, 
-              :nombre, :nombre, { :include_blank => "" }, 
-              { class: 'chosen-select' }
-            %-->
-          <!--/div>
-        </div-->
         <%= f.input :pagina,
           label: 'Página en Fuente:',
           required: false,
           maxlength: 150
         %>
 
-
-        <!--div class="input string">
-          <label for="pagina">Página Fuente:</label-->
-          <!--%= text_field_tag 'pagina', @pagina, maxlength: 20,
-            class: 'form-control'
-          %-->
-        <!--/div-->
-
-        <%= f.button :submit, 'Buscar' %>
-        <!--%= submit_tag "Buscar", {class: 'btn'} %-->
-        <%= f.button :button, 'Limpiar', type: :reset %>
-        <!--%= button_tag "Limpiar", type: :reset, class: 'btn' %-->
-        <%= f.button :button, 'Historial', id: 'historial' %>
-        <!--%= button_tag "Historial", {id: 'historial', class: 'btn'} %-->
+        <%= f.button :button, {class: 'btn btn-primary'} do %>
+          <%= fa_icon 'fa search', text: 'Buscar' %> 
+        <% end %>
+        <%= f.button :button, type: :reset do %>
+          <%= fa_icon 'fa undo', text: 'Limpiar' %> 
+        <% end %>
+        <%= f.button :button, id: 'buscar_historial' do %>
+          <%= fa_icon 'fa history', text: 'Historial' %> 
+        <% end %>
         <br>
       </div>
     </div>
@@ -132,3 +93,26 @@
     <%= render 'resultados_busqueda' %>
   <% end %>
 </div> <!-- id: resultados -->
+
+
+<div class="modal fade" id="modal-imagen" tabindex="-1" role="dialog" aria-labelledby="modal-imagen-etiqueta">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Modal title</h4>
+      </div>
+      <div class="modal-body" style="overflow:scroll; max-height: 200px; width:auto">
+        <! -- Aqui mostraruno.js.erb insertará la imagen de _imagen -->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">
+          <i class="fa fa-close"></i> Cerrar
+        </button>
+        <a href="" id="imagen-nueva-ventana" class="btn" target="_blank">
+          <i class="fa fa-external-link"></i> Abrir en Nueva Ventana
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
