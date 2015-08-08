@@ -4,6 +4,10 @@
 #resultados {
 }
 
+body {
+	height: 100%;
+}
+
 .presenta_articulo_descarga {
 	color: white;
 }
