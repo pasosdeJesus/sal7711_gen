@@ -40,7 +40,7 @@ module Sal7711Gen
         }
       end
       return articulo_params['fecha'] + " | " + ncat + " | " +
-        " | " + nmun+ " / " + ndep + " | " + nfuente + " | " + 
+        nmun+ " / " + ndep + " | " + nfuente + " | " + 
         articulo_params['pagina']
     end
 
