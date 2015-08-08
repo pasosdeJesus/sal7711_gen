@@ -1,6 +1,9 @@
 # encoding: UTF-8
 module Sal7711Gen
   module ApplicationHelper
+
+    include FontAwesome::Rails::IconHelper
+
     def pagina(collection, params= {})
       # Solución de https://gist.github.com/jeroenr/3142686
       will_paginate collection, params.merge(
@@ -10,22 +13,28 @@ module Sal7711Gen
 
     def desc_bitacora(entrada)
       r = ''
-      if ( (entrada['fechaini']  && entrada['fechaini'] != '') ||
-         (entrada['fechafin'] && entrada['fechafin'] != '') )
-        r += "Fecha: #{entrada['fechaini']} - #{entrada['fechafin']}. "
+      if !entrada[:buscar]
+        return ''
       end
-      if (entrada['mundep'] && entrada['mundep'] != '')
-        r += "Muncipio/Departamento: #{entrada['mundep']}. "
+      if ( (entrada[:buscar]['fechaini']  && entrada[:buscar][:fechaini] != '') ||
+         (entrada[:buscar]['fechafin'] && entrada[:buscar]['fechafin'] != '') )
+        r += "Fecha: #{entrada[:buscar]['fechaini']} - " +
+          "#{entrada[:buscar]['fechafin']}. "
       end
-      if (entrada['categoria'] && entrada['categoria'] != '')
-        r += "Categoria: #{entrada['categoria']}. "
+      if (entrada[:buscar]['mundep'] && entrada[:buscar]['mundep'] != '')
+        r += "Muncipio/Departamento: #{entrada[:buscar]['mundep']}. "
       end
-      if (entrada['fuente'] && entrada['fuente']['nombre'] && 
-          entrada['fuente']['nombre'] != '')
-        r += "Fuente: #{entrada['fuente']}. "
+      if (entrada[:buscar]['categoria'] && entrada[:buscar]['categoria'] != '')
+        r += "Categoria: #{entrada[:buscar]['categoria']}. "
       end
-      if  (entrada['pagina'] && entrada['pagina'] != '')
-        r += "Página: #{entrada['pagina']}. "
+      if (entrada[:buscar]['fuente'] && entrada[:buscar]['fuente'] != '')
+        f = Sip::Fuenteprensa.find(entrada[:buscar]['fuente'])
+        if f
+          r += "Fuente: #{f.nombre}. "
+        end
+      end
+      if  (entrada[:buscar]['pagina'] && entrada[:buscar]['pagina'] != '')
+        r += "Página: #{entrada[:buscar]['pagina']}. "
       end
       
       return r
