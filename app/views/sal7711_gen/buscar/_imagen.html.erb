@@ -1,16 +1,12 @@
-<div style="overflow:scroll; width:auto; height: 400px;">
-  <div class="imagen-titulo">
-    <p><%= @titulo %></p>
-  </div>
-  <div class="imagen-contenido">
-    <%= image_tag @descargajpg, class: "img-responsive", width: "90%" 
-    %>
-  </div>
-  <div class="imagen-descarga">
-    <p style="width: 100%">
-      <%= link_to "Descarga PDF", @descargapdf, 
-        target: "_blank", class: "presenta_articulo_descarga" 
-      %>
-    </p>
-  </div>
+<div class="imagen-contenido">
+  <%= image_tag @descargajpg %>
+</div>
+<div class="descarga">
+  <p style="width: 100%">
+  <%= link_to(@descargapdf, {target: "_blank", 
+                             class: "btn"}) do
+  %>
+    <%= fa_icon 'fa file-pdf-o', text: 'Descarga PDF' %>
+  <% end %>
+  </p>
 </div>
