@@ -2,7 +2,7 @@
 module Sal7711Gen
   module ApplicationHelper
 
-    include FontAwesome::Rails::IconHelper
+    include ::FontAwesome::Rails::IconHelper
 
     def pagina(collection, params= {})
       # Solución de https://gist.github.com/jeroenr/3142686
