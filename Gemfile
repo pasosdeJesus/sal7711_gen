@@ -20,12 +20,6 @@ gem "sass-rails"
 # Cuadros de selección para búsquedas
 gem 'chosen-rails'
 
-# Dialogo modal
-gem 'lazybox'
-
-# Para convertir de tiff a jpg
-#gem "rmagick"
-
 # Para generar PDF
 gem "prawn"
 
@@ -50,6 +44,7 @@ gem "turbolinks"
 # Ambiente de CSS
 gem "twitter-bootstrap-rails"
 gem "bootstrap-datepicker-rails"
+gem "font-awesome-rails"
 
 # Formularios simples 
 gem "simple_form"

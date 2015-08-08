@@ -126,6 +126,8 @@ GEM
       factory_girl (~> 4.5.0)
       railties (>= 3.0.0)
     ffi (1.9.10)
+    font-awesome-rails (4.4.0.0)
+      railties (>= 3.2, < 5.0)
     git-version-bump (0.15.1)
     globalid (0.3.6)
       activesupport (>= 4.1.0)
@@ -145,7 +147,6 @@ GEM
     kgio (2.9.3)
     launchy (2.4.3)
       addressable (~> 2.3)
-    lazybox (1.1.5)
     loofah (2.0.2)
       nokogiri (>= 1.5.9)
     mail (2.6.3)
@@ -331,12 +332,12 @@ DEPENDENCIES
   devise
   devise-i18n
   factory_girl_rails (~> 4.0)
+  font-awesome-rails
   jbuilder
   jquery-rails
   jquery-ui-bootstrap-rails!
   jquery-ui-rails
   launchy
-  lazybox
   meta_request
   paperclip (~> 4.1)
   pg
