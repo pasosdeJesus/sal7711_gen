@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/pasosdeJesus/sip.git
-  revision: 5b688552fcdacedade13f534dc56f108de16ca9d
+  revision: 25e2d78b94d8da4296c2f41f42f80255651e0a2a
   specs:
     sip (2.0.a6)
       devise
@@ -108,7 +108,7 @@ GEM
       sass-rails (<= 5.0.1)
       sprockets (< 2.13)
     debug_inspector (0.0.2)
-    devise (3.5.1)
+    devise (3.5.2)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
       railties (>= 3.2.6, < 5)

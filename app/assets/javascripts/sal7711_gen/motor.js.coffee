@@ -37,6 +37,9 @@
   })
   return
 
+@actualiza_fuente = () ->
+    $('#buscar_fuente').trigger("chosen:updated")
+
 @sal7711_gen_prepara_eventos_comunes = (root) ->
 #  $(document).on 'ready page:load',  -> 
 #    $('[data-behaviour~=datepicker]').datepicker({
@@ -46,16 +49,18 @@
 #      language: 'es'	
 #    });
 
-  $('.chosen-select').chosen
+  $('.chosen-select').chosen(
     allow_single_deselect: true
     no_results_text: 'No hay resultados',
     placeholder_text_single: 'Elija una opción',
     width: '100%'
+  )
 
-  $('#buscar_mundep').on 'focusin', (e) ->
+  $('#buscar_mundep').on('focusin', (e) ->
     busca_gen($(this), "#buscar_mundep_id", "mundep.json")
+  )
 
-  $('#buscar_categoria').on 'focusin', (e) ->
+  $('#buscar_categoria').on('focusin', (e) ->
 # Otro método para autocompletar, usable cuando son pocas opciones para elegir
 #    este=$(this)
 #    $.ajax({
@@ -91,12 +96,32 @@
           response( a )
       })
     )
+  )
   # Ilumina la última vista
   $(document).on('click', 'a.muestra-imagen', (e) ->
     $('a.muestra-imagen').removeClass('ultimo-visto')
     $(this).addClass('ultimo-visto') 
   )
 
+  $(document).on('click', 'a.historial-filtro', (e) ->
+    e.stopPropagation()
+    e.preventDefault()
+    a = ['fechaini', 'fechafin', 'mundep', 'categoria', 'fuente', 'pagina']
+    for i of a
+      df = $(this).attr('data-' + a[i] + 'filtro')
+      $('#buscar_' + a[i]).val(df)
+    $('#buscar_fuente').trigger("chosen:updated")
+    return
+  )
+
+   
+  $(document).on('click', '#limpiarfiltro', (e) ->
+    setTimeout(actualiza_fuente, 500);
+    # Si se limpia directamente se ejecuta antes de la acción
+    # por defecto de limpiar y no se ve el cambio.
+    return
+  )
+ 
   $('#buscar_historial').on('click', (e) ->
     e.stopPropagation()
     e.preventDefault()
@@ -105,15 +130,17 @@
     )
   )
 
-  $(document).on 'click', '#imagen-acercar', (e) ->
+
+  $(document).on('click', '#imagen-acercar', (e) ->
     e.preventDefault();
     e.stopPropagation();
     cp = $('#imagen-detalle').width()*100/$('#imagen-detalle').parent().width();
     np = Math.floor(cp + 10)
     $('#imagen-detalle').width(np + "%");
     return
+  )
 
-  $(document).on 'click', '#imagen-alejar', (e) ->
+  $(document).on('click', '#imagen-alejar', (e) ->
     e.preventDefault();
     e.stopPropagation();
     cp = $('#imagen-detalle').width()*100/$('#imagen-detalle').parent().width();
@@ -123,8 +150,9 @@
       np = 0
     $('#imagen-detalle').width(np + "%");
     return
+  )
 
-  $('#buscar_meses_rapido').on 'change', ->
+  $('#buscar_meses_rapido').on('change', ->
     max = -1
     min = -1
     $("#buscar_meses_rapido option:selected").each( ->
@@ -155,5 +183,7 @@
     )
     $("#buscar_meses_rapido").val(op)
     return
+  )
+
   return
 

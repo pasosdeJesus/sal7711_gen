@@ -49,12 +49,7 @@
         %>
         <%= hidden_field_tag 'mundep_id' %>
 
-        <%= f.input :categoria,
-          label: 'Categoria',
-          required: false,
-          maxlength: 1500
-        %>
-        <%= hidden_field_tag 'categoria_id' %>
+        <%= render partial: 'index_categoria', locals: {f: f} %>
 
         <%= f.input :fuente,
           collection: Sip::Fuenteprensa.habilitados,
@@ -75,7 +70,7 @@
         <%= f.button :button, {class: 'btn btn-primary'} do %>
           <%= fa_icon 'fa search', text: 'Buscar' %> 
         <% end %>
-        <%= f.button :button, type: :reset do %>
+        <%= f.button :button, type: :reset, id: :limpiarfiltro do %>
           <%= fa_icon 'fa undo', text: 'Limpiar' %> 
         <% end %>
         <%= f.button :button, id: 'buscar_historial' do %>

@@ -6,8 +6,16 @@
       <tbody>
       <% @consultas.try(:each) do |fila| %>
         <tr><td>
-            <%= CGI.escapeHTML(truncate(
-              desc_bitacora(fila['detalle']), length: 95, separator: ' '))
+            <%= d = fila['detalle']
+              link_to CGI.escapeHTML(truncate(
+              desc_bitacora(d), length: 95, separator: ' ')),
+              '#', class: 'historial-filtro', 
+              'data-fechainifiltro': CGI.escapeHTML(d['buscar']['fechaini']),
+              'data-fechafinfiltro': CGI.escapeHTML(d['buscar']['fechafin']),
+              'data-mundepfiltro': CGI.escapeHTML(d['buscar']['mundep']),
+              'data-categoriafiltro': CGI.escapeHTML(d['buscar']['categoria']),
+              'data-fuentefiltro': CGI.escapeHTML(d['buscar']['fuente']),
+              'data-paginafiltro': CGI.escapeHTML(d['buscar']['pagina'])
             %>
         </td></tr>
     <% end %>
