@@ -106,6 +106,8 @@
   $(document).on('click', 'a.historial-filtro', (e) ->
     e.stopPropagation()
     e.preventDefault()
+    # limpiar meses_rapido
+    $('#buscar_meses_rapido>option:selected').prop('selected', false)
     a = ['fechaini', 'fechafin', 'mundep', 'categoria', 'fuente', 'pagina']
     for i of a
       df = $(this).attr('data-' + a[i] + 'filtro')
