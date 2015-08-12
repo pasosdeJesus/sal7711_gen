@@ -19,7 +19,6 @@ $(document).on('ready page:load', function() {
 	var root;
 	root = typeof exports !== "undefined" && exports !== null ? 
 		exports : this;	
-	debugger;
 	sip_prepara_eventos_comunes(root);
 	sal7711_gen_prepara_eventos_comunes(root);
 

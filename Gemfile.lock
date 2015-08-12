@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/pasosdeJesus/sip.git
-  revision: 3db0c1a2cda3db1bb8bd06301c194d3e2f218019
+  revision: c850504e2c1c03d5a66723e640938349dc9299e1
   specs:
     sip (2.0.a6)
       devise
@@ -297,7 +297,7 @@ GEM
       tzinfo
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
-    tzinfo-data (1.2015.5)
+    tzinfo-data (1.2015.6)
       tzinfo (>= 1.0.0)
     uglifier (2.7.1)
       execjs (>= 0.3.0)

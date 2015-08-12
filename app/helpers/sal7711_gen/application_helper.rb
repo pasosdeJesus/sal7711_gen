@@ -7,7 +7,7 @@ module Sal7711Gen
     def pagina(collection, params= {})
       # Solución de https://gist.github.com/jeroenr/3142686
       will_paginate collection, params.merge(
-        :renderer => PaginacionAjaxHelper::GeneraEnlace
+        :renderer => Sip::PaginacionAjaxHelper::GeneraEnlace
       )
     end
 
