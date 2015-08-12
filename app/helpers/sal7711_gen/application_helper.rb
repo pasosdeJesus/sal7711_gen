@@ -3,13 +3,7 @@ module Sal7711Gen
   module ApplicationHelper
 
     include ::FontAwesome::Rails::IconHelper
-
-    def pagina(collection, params= {})
-      # Solución de https://gist.github.com/jeroenr/3142686
-      will_paginate collection, params.merge(
-        :renderer => Sip::PaginacionAjaxHelper::GeneraEnlace
-      )
-    end
+    include Sip::PaginacionAjaxHelper
 
     def desc_bitacora(entrada)
       r = ''
