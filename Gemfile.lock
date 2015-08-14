@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/pasosdeJesus/sip.git
-  revision: d3407204e0a066702e6788968b2c7aa1f9e2db92
+  revision: 3006f2dcbd50275091d0fd7034b753a08e3e7e15
   specs:
     sip (2.0.a6)
       devise
@@ -204,7 +204,7 @@ GEM
       sprockets-rails
     rails-deprecated_sanitizer (1.0.3)
       activesupport (>= 4.2.0.alpha)
-    rails-dom-testing (1.0.6)
+    rails-dom-testing (1.0.7)
       activesupport (>= 4.2.0.beta, < 5.0)
       nokogiri (~> 1.6.0)
       rails-deprecated_sanitizer (>= 1.0.1)
