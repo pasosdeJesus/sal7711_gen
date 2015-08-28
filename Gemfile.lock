@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/pasosdeJesus/sip.git
-  revision: 89157866df91db280b3344f6fbf211cf5176a3ad
+  revision: bb915d81a525da46379e2060271c6891c532ba58
   specs:
     sip (2.0.a6)
       devise
@@ -63,7 +63,7 @@ GEM
     callsite (0.0.11)
     camertron-eprun (1.1.0)
     cancancan (1.12.0)
-    capybara (2.4.4)
+    capybara (2.5.0)
       mime-types (>= 1.16)
       nokogiri (>= 1.3.3)
       rack (>= 1.0.0)
@@ -299,7 +299,7 @@ GEM
       thread_safe (~> 0.1)
     tzinfo-data (1.2015.6)
       tzinfo (>= 1.0.0)
-    uglifier (2.7.1)
+    uglifier (2.7.2)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
     unicorn (4.9.0)
