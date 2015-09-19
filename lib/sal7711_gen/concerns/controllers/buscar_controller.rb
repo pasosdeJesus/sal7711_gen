@@ -216,9 +216,11 @@ module Sal7711Gen
               #img.write ""
               # Image.read falla para algunas imagenes con  Null count for "Tag 34026" (type 1, writecount │-3, passcount 1). `_TIFFVSetField' @ error/tiff.c/TIFFErrors/508):
               if !File.exists? "#{rutajpg}"
-                system("convert #{rlocal} #{rutajpg}")
+                system("convert -append #{rlocal} #{rutajpg}")
               end
               if !File.exists? "#{rutajpg}"
+                flash[:error] = "No fue posible convertir #{rlocal}"
+                render inline: "No fue posible convertir #{rlocal}"
                 return
               end
               # Genera PDF
