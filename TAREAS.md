@@ -1,4 +1,9 @@
 
+* Poner cotejación en espanol en campos nombre, observaciones de tablas
+  básicas y en otras con textos en español, ver en 
+  db/migrate/20151020203421_agrega_cotejacion.rb
+
+
 Las tablas básicas que tengan relaciones has_many, no pueden borrarse 
 cuando hay objetos dependientes, puede ser mejor:
 

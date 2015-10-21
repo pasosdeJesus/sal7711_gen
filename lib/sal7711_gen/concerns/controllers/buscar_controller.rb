@@ -110,9 +110,13 @@ module Sal7711Gen
               end
             end
           end
-        
+       
+         def autentica_especial
+         end
+
           # Resultado de aplicar filtro
           def index
+            autentica_especial
             authorize! :read, Sal7711Gen::Articulo
             if !@meses
               mes = Date.today.strftime("%m").to_i
