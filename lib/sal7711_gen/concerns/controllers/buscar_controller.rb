@@ -113,7 +113,7 @@ module Sal7711Gen
         
           # Resultado de aplicar filtro
           def index
-            authorize! :index, Sal7711Gen::Articulo
+            authorize! :read, Sal7711Gen::Articulo
             if !@meses
               mes = Date.today.strftime("%m").to_i
               anio = Date.today.strftime("%Y").to_i

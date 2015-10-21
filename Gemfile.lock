@@ -1,8 +1,8 @@
 GIT
   remote: git://github.com/pasosdeJesus/sip.git
-  revision: 50e093fa2c962898cc1f47042a293e599fb30a79
+  revision: 9eed5f998a809c12e41643595b1ad612830f671d
   specs:
-    sip (2.0.a6)
+    sip (2.0.a7)
       devise
       jquery-rails
       rails
@@ -364,3 +364,6 @@ DEPENDENCIES
   unicorn
   web-console
   will_paginate
+
+BUNDLED WITH
+   1.10.6
