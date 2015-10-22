@@ -3,7 +3,7 @@
     { url: buscar_path, method: "get", remote: true } do |f| 
   %>
     <div class="panel panel-default">
-      <div class="panel-heading">Filtro</div>
+      <div class="panel-heading"><%= Sal7711Gen::Articulo.human_attribute_name(:filtro) %></div>
       <div class="panel-body">
         <div class="rango-fechas">
           <div class="col-md-6">

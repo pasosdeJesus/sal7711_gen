@@ -21,4 +21,6 @@ es:
       "sal7711_gen/categoriaprensa":
         Categoriaprensa: Categoria de Prensa
         Categoriasprensa: Categorias de Prensa
+      "sal7711_gen/articulo":
+        filtro: Filtro
 
