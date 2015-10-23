@@ -181,7 +181,7 @@ module Sal7711Gen
               end
           end
       
-          def descarga(id, rutacache) 
+          def descarga(id, rutacolchon) 
             a = Articulo.joins(:anexo).where(
               "sal7711_gen_articulo.id = ?", id).take
             ruta = a.anexo.adjunto_file_name
@@ -201,18 +201,18 @@ module Sal7711Gen
               #byebug
               id = params[:id].to_i
               rutapublic = Rails.root.join('public').to_s
-              urlcache = '/assets/images/cache-articulos/'
-              rutacache = rutapublic + urlcache
-              if (!File.exists? rutacache)
-                raise "Crear directorio #{rutacache}"
+              urlcolchon = '/colchon-articulos/'
+              rutacolchon = rutapublic + urlcolchon
+              if (!File.exists? rutacolchon)
+                raise "Crear directorio #{rutacolchon}"
               end
-              titulo, rlocal = descarga(id, rutacache)
+              titulo, rlocal = descarga(id, rutacolchon)
               @titulo = titulo
               @id = id
               # Convierte a jpg
               nomar = titulo.gsub(/[^0-9A-Za-z.\-]/, '_')  + "-" + id.to_s
-              @descargajpg = urlcache + nomar + ".jpg"
-              rutajpg = rutacache + nomar + ".jpg"
+              @descargajpg = urlcolchon + nomar + ".jpg"
+              rutajpg = rutacolchon + nomar + ".jpg"
               #img = Magick::Image.read(rlocal).first
               #img.write ""
               # Image.read falla para algunas imagenes con  Null count for "Tag 34026" (type 1, writecount │-3, passcount 1). `_TIFFVSetField' @ error/tiff.c/TIFFErrors/508):
@@ -225,8 +225,8 @@ module Sal7711Gen
                 return
               end
               # Genera PDF
-              @descargapdf= urlcache + nomar + ".pdf"
-              rutapdf = rutacache + nomar + ".pdf"
+              @descargapdf= urlcolchon + nomar + ".pdf"
+              rutapdf = rutacolchon + nomar + ".pdf"
               puts "rutapdf=#{rutapdf}"
               if !File.exists? "#{rutapdf}"
                 Prawn::Document.generate("#{rutapdf}") do
