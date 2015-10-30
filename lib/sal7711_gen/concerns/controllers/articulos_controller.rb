@@ -50,7 +50,7 @@ module Sal7711Gen
               }
             end
             return articulo_params['fecha'] + " | " + ncat + " | " +
-              nmun+ " / " + ndep + " | " + nfuente + " | " + 
+              nmun + " / " + ndep + " | " + nfuente + " | " + 
               articulo_params['pagina']
           end
 
@@ -82,11 +82,15 @@ module Sal7711Gen
             @articulo.anexo.descripcion = gen_descripcion(articulo_params)
             respond_to do |format|
               if @articulo.update(articulo_params)
-                format.html { redirect_to @articulo, notice: 'Artículo actualizado.' }
+                format.html { 
+                  redirect_to @articulo, notice: 'Artículo actualizado.' 
+                }
                 format.json { render :show, status: :ok, location: @articulo }
               else
                 format.html { render :edit }
-                format.json { render json: @articulo.errors, status: :unprocessable_entity }
+                format.json { 
+                  render json: @articulo.errors, status: :unprocessable_entity 
+                }
               end
             end
           end
@@ -96,7 +100,9 @@ module Sal7711Gen
           def destroy
             @articulo.destroy
             respond_to do |format|
-              format.html { redirect_to articulos_url, notice: 'Artículo eliminado.' }
+              format.html { 
+                redirect_to articulos_url, notice: 'Artículo eliminado.' 
+              }
               format.json { head :no_content }
             end
           end
