@@ -153,6 +153,10 @@ module Sal7711Gen
         
           end
         
+          def redirigeindex
+            redirect_to buscar_url
+          end  
+
           # Para responder a solicitudes AJAX de autocompletación de
           # municipio / departamento
           def mundep
