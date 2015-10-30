@@ -38,9 +38,9 @@ module Sal7711Gen
       can :descarga_anexo, Sip::Anexo
       can :nuevo, Sip::Ubicacion
       if usuario && usuario.rol then
+        can :read, Sal7711Gen::Articulo
         case usuario.rol 
         when Ability::ROLANALI
-          can :read, Sal7711Gen::Articulo
           can :manage, Sip::Persona
           can :read, Sip::Ubicacion
           can :new, Sip::Ubicacion

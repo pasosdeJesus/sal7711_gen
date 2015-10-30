@@ -5,14 +5,20 @@
     <table class="table table-striped">
       <tbody>
       <% @entradas.try(:each) do |fila| %>
-        <tr><td>
-          <%= link_to CGI.escapeHTML(truncate(
-            fila[@coltexto].to_s, length: 85, separator: /[ -|]/)), 
-          "/buscar/#{CGI.escapeHTML(fila[@colid].to_s)}", 
-          class: 'muestra-imagen', remote: true
-        %>
-    </td></tr>
-    <% end %>
+        <tr>
+          <td>
+            <%= link_to CGI.escapeHTML(truncate(
+              fila[@coltexto].to_s, length: 85, separator: /[ -|]/)), 
+              "/buscar/#{CGI.escapeHTML(fila[@colid].to_s)}", 
+              class: 'muestra-imagen', remote: true
+            %>
+          </td>
+          <% if can? :manage, Sal7711Gen::Articulo %>
+            <td><%= link_to 'Editar', sal7711_gen.edit_articulo_path(fila[@colid]) %></td>
+            <td><%= link_to 'Eliminar', sal7711_gen.articulo_path(fila[@colid]), method: :delete, data: { confirm: '¿Está seguro?' } %></td>
+          <% end %> 
+        </tr>
+      <% end %>
       </tbody>
     </table>
     <div id="enlaces_paginacion">
