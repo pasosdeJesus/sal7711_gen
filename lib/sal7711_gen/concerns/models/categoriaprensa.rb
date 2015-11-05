@@ -9,6 +9,11 @@ module Sal7711Gen
 
         included do
 
+          has_many :articulo_categoriaprensa, 
+            foreign_key: "categoriaprensa_id", 
+            validate: true,
+            class_name: 'Sal7711Gen::ArticuloCategoriaprensa'
+
           validates :codigo, presence: true, allow_blank: false, 
             uniqueness: { case_senstivie: false }
 
