@@ -42,6 +42,8 @@
 
   <%= render partial: 'articulos_complemento1', locals: { f: f } %>
 
+  <%= f.input :texto %> 
+
   <%= f.simple_fields_for :anexo do |a| %>
 
     <% if !a.object || !a.object.id || !a.object.adjunto_file_name %>
