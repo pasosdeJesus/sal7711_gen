@@ -172,7 +172,8 @@ CREATE TABLE sal7711_gen_articulo (
     pagina character varying(20) NOT NULL,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
-    anexo_id integer NOT NULL
+    anexo_id integer NOT NULL,
+    texto text
 );
 
 
@@ -1329,4 +1330,6 @@ INSERT INTO schema_migrations (version) VALUES ('20150803082520');
 INSERT INTO schema_migrations (version) VALUES ('20150809032138');
 
 INSERT INTO schema_migrations (version) VALUES ('20151020203421');
+
+INSERT INTO schema_migrations (version) VALUES ('20151030154458');
 
