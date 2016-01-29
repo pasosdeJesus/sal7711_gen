@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/pasosdeJesus/sip.git
-  revision: 702472312947443d329e970e35de89bef151797b
+  revision: 85efdffed450f6b5baeacfe977590e837a164ce5
   specs:
     sip (2.0.a7)
       bootstrap-datepicker-rails
@@ -75,7 +75,7 @@ GEM
     callsite (0.0.11)
     camertron-eprun (1.1.0)
     cancancan (1.13.1)
-    capybara (2.6.0)
+    capybara (2.6.2)
       addressable
       mime-types (>= 1.16)
       nokogiri (>= 1.3.3)
@@ -319,7 +319,7 @@ GEM
       tzinfo
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
-    tzinfo-data (1.2015.7)
+    tzinfo-data (1.2016.1)
       tzinfo (>= 1.0.0)
     uglifier (2.7.2)
       execjs (>= 0.3.0)
@@ -328,9 +328,9 @@ GEM
       kgio (~> 2.6)
       rack
       raindrops (~> 0.7)
-    warden (1.2.4)
+    warden (1.2.5)
       rack (>= 1.0)
-    web-console (3.0.0)
+    web-console (3.1.1)
       activemodel (>= 4.2)
       debug_inspector
       railties (>= 4.2)
