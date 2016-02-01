@@ -15,7 +15,7 @@ gem "colorize"
 # Para generar CSS
 gem "sass"
 gem "sass-rails"
-gem "compass-rails", '~> 2.0.5'
+gem "compass-rails"
 
 # Cuadros de selección para búsquedas
 gem 'chosen-rails'
