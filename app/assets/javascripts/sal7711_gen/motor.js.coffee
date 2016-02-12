@@ -162,21 +162,21 @@
     )
     f = $('[data-behaviour~=datepicker]').first().data('datepicker').o.format
     if f == 'dd-mm-yyyy' 
-      p=max.split("-");
-      mesmax=p[0] 
-      aniomax=p[1] 
-      fini="01-" + min
-      ffin=diasEnMes(mesmax,aniomax) + "-" + max
+      p = max.split("-");
+      mesmax = p[0] 
+      aniomax = p[1] 
+      fini = "01-" + min
+      ffin = diasEnMes(mesmax,aniomax) + "-" + max
     else if f == 'yyyy-mm-dd'
-      p=max.split("-");
-      mesmax=p[1] 
-      aniomax=p[0] 
-      $("#buscar_fechaini").val(min + "-01")
-      $("#buscar_fechafin").val(max + "-" + diasEnMes(mesmax, aniomax))
+      p = max.split("-");
+      mesmax = p[1] 
+      aniomax = p[0] 
+      fini = min + "-01"
+      ffin = max + "-" + diasEnMes(mesmax, aniomax)
     $("#buscar_fechaini").val(fini)
     $("#buscar_fechaini").datepicker("update", fini)
     $("#buscar_fechafin").val(ffin)
-    $("#buscar_fechafin").datepicker(ffin)
+    $("#buscar_fechafin").datepicker("update", ffin)
 
     marca = false
     op=[]
