@@ -7,10 +7,7 @@
 # Basado en
 # http://stackoverflow.com/questions/1184334/get-number-days-in-a-specified-month-using-javascript
 # Mes inicial es 1
-@diasEnMes= (month_year) ->
-  p=month_year.split("-");
-  mes=p[0] 
-  anio=p[1] 
+@diasEnMes= (mes, anio) ->
   return new Date(anio, mes, 0).getDate()
 
 #
@@ -165,13 +162,22 @@
     )
     f = $('[data-behaviour~=datepicker]').first().data('datepicker').o.format
     if f == 'dd-mm-yyyy' 
-      $("#buscar_fechaini").val("01-" + min)
-      $("#buscar_fechaini").datepicker("update", "01-" + min)
-      $("#buscar_fechafin").val(diasEnMes(max) + "-" + max)
-      $("#buscar_fechafin").datepicker("update", diasEnMes(max) + "-" + max)
-    else
+      p=max.split("-");
+      mesmax=p[0] 
+      aniomax=p[1] 
+      fini="01-" + min
+      ffin=diasEnMes(mesmax,aniomax) + "-" + max
+    else if f == 'yyyy-mm-dd'
+      p=max.split("-");
+      mesmax=p[1] 
+      aniomax=p[0] 
       $("#buscar_fechaini").val(min + "-01")
-      $("#buscar_fechafin").val(max + "-" + diasEnMes(max))
+      $("#buscar_fechafin").val(max + "-" + diasEnMes(mesmax, aniomax))
+    $("#buscar_fechaini").val(fini)
+    $("#buscar_fechaini").datepicker("update", fini)
+    $("#buscar_fechafin").val(ffin)
+    $("#buscar_fechafin").datepicker(ffin)
+
     marca = false
     op=[]
     $("#buscar_meses_rapido option").each( ->
