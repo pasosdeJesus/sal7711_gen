@@ -5,21 +5,21 @@
 
 
 ### Requerimientos
-* Ruby version >= 2.2
-* PostgreSQL >= 9.4 con extensión unaccent disponible
-* Recomendado sobre adJ 5.6 (que incluye todos los componentes mencionados).  
-  Las siguientes instrucciones suponen que opera en este ambiente.
 
-Puede consultar como instalar estos componentes en: http://dhobsd.pasosdejesus.org/index.php?id=Ruby+on+Rails+en+OpenBSD
+* Ruby version >= 2.3
+* Ruby on Rails 4.2.x
+* PostgreSQL >= 9.4 con extensión unaccent disponible
+* Recomendado sobre adJ 5.8 (que incluye todos los componentes mencionados) usando
+  bundler con doas, ver [http://dhobsd.pasosdejesus.org/bundler-doas.html].  
+
+Estas instrucciones suponen que opera en este ambiente, puedes ver más sobre
+la instalación de Ruby on Rails en adJ en 
+[http://dhobsd.pasosdejesus.org/Ruby_on_Rails_en_OpenBSD.html]
 
 Es como otros motores, se recomienda ver cor1440_gen en
 https://github.com/pasosdeJesus/cor1440_gen
 
 ### Configuración 
 
-* Configure el formato de la fecha en config/application.rb bien con ```config.formato_fecha = 'yyyy-mm-dd'``` o  bien con ```config.formato_fecha = 'dd-mm-yyyy'```
-* En el layout general que utilize asegurese de agregar:
-```
-<meta name="formato_fecha" content="<%= Rails.application.config.formato_fecha  ? Rails.application.config.formato_fecha : 'yyyy-mm-dd' %>">
-```
+* Configure el formato de la fecha en config/application.rb bien con ```config.x.formato_fecha = 'yyyy-mm-dd'``` o  bien con ```config.x.formato_fecha = 'dd-mm-yyyy'```
 
