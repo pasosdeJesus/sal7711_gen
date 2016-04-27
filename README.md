@@ -4,22 +4,22 @@
 ![Logo de sal7711](https://raw.githubusercontent.com/pasosdeJesus/sal7711_gen/master/spec/dummy/public/images/logo.jpg)
 
 
-### Requerimientos
+## Uso
 
-* Ruby version >= 2.3
-* Ruby on Rails 4.2.x
-* PostgreSQL >= 9.4 con extensión unaccent disponible
-* Recomendado sobre adJ 5.8 (que incluye todos los componentes mencionados) usando
-  bundler con doas, ver [http://dhobsd.pasosdejesus.org/bundler-doas.html].  
+### Requerimientos Tecnológicos
 
-Estas instrucciones suponen que opera en este ambiente, puedes ver más sobre
-la instalación de Ruby on Rails en adJ en 
-[http://dhobsd.pasosdejesus.org/Ruby_on_Rails_en_OpenBSD.html]
+Ver <https://github.com/pasosdeJesus/sip/wiki/Requerimientos>
 
-Es como otros motores, se recomienda ver cor1440_gen en
-https://github.com/pasosdeJesus/cor1440_gen
+## Pruebas
 
-### Configuración 
+Es posible ejecutar una aplicación de prueba incluida con este motor así
+como pruebas de regresión que la usan.  Favor revisar estos aspectos en
+otro motor que es análogo a este, ver 
+<https://github.com/pasosdeJesus/sivel2_gen/
 
-* Configure el formato de la fecha en config/application.rb bien con ```config.x.formato_fecha = 'yyyy-mm-dd'``` o  bien con ```config.x.formato_fecha = 'dd-mm-yyyy'```
+## Configuración 
+
+* Configure el formato de la fecha en ```config/application.rb``` bien 
+  con ```config.x.formato_fecha = 'yyyy-mm-dd'``` o  bien con 
+  ```config.x.formato_fecha = 'dd-mm-yyyy'```
 
