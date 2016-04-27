@@ -20,9 +20,7 @@
                 :class => 'btn btn-xs' 
               %>
             </td>
-          <!--%= link_to 'Editar', sal7711_gen.edit_articulo_path %></td-->
             <td>
-  <!--%= link_to 'Eliminar', sal7711_gen.articulo_path(fila[@colid]), method: :delete, data: { confirm: '¿Está seguro?' } %></td -->
               <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
                 sal7711_gen.articulo_path(fila[@colid]),
                 :method => :delete,

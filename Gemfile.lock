@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/pasosdeJesus/sip.git
-  revision: 2249c33e1b51162fc5928ecae2c9a7960bf4e934
+  revision: f9943d10a2e3967c48504320a002e3ef5bf98e6d
   specs:
     sip (2.0.a7)
       bootstrap-datepicker-rails
@@ -82,9 +82,8 @@ GEM
       rack (>= 1.0.0)
       rack-test (>= 0.5.4)
       xpath (~> 2.0)
-    chosen-rails (1.4.3)
+    chosen-rails (1.5.2)
       coffee-rails (>= 3.2)
-      compass-rails (>= 2.0.4)
       railties (>= 3.0)
       sass-rails (>= 3.2)
     chunky_png (1.3.5)
@@ -123,12 +122,11 @@ GEM
       sprockets (< 4.0)
     concurrent-ruby (1.0.1)
     debug_inspector (0.0.2)
-    devise (3.5.6)
+    devise (4.0.1)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
-      railties (>= 3.2.6, < 5)
+      railties (>= 4.1.0, < 5.1)
       responders
-      thread_safe (~> 0.1)
       warden (~> 1.2.3)
     devise-i18n (1.0.1)
     diff-lcs (1.2.5)
@@ -141,7 +139,7 @@ GEM
       factory_girl (~> 4.7.0)
       railties (>= 3.0.0)
     ffi (1.9.10)
-    font-awesome-rails (4.5.0.1)
+    font-awesome-rails (4.6.1.0)
       railties (>= 3.2, < 5.1)
     git-version-bump (0.15.1)
     globalid (0.3.6)
@@ -183,7 +181,7 @@ GEM
     mimemagic (0.3.0)
     mini_portile2 (2.0.0)
     minitest (5.8.4)
-    multi_json (1.11.2)
+    multi_json (1.11.3)
     nokogiri (1.6.7.2)
       mini_portile2 (~> 2.0.0.rc2)
     orm_adapter (0.5.0)
@@ -291,7 +289,7 @@ GEM
       simplecov-html (~> 0.10.0)
     simplecov-html (0.10.0)
     slop (3.6.0)
-    spring (1.7.0)
+    spring (1.7.1)
     spring-commands-rspec (1.0.4)
       spring (>= 0.9.1)
     sprockets (3.6.0)
@@ -319,7 +317,7 @@ GEM
       tzinfo
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
-    tzinfo-data (1.2016.3)
+    tzinfo-data (1.2016.4)
       tzinfo (>= 1.0.0)
     uglifier (3.0.0)
       execjs (>= 0.3.0, < 3)

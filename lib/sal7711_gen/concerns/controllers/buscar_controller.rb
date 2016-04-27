@@ -19,7 +19,7 @@ module Sal7711Gen
             @articulos = Articulo.all
             if (params[:buscar] && params[:buscar][:fechaini] && params[:buscar][:fechaini] != '')
               pfi = params[:buscar][:fechaini]
-              if Rails.application.config.formato_fecha == 'dd-mm-yyyy'
+              if Rails.application.config.x.formato_fecha == 'dd-mm-yyyy'
                 pfid = Date.strptime(pfi, '%d-%m-%Y')
               else
                 pfid = Date.strptime(pfi, '%Y-%m-%d')
@@ -28,7 +28,7 @@ module Sal7711Gen
             end
             if(params[:buscar] && params[:buscar][:fechafin] && params[:buscar][:fechafin] != '')
               pff = params[:buscar][:fechafin]
-              if Rails.application.config.formato_fecha == 'dd-mm-yyyy'
+              if Rails.application.config.x.formato_fecha == 'dd-mm-yyyy'
                 pffd = Date.strptime(pff, '%d-%m-%Y')
               else
                 pffd = Date.strptime(pff, '%Y-%m-%d')
@@ -124,7 +124,7 @@ module Sal7711Gen
               anio = Date.today.strftime("%Y").to_i
               @meses = []
               (0..23).each do |n|
-                if Rails.application.config.formato_fecha == 'dd-mm-yyyy'
+                if Rails.application.config.x.formato_fecha == 'dd-mm-yyyy'
                   estem = mes.to_s.rjust(2, "0") + "-" + anio.to_s
                 else
                   estem = anio.to_s + "-" + mes.to_s.rjust(2, "0")
@@ -192,7 +192,7 @@ module Sal7711Gen
             ruta = a.anexo.adjunto_file_name
             n = sprintf(Sip.ruta_anexos + "/%d_%s", a.anexo.id.to_i, 
                         File.basename(ruta))
-            if Rails.application.config.formato_fecha == 'dd-mm-yyyy'
+            if Rails.application.config.x.formato_fecha == 'dd-mm-yyyy'
               titulo = a.fecha.strftime('%d-%m-%Y')
             else
               titulo = a.fecha.to_s

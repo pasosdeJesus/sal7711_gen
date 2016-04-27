@@ -38,13 +38,6 @@
     $('#buscar_fuente').trigger("chosen:updated")
 
 @sal7711_gen_prepara_eventos_comunes = (root) ->
-#  $(document).on 'ready page:load',  -> 
-#    $('[data-behaviour~=datepicker]').datepicker({
-#      format: 'dd-mm-yyyy'
-#      autoclose: true
-#      todayHighlight: true
-#      language: 'es'	
-#    });
 
   $('.chosen-select').chosen(
     allow_single_deselect: true
@@ -150,6 +143,16 @@
     $('#imagen-detalle').width(np + "%");
     return
   )
+
+  $(document).on('click', '#imagen-siguiente', (e) ->
+    e.preventDefault();
+    e.stopPropagation();
+    cp = $('#imagen-detalle').width()*100/$('#imagen-detalle').parent().width();
+    np = Math.floor(cp + 10)
+    $('#imagen-detalle').width(np + "%");
+    return
+  )
+
 
   $('#buscar_meses_rapido').on('change', ->
     max = -1
