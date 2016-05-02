@@ -49,9 +49,14 @@ module Sal7711Gen
                 end
               }
             end
+            npag = '';
+            if articulo_params['pagina'] && articulo_params['pagina'] != ''
+              npag = articulo_params['pagina']
+            end
+
             return articulo_params['fecha'] + " | " + ncat + " | " +
-              nmun + " / " + ndep + " | " + nfuente + " | " + 
-              articulo_params['pagina']
+              nmun + " / " + ndep + " | " + nfuente + " | " + npag
+              
           end
 
           # POST /articulos
