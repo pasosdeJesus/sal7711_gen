@@ -38,7 +38,6 @@
     $('#buscar_fuente').trigger("chosen:updated")
 
 @sal7711_gen_prepara_eventos_comunes = (root) ->
-
   $('.chosen-select').chosen(
     allow_single_deselect: true
     no_results_text: 'No hay resultados',
@@ -86,11 +85,6 @@
           response( a )
       })
     )
-  )
-  # Ilumina la última vista
-  $(document).on('click', 'a.muestra-imagen', (e) ->
-    $('a.muestra-imagen').removeClass('ultimo-visto')
-    $(this).addClass('ultimo-visto') 
   )
 
   $(document).on('click', 'a.historial-filtro', (e) ->
@@ -143,16 +137,6 @@
     $('#imagen-detalle').width(np + "%");
     return
   )
-
-  $(document).on('click', '#imagen-siguiente', (e) ->
-    e.preventDefault();
-    e.stopPropagation();
-    cp = $('#imagen-detalle').width()*100/$('#imagen-detalle').parent().width();
-    np = Math.floor(cp + 10)
-    $('#imagen-detalle').width(np + "%");
-    return
-  )
-
 
   $('#buscar_meses_rapido').on('change', ->
     max = -1
