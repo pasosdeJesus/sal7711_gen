@@ -9,8 +9,10 @@
           <td>
             <%= link_to CGI.escapeHTML(truncate(
               fila[@coltexto].to_s, length: 85, separator: /[ -|]/)), 
-              "/buscar/#{CGI.escapeHTML(fila[@colid].to_s)}", 
-              class: 'muestra-imagen', remote: true
+            "/buscar/#{CGI.escapeHTML(fila[@colid].to_s)}", 
+              class: 'muestra-imagen', remote: true,
+              "data-siguiente": fila["siguiente"],
+              "data-anterior": fila["anterior"]
             %>
           </td>
           <% if can? :manage, Sal7711Gen::Articulo %>

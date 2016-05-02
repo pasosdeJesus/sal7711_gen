@@ -54,3 +54,9 @@ body {
 	text-overflow: ellipsis;
 	font-size: 14px;
 }
+
+a.deshabilitado {
+	opacity: 0.5;
+	pointer-events: none;
+	cursor: default;
+}

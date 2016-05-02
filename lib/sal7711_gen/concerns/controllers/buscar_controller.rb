@@ -93,17 +93,38 @@ module Sal7711Gen
             @entradas = WillPaginate::Collection.create(
               pag, @@porpag, @numregistros
             ) do |paginador|
-        
               c = @articulos.to_sql 
-              c += " LIMIT #{paginador.per_page} OFFSET #{paginador.offset}"
+              if (paginador.offset == 0) 
+                desp = 0
+                limite = paginador.per_page + 1
+              else
+                desp = paginador.offset - 1
+                limite = paginador.per_page + 2
+              end
+              c += " LIMIT #{limite} OFFSET #{desp}"
               puts "OJO c=#{c}"
               result = ActiveRecord::Base.connection.execute(c)
               puts result
               arr = []
+              num = 0;
+              ultid = ''
               result.try(:each) do |fila|
-                #byebug
-                puts fila[@coltexto]
-                arr.push(fila)
+                if arr.last
+                    arr.last["siguiente"] = fila["id"]
+                end
+                if ((paginador.offset == 0 && num < paginador.per_page) || 
+                    (paginador.offset > 0 && num > 0 && 
+                     num <= paginador.per_page))
+                  if ultid != ''
+                    fila["anterior"] = ultid
+                  end
+                  arr.push(fila)
+                  puts ": #{fila[@coltexto]}"
+                else
+                  puts fila[@coltexto]
+                end
+                ultid = fila["id"]
+                num += 1
               end
               paginador.replace(arr)
               unless paginador.total_entries
@@ -119,6 +140,7 @@ module Sal7711Gen
           def index
             autentica_especial
             authorize! :read, Sal7711Gen::Articulo
+            #byebug
             if !@meses
               mes = Date.today.strftime("%m").to_i
               anio = Date.today.strftime("%Y").to_i
@@ -140,6 +162,7 @@ module Sal7711Gen
               end
             end
             prepara_pagina 
+             @muestraid = params[:muestraid].to_i
             if params.count > 2
               # 2 params que siempre estan son controller y action si hay
               # más sería una consulta iniciada por usuario
@@ -203,7 +226,6 @@ module Sal7711Gen
 
           def mostraruno
             if (params[:id] && params[:id].to_i > 0)
-              #byebug
               id = params[:id].to_i
               rutapublic = Rails.root.join('public').to_s
               urlcolchon = '/colchon-articulos/'

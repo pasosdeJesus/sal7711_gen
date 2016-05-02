@@ -1,7 +1,43 @@
+dirm = '/buscar/<%= CGI.escapeHTML(@id.to_s) %>'
 $('.modal-title').text("<%= @titulo %>")
-$('#imagen-nueva-ventana').prop('href', '/buscar/' +
-                                '<%= CGI.escapeHTML(@id.to_s) %>')
+$('#imagen-nueva-ventana').prop('href', dirm)
 $('.modal-body').html("<%= j(render 'imagen') %>")
-av = window.innerHeight*0.9 - 100;
+av = window.innerHeight * 0.9 - 100;
 $('.modal-body').css('max-height', av)
 $('#modal-imagen').modal('show')
+e = $('a.muestra-imagen[href="' + dirm + '"]')
+
+$('#imagen-siguiente').removeAttr('onclick')
+a = e.attr('data-anterior')
+if (typeof a == 'undefined') {
+  $('#imagen-anterior').addClass('deshabilitado')
+  eant = "#"
+} else {
+  $('#imagen-anterior').removeClass('deshabilitado')
+  if ($('a.muestra-imagen').first().attr('href') == dirm) {
+    eant = $('a.previous_page').attr('href') + '&muestraid=' + a
+  } else {
+    eant = '/buscar/' + a
+  }
+}
+$('#imagen-anterior').prop('href', eant)
+
+$('#imagen-siguiente').removeAttr('onclick')
+s = e.attr('data-siguiente')
+if (typeof s == 'undefined') {
+  $('#imagen-siguiente').addClass('deshabilitado')
+  esig = "#"
+} else {
+  $('#imagen-siguiente').removeClass('deshabilitado')
+  if ($('a.muestra-imagen').last().attr('href') == dirm) {
+    esig = $('a.next_page').attr('href') + '&muestraid=' + s
+  } else {
+    esig = '/buscar/' + s
+  }
+}
+$('#imagen-siguiente').prop('href', esig)
+
+$('a.muestra-imagen').removeClass('ultimo-visto')
+if (typeof e != 'undefined') {
+  e.addClass('ultimo-visto')
+}
