@@ -15,7 +15,6 @@ module Sal7711Gen
 
           # Prepara una página de resultados
           def prepara_pagina
-            #byebug
             @articulos = Articulo.all
             if (params[:buscar] && params[:buscar][:fechaini] && params[:buscar][:fechaini] != '')
               pfi = params[:buscar][:fechaini]
@@ -83,9 +82,13 @@ module Sal7711Gen
             end
             @numregistros = @articulos.count
             @articulos = @articulos.joins(:anexo).order("fecha").select(
-              "sal7711_gen_articulo.id AS id, sip_anexo.descripcion AS titulo")
+              "sal7711_gen_articulo.id AS id, " +
+              "sip_anexo.descripcion AS titulo, " +
+              "sal7711_gen_articulo.texto AS texto"
+            )
             @coltexto = "titulo"
             @colid = "id"
+            @coldesc = "texto"
             pag = 1
             if (params[:pag])
               pag = params[:pag].to_i
