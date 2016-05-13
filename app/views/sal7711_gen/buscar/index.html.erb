@@ -91,40 +91,5 @@
 </div> <!-- id: resultados -->
 
 
-<div class="modal fade" id="modal-imagen" tabindex="-1" role="dialog" aria-labelledby="modal-imagen-etiqueta">
-  <div class="modal-dialog modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title">Modal title</h4>
-      </div>
-      <div class="modal-body" style="overflow:scroll; max-height: 200px; width:auto">
-        <! -- Aqui mostraruno.js.erb insertará la imagen de _imagen -->
-      </div>
-      <div class="modal-footer">
-        <a href="#" id="imagen-anterior" class="btn" data-remote="true">
-          <i class="fa fa-arrow-left"></i>Anterior
-        </a>
+<%= render 'modal_articulo' %>
 
-        <button type="button" class="btn btn-default" data-dismiss="modal">
-          <i class="fa fa-close"></i> Cerrar
-        </button>
-        <a href="#" id="imagen-acercar" class="btn">
-          <i class="fa fa-search-plus"></i> Acercar
-        </a>
-        <a href="#" id="imagen-alejar" class="btn">
-          <i class="fa fa-search-minus"></i> Alejar
-        </a>
-        <a href="#" id="imagen-nueva-ventana" class="btn" target="_blank">
-          <i class="fa fa-external-link"></i> Abrir en Nueva Ventana
-        </a>
-
-        <a href="#" id="imagen-siguiente" class="btn" data-remote="true">
-          <i class="fa fa-arrow-right"></i>Siguiente
-        </a>
-
-
-      </div>
-    </div>
-  </div>
-</div>
