@@ -14,10 +14,23 @@ module Sal7711Gen
             validate: true, class_name: "Sip::Municipio"
           belongs_to :fuenteprensa, foreign_key: "fuenteprensa_id",
             validate: true, class_name: "Sip::Fuenteprensa", required: true
-          belongs_to :anexo, foreign_key: "anexo_id", class_name: 'Sip::Anexo',
-            validate: true,  required: true
-          accepts_nested_attributes_for :anexo, reject_if: :all_blank, 
-            allow_destroy: true, update_only: true
+
+          has_attached_file :adjunto, :path => :ruta_articulo
+
+          def ruta_articulo
+            File.join(Sip.ruta_anexos, fecha.year.to_s,
+            fecha.month.to_s.rjust(2, '0'),
+            fecha.day.to_s.rjust(2, '0'),
+            "/#{id}_#{adjunto_file_name}")
+          end
+
+          validates_attachment_content_type :adjunto, 
+            :content_type => ['text/plain', /.*/]
+          validates_attachment_presence :adjunto
+          validates :adjunto_file_name, length: { maximum: 255 }
+          validates :adjunto_content_type, length: { maximum: 255 }
+          validates :adjunto_descripcion, presence: true, allow_blank: false, 
+              length: { maximum: 1500 } 
 
           has_many :articulo_categoriaprensa, 
             class_name: 'Sal7711Gen::ArticuloCategoriaprensa',

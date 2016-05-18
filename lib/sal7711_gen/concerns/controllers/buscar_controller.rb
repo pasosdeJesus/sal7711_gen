@@ -9,7 +9,7 @@ module Sal7711Gen
 
         included do
           include ActionView::Helpers::AssetUrlHelper
-  
+
           # entradas por página
           @@porpag = 20 
 
@@ -81,9 +81,9 @@ module Sal7711Gen
               end
             end
             @numregistros = @articulos.count
-            @articulos = @articulos.joins(:anexo).order("fecha").select(
+            @articulos = @articulos.order("fecha").select(
               "sal7711_gen_articulo.id AS id, " +
-              "sip_anexo.descripcion AS titulo, " +
+              "sal7711_gen_articulo.adjunto_descripcion AS titulo, " +
               "sal7711_gen_articulo.texto AS texto"
             )
             @coltexto = "titulo"
@@ -213,18 +213,15 @@ module Sal7711Gen
           end
       
           def descarga(id, rutacolchon) 
-            a = Articulo.joins(:anexo).where(
-              "sal7711_gen_articulo.id = ?", id).take
-            ruta = a.anexo.adjunto_file_name
-            n = sprintf(Sip.ruta_anexos + "/%d_%s", a.anexo.id.to_i, 
-                        File.basename(ruta))
-            if Rails.application.config.x.formato_fecha == 'dd-mm-yyyy'
-              titulo = a.fecha.strftime('%d-%m-%Y')
-            else
-              titulo = a.fecha.to_s
-            end
-            titulo = a.anexo.descripcion
-            return [titulo, n]
+            a = Articulo.where("sal7711_gen_articulo.id = ?", id).take
+            ruta = a.ruta_articulo
+#            if Rails.application.config.x.formato_fecha == 'dd-mm-yyyy'
+#              titulo = a.fecha.strftime('%d-%m-%Y')
+#            else
+#              titulo = a.fecha.to_s
+#            end
+            titulo = a.adjunto_descripcion
+            return [titulo, ruta]
           end
 
           def mostraruno
