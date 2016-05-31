@@ -5,8 +5,8 @@ default: &default
   # For details on connection pooling, see rails configuration guide
   # http://guides.rubyonrails.org/configuring.html#database-pooling
   pool: 5
-  host: /var/www/tmp
-  username: sal7711gen
+  host: /var/www/var/run/postgresql
+  username: sipdes
   password: xyz
 
 development:
