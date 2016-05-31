@@ -15,8 +15,7 @@ module Sal7711Gen
           # GET /articulos/new
           def new
             @articulo = Sal7711Gen::Articulo.new
-            @articulo.anexo = Sip::Anexo.new
-            @articulo.anexo.descripcion = "J"
+            @articulo.adjunto_descripcion = "J"
             #logger.debug "Anexo salvado: #{@articulo.anexo.inspect}"
           end
 
@@ -63,8 +62,7 @@ module Sal7711Gen
           # POST /articulos.json
           def create
             @articulo = Sal7711Gen::Articulo.new(articulo_params)
-            @articulo.anexo.descripcion = gen_descripcion(articulo_params)
-            @articulo.anexo.save
+            @articulo.adjunto_descripcion = gen_descripcion(articulo_params)
 
             respond_to do |format|
               if @articulo.save
@@ -84,7 +82,7 @@ module Sal7711Gen
           # PATCH/PUT /articulos/1
           # PATCH/PUT /articulos/1.json
           def update
-            @articulo.anexo.descripcion = gen_descripcion(articulo_params)
+            @articulo.adjunto_descripcion = gen_descripcion(articulo_params)
             respond_to do |format|
               if @articulo.update(articulo_params)
                 format.html { 
@@ -126,10 +124,10 @@ module Sal7711Gen
               :fuenteprensa_id, 
               :fecha, 
               :pagina,
-              {:categoriaprensa_ids => []},
-              {:anexo_attributes => [
-                :id, :fecha, :descripcion, :archivo, :adjunto, :_destroy
-              ]}
+              :adjunto_descripcion,
+              :adjunto,
+              :archivo,
+              {:categoriaprensa_ids => []}
             )
           end
         end

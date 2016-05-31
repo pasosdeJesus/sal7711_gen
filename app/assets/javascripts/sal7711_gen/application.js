@@ -22,12 +22,12 @@ $(document).on('ready page:load', function() {
 	sip_prepara_eventos_comunes(root);
 	sal7711_gen_prepara_eventos_comunes(root);
 
-	formato_fecha = 'yyyy-mm-dd'
+	/*formato_fecha = 'yyyy-mm-dd'
 	if ($('meta[name=formato_fecha]') != []) {
 		formato_fecha = $('meta[name=formato_fecha]').attr('content')
-	}
+	}*/
 	$('[data-behaviour~=datepicker]').datepicker({
-		format: formato_fecha,
+		format: root.formato_fecha,
 		autoclose: true,
 		todayHighlight: true,
 		language: 'es'	
