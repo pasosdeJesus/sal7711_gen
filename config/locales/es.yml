@@ -23,4 +23,6 @@ es:
         Categoriasprensa: Categorias de Prensa
       "sal7711_gen/articulo":
         filtro: Filtro
+        categoriaprensa: Categoria de Prensa
+        fuenteprensa: Fuente de Prensa
 
