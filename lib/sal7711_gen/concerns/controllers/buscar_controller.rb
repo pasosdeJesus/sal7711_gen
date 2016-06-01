@@ -13,6 +13,10 @@ module Sal7711Gen
           # entradas por página
           @@porpag = 20 
 
+          def orden_articulos
+            "fecha"
+          end
+
           # Prepara una página de resultados
           def prepara_pagina
             @articulos = Articulo.all
@@ -81,7 +85,7 @@ module Sal7711Gen
               end
             end
             @numregistros = @articulos.count
-            @articulos = @articulos.order("fecha").select(
+            @articulos = @articulos.order(orden_articulos).select(
               "sal7711_gen_articulo.id AS id, " +
               "sal7711_gen_articulo.adjunto_descripcion AS titulo, " +
               "sal7711_gen_articulo.texto AS texto"
