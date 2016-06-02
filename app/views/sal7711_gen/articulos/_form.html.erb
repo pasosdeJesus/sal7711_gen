@@ -45,17 +45,14 @@
 
   <%= f.input :texto %> 
 
-  <%= f.simple_fields_for :anexo do |a| %>
 
-    <% if !a.object || !a.object.id || !a.object.adjunto_file_name %>
-      <%= a.input :adjunto, as: :file, label: 'Archivo' %>
-    <% else %>
-      <div class="actividad_sip_anexo_adjunto">
-         <label for="actividad_sip_anexo_attributes_<%=a.object.id%>_adjunto">Archivo</label>
-         <a id="actividad_sip_anexo_attributes_<%=a.object.id%>_adjunto" href="<%= sip.descarga_anexo_path(a.object.id) %>", style="text-decoration:none"><%= a.object.adjunto_file_name %></a>
-      </div>
-    <% end %>
-
+  <% if !f.object || !f.object.id || !f.object.adjunto_file_name %>
+    <%= f.input :adjunto, as: :file, label: 'Archivo' %>
+  <% else %>
+    <div class="articulo_adjunto">
+      <label for="articulo_attributes_<%=f.object.id%>_adjunto">Archivo</label>
+      <a id="articulo_adjunto_attributes_<%=f.object.id%>_adjunto" href="<%= buscar_mostraruno(f.object.id) %>", style="text-decoration:none"><%= f.object.adjunto_file_name %></a>
+    </div>
   <% end %>
 
   <div class="form-actions">
