@@ -34,5 +34,9 @@ module Sal7711Gen
       return r
     end
 
+    def buscar_mostraruno(id)
+      Rails.configuration.relative_url_root + "buscar/#{id.to_s}"
+    end
+
   end
 end

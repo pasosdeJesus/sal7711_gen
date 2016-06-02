@@ -1,4 +1,7 @@
-dirm = '/buscar/<%= CGI.escapeHTML(@id.to_s) %>'
+var root;
+// this es Window
+root = this.document;
+dirm = root.puntomontaje + 'buscar/<%= CGI.escapeHTML(@id.to_s) %>' 
 $('.modal-title').text("<%= @titulo %>")
 $('#imagen-nueva-ventana').prop('href', dirm)
 $('.modal-body').html("<%= j(render 'imagen') %>")
@@ -17,7 +20,7 @@ if (typeof a == 'undefined') {
   if ($('a.muestra-imagen').first().attr('href') == dirm) {
     eant = $('a.previous_page').attr('href') + '&muestraid=' + a
   } else {
-    eant = '/buscar/' + a
+    eant = root.puntomontaje + 'buscar/' + a
   }
 }
 $('#imagen-anterior').prop('href', eant)
@@ -32,7 +35,7 @@ if (typeof s == 'undefined') {
   if ($('a.muestra-imagen').last().attr('href') == dirm) {
     esig = $('a.next_page').attr('href') + '&muestraid=' + s
   } else {
-    esig = '/buscar/' + s
+    esig = root.puntomontaje + 'buscar/' + s
   }
 }
 $('#imagen-siguiente').prop('href', esig)
