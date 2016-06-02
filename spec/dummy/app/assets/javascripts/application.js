@@ -10,18 +10,10 @@
 // Read Sprockets README (https://github.com/sstephenson/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= require sip/motor
-//= require sal7711_gen/motor
-//= require chosen-jquery
+//= require sal7711_gen/application
 //= require_tree .
 
 $(document).on('ready page:load', function() {
-	var root;
-	root = typeof exports !== "undefined" && exports !== null ? 
-		exports : this;	
-	sip_prepara_eventos_comunes(root);
-	sal7711_gen_prepara_eventos_comunes(root);
-
 	formato_fecha = 'yyyy-mm-dd'
 	if ($('meta[name=formato_fecha]') != []) {
 		formato_fecha = $('meta[name=formato_fecha]').attr('content')

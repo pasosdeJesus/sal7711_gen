@@ -124,6 +124,7 @@ module Sal7711Gen
               :fuenteprensa_id, 
               :fecha, 
               :pagina,
+              :texto,
               :adjunto_descripcion,
               :adjunto,
               :archivo,
