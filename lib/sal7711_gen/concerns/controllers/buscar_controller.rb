@@ -225,7 +225,8 @@ module Sal7711Gen
 #              titulo = a.fecha.to_s
 #            end
             titulo = a.adjunto_descripcion
-            return [titulo, ruta]
+            texto = a.texto
+            return [titulo, ruta, texto]
           end
 
           def mostraruno
@@ -237,9 +238,10 @@ module Sal7711Gen
               if (!File.exists? rutacolchon)
                 raise "Crear directorio #{rutacolchon}"
               end
-              titulo, rlocal = descarga(id, rutacolchon)
+              titulo, rlocal, texto = descarga(id, rutacolchon)
               @titulo = titulo
               @id = id
+              @texto = texto
               # Convierte a jpg
               nomar = titulo.gsub(/[^0-9A-Za-z.\-]/, '_')  + "-" + id.to_s
               @descargajpg = urlcolchon + nomar + ".jpg"
