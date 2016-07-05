@@ -21,5 +21,6 @@ spec/dummy/config/database.yml
 spec/dummy/log/development.log
 spec/dummy/tmp/
 spec/dummy/public/assets/
+spec/dummy/archivo/
 herram
 spec/dummy/public/colchon-articulos
