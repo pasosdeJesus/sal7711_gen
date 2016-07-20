@@ -3,11 +3,13 @@ source 'https://rubygems.org'
 #ruby "2.2.2"
 
 # Rails (internacionalización)
-gem "rails", '~> 4.2.0'
+gem "rails", '~> 5.0.0'
 gem "rails-i18n"
 
 # Postgresql
 gem "pg"
+
+gem 'puma'
 
 # Colores en consola
 gem "colorize"
@@ -36,7 +38,6 @@ gem "coffee-rails", '~> 4.1.0'
 gem "jquery-rails"
 
 gem "jquery-ui-rails"
-gem "jquery-ui-bootstrap-rails", git: "https://github.com/kristianmandrup/jquery-ui-bootstrap-rails"
 
 # Seguir enlaces más rápido. Ver: https://github.com/rails/turbolinks
 gem "turbolinks"
@@ -72,7 +73,7 @@ gem "tzinfo"
 gem "tzinfo-data"
 
 # Motor de sistemas de información estilo Pasos de Jesús
-gem 'sip', github: 'pasosdeJesus/sip'
+gem 'sip', github: 'pasosdeJesus/sip', branch: 'rails5'
 #gem 'sip', path: '../sip'
 
 group :doc do
