@@ -29,10 +29,10 @@ gem "prawn"
 gem "jbuilder"
 
 # Uglifier comprime recursos Javascript
-gem "uglifier", '>= 1.3.0'
+gem "uglifier"#, '>= 1.3.0'
 
 # CoffeeScript para recuersos .js.coffee y vistas
-gem "coffee-rails", '~> 4.1.0'
+gem "coffee-rails"#, '~> 4.1.0'
 
 # jquery como librería JavaScript
 gem "jquery-rails"
@@ -66,7 +66,7 @@ gem "will_paginate"
 gem 'twitter_cldr'
 
 # Maneja adjuntos
-gem "paperclip", "~> 4.1"
+gem "paperclip"#, "~> 4.1"
 
 # Zonas horarias
 gem "tzinfo"
@@ -100,7 +100,7 @@ group :test do
   gem 'rspec-rails'
 
   # Maneja datos de prueba
-  gem "factory_girl_rails", "~> 4.0", group: [:development, :test]
+  gem "factory_girl_rails"#, "~> 4.0", group: [:development, :test]
 
   # https://www.relishapp.com/womply/rails-style-guide/docs/developing-rails-applications/bundler
   # Lanza programas para examinar resultados
