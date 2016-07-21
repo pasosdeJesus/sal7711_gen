@@ -73,7 +73,7 @@ gem "tzinfo"
 gem "tzinfo-data"
 
 # Motor de sistemas de información estilo Pasos de Jesús
-gem 'sip', github: 'pasosdeJesus/sip', branch: 'rails5'
+gem 'sip', github: 'pasosdeJesus/sip'
 #gem 'sip', path: '../sip'
 
 group :doc do
@@ -100,7 +100,7 @@ group :test do
   gem 'rspec-rails'
 
   # Maneja datos de prueba
-  gem "factory_girl_rails"#, "~> 4.0", group: [:development, :test]
+  gem "factory_girl_rails", group: [:development, :test]#, "~> 4.0"
 
   # https://www.relishapp.com/womply/rails-style-guide/docs/developing-rails-applications/bundler
   # Lanza programas para examinar resultados
