@@ -13,15 +13,3 @@
 //= require sal7711_gen/application
 //= require_tree .
 
-$(document).on('ready page:load', function() {
-	formato_fecha = 'yyyy-mm-dd'
-	if ($('meta[name=formato_fecha]') != []) {
-		formato_fecha = $('meta[name=formato_fecha]').attr('content')
-	}
-	$('[data-behaviour~=datepicker]').datepicker({
-		format: formato_fecha,
-		autoclose: true,
-		todayHighlight: true,
-		language: 'es'	
-	});
-});
