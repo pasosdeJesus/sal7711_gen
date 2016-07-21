@@ -40,7 +40,7 @@ gem "jquery-rails"
 gem "jquery-ui-rails"
 
 # Seguir enlaces más rápido. Ver: https://github.com/rails/turbolinks
-gem "turbolinks"
+gem "turbolinks", '5.0.0'
 
 # Ambiente de CSS
 gem "twitter-bootstrap-rails"

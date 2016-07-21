@@ -372,7 +372,7 @@ DEPENDENCIES
   sip!
   spring
   spring-commands-rspec
-  turbolinks
+  turbolinks (= 5.0.0)
   twitter-bootstrap-rails
   twitter_cldr
   tzinfo

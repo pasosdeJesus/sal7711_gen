@@ -15,10 +15,10 @@
 //= require chosen-jquery
 //= require_tree .
 
-$(document).on('ready page:load', function() {
+$(document).on('turbolinks:load', function() {
 	var root;
 	root = typeof exports !== "undefined" && exports !== null ? 
-		exports : this;	
+		exports : this;
 	sip_prepara_eventos_comunes(root);
 	sal7711_gen_prepara_eventos_comunes(root);
 
