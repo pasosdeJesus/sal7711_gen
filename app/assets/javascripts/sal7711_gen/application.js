@@ -15,7 +15,7 @@
 //= require chosen-jquery
 //= require_tree .
 
-$(document).on('turbolinks:load', function() {
+$(document).on('turbolinks:load ready page:change', function() {
 	var root;
 	root = typeof exports !== "undefined" && exports !== null ? 
 		exports : this;
