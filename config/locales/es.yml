@@ -12,6 +12,9 @@ es:
     id_tviolencia: Tipo de Violencia
     limiteinferior: Límite Inferior
     limitesuperior: Límite Superior
+    error:
+      one: error
+      other: errores
   will_paginate:
     previous_label: "&#8592; Anterior"
     next_label: "&#8594; Siguiente"

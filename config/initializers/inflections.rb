@@ -18,4 +18,5 @@ ActiveSupport::Inflector.inflections do |inflect|
 	inflect.irregular 'actividad', 'actividades'
 	inflect.irregular 'categoriaprensa', 'categoriasprensa'
 	inflect.irregular 'organizacion', 'organizaciones'
+	inflect.irregular 'error', 'errores'
 end

@@ -2,16 +2,9 @@
 <%= simple_form_for @articulo, 
   :html => { :class => 'form-horizontal' } do |f| 
 %>
-  <% if @articulo.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@articulo.errors.count, "error") %> prohibited this articulo from being saved:</h2>
-      <ul>
-      <% @articulo.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+  
+  <%= render partial: 'sip/hogar/errores', locals: { f: f } %>
+
   <%= f.input :fecha, 
     :input_html => { "data-behaviour" => "datepicker"}, 
     :as => :string 
