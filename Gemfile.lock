@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/pasosdeJesus/sip.git
-  revision: 255ce4cd5ccc3061b90f2e81be796feeb9101b40
+  revision: d3cca6e25e92a7cbc64d326e87021bd832d3ba8f
   specs:
     sip (2.0.b1)
       bootstrap-datepicker-rails
@@ -59,7 +59,7 @@ GEM
       minitest (~> 5.1)
       tzinfo (~> 1.1)
     addressable (2.4.0)
-    arel (7.1.0)
+    arel (7.1.1)
     bcrypt (3.1.11)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
@@ -135,7 +135,7 @@ GEM
     ffi (1.9.14)
     font-awesome-rails (4.6.3.1)
       railties (>= 3.2, < 5.1)
-    globalid (0.3.6)
+    globalid (0.3.7)
       activesupport (>= 4.1.0)
     i18n (0.7.0)
     interception (0.5)
@@ -202,7 +202,7 @@ GEM
     pry-stack_explorer (0.4.9.2)
       binding_of_caller (>= 0.7)
       pry (>= 0.9.11)
-    puma (3.5.2)
+    puma (3.6.0)
     rack (2.0.1)
     rack-contrib (1.2.0)
       rack (>= 0.9.1)
@@ -239,7 +239,7 @@ GEM
       method_source
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
-    raindrops (0.16.0)
+    raindrops (0.17.0)
     rake (11.2.2)
     rb-fsevent (0.9.7)
     rb-inotify (0.9.7)
@@ -248,7 +248,7 @@ GEM
       json (~> 1.4)
     responders (2.2.0)
       railties (>= 4.2.0, < 5.1)
-    rspec-core (3.5.1)
+    rspec-core (3.5.2)
       rspec-support (~> 3.5.0)
     rspec-expectations (3.5.0)
       diff-lcs (>= 1.2.0, < 2.0)
@@ -298,7 +298,7 @@ GEM
     thread_safe (0.3.5)
     tilt (2.0.5)
     ttfunk (1.4.0)
-    turbolinks (5.0.0)
+    turbolinks (5.0.1)
       turbolinks-source (~> 5)
     turbolinks-source (5.0.0)
     twitter-bootstrap-rails (3.2.2)
@@ -314,7 +314,7 @@ GEM
       thread_safe (~> 0.1)
     tzinfo-data (1.2016.6)
       tzinfo (>= 1.0.0)
-    uglifier (3.0.0)
+    uglifier (3.0.1)
       execjs (>= 0.3.0, < 3)
     unicorn (5.1.0)
       kgio (~> 2.6)
