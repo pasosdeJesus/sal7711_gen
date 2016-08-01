@@ -60,19 +60,23 @@ module Sal7711Gen
 
           # POST /articulos
           # POST /articulos.json
+          def create_gen(articulo)
+
+            respond_to do |format|
+              if articulo.save
+                format.html { redirect_to '/articulos', notice: 'Artículo creado.' }
+                format.json { render :show, status: :created, location: articulo }
+              else
+                format.html { render :new }
+                format.json { render json: articulo.errors, status: :unprocessable_entity }
+              end
+            end
+          end
+
           def create
             @articulo = Sal7711Gen::Articulo.new(articulo_params)
             @articulo.adjunto_descripcion = gen_descripcion(articulo_params)
-
-            respond_to do |format|
-              if @articulo.save
-                format.html { redirect_to '/articulos', notice: 'Artículo creado.' }
-                format.json { render :show, status: :created, location: @articulo }
-              else
-                format.html { render :new }
-                format.json { render json: @articulo.errors, status: :unprocessable_entity }
-              end
-            end
+            create_gen(@articulo)
           end
 
           # GET /articulos/1/edit
