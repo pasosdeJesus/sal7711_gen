@@ -36,7 +36,7 @@
   <% else %>
     <div class="articulo_adjunto">
       <label for="articulo_attributes_<%=f.object.id%>_adjunto">Archivo</label>
-      <a id="articulo_adjunto_attributes_<%=f.object.id%>_adjunto" href="<%= buscar_mostraruno(f.object.id) %>", style="text-decoration:none"><%= f.object.adjunto_file_name %></a>
+      <a id="articulo_adjunto_attributes_<%=f.object.id%>_adjunto" href="<%= buscar_mostraruno_url(f.object.id) %>", style="text-decoration:none"><%= f.object.adjunto_file_name %></a>
     </div>
   <% end %>
 
