@@ -32,7 +32,7 @@
 
 
   <% if !f.object || !f.object.id || !f.object.adjunto_file_name %>
-    <%= f.input :adjunto, as: :file, label: 'Archivo' %>
+    <%= f.input :adjunto, as: :file, label: 'Archivo (.jpg, .png, .tiff)' %>
   <% else %>
     <div class="articulo_adjunto">
       <label for="articulo_attributes_<%=f.object.id%>_adjunto">Archivo</label>
