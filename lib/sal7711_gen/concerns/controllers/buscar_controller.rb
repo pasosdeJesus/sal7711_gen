@@ -1,5 +1,7 @@
 # encoding: UTF-8
 
+require 'fileutils'
+
 module Sal7711Gen
   module Concerns
     module Controllers
@@ -9,6 +11,7 @@ module Sal7711Gen
 
         included do
           include ActionView::Helpers::AssetUrlHelper
+          include Sal7711Gen::ApplicationHelper
 
           # entradas por página
           @@porpag = 20 
@@ -36,7 +39,8 @@ module Sal7711Gen
               else
                 pffd = Date.strptime(pff, '%Y-%m-%d')
               end
-              @articulos = @articulos.where("fecha <= ?", pffd.strftime('%Y-%m-%d'))
+              @articulos = @articulos.where("fecha <= ?", 
+                                            pffd.strftime('%Y-%m-%d'))
             end
             if (params[:buscar] && params[:buscar][:mundep] && params[:buscar][:mundep] != '')
               pmd = params[:buscar][:mundep].split(" / ")
@@ -226,48 +230,54 @@ module Sal7711Gen
 #            end
             titulo = a.adjunto_descripcion
             texto = a.texto
-            return [titulo, ruta, texto]
+            anio = a.fecha.year
+            mes = a.fecha.month
+            dia = a.fecha.day
+            return [titulo, ruta, texto, anio, mes, dia]
           end
 
           def mostraruno
             if (params[:id] && params[:id].to_i > 0)
               id = params[:id].to_i
-              rutapublic = Rails.root.join('public').to_s
-              urlcolchon = '/colchon-articulos/'
-              rutacolchon = rutapublic + urlcolchon
-              if (!File.exists? rutacolchon)
-                raise "Crear directorio #{rutacolchon}"
-              end
-              titulo, rlocal, texto = descarga(id, rutacolchon)
+              titulo, texto, rlocal, rutajpg, urljpg, rutapdf, urlpdf = 
+                datos_articulo(id)
+#              rutapublic = Rails.root.join('public').to_s
+#              urlcolchon = '/colchon-articulos/'
+#              rutacolchon = rutapublic + urlcolchon
+#              if (!File.exists? rutacolchon)
+#                raise "Crear directorio #{rutacolchon}"
+#              end
+#              titulo, rlocal, texto, anio, mes, dia = descarga(id, rutacolchon)
               @titulo = titulo
               @id = id
               @texto = texto
-              # Convierte a jpg
-              nomar = titulo.gsub(/[^0-9A-Za-z.\-]/, '_')  + "-" + id.to_s
-              @descargajpg = urlcolchon + nomar + ".jpg"
-              rutajpg = rutacolchon + nomar + ".jpg"
+#              # Convierte a jpg
+#              nomar = titulo.gsub(/[^0-9A-Za-z.\-]/, '_')  + "-" + id.to_s
+#              rutaf = "#{anio.to_i.to_s}/#{mes.to_i.to_s}/#{dia.to_i.to_s}/"
+              @descargajpg = urljpg.to_s
+#              rutajpg = rutacolchon + rutaf + nomar + ".jpg"
               #img = Magick::Image.read(rlocal).first
               #img.write ""
               # Image.read falla para algunas imagenes con  Null count for "Tag 34026" (type 1, writecount │-3, passcount 1). `_TIFFVSetField' @ error/tiff.c/TIFFErrors/508):
-              if !File.exists? "#{rutajpg}"
-                system("convert -append #{rlocal} #{rutajpg}")
+              if !File.exists? "#{rutajpg.to_s}"
+                FileUtils.mkdir_p rutajpg.dirname
+                system("convert -append #{rlocal} #{rutajpg.to_s}")
               end
-              if !File.exists? "#{rutajpg}"
+              if !File.exists? "#{rutajpg.to_s}"
                 flash[:error] = "No fue posible convertir #{rlocal}"
                 render inline: "No fue posible convertir #{rlocal}"
                 return
               end
               # Genera PDF
-              @descargapdf= urlcolchon + nomar + ".pdf"
-              rutapdf = rutacolchon + nomar + ".pdf"
-              puts "rutapdf=#{rutapdf}"
-              if !File.exists? "#{rutapdf}"
-                Prawn::Document.generate("#{rutapdf}") do
+              @descargapdf= urlpdf.to_s
+              if !File.exists? "#{rutapdf.to_s}"
+                FileUtils.mkdir_p rutapdf.dirname
+                Prawn::Document.generate("#{rutapdf.to_s}") do
                   w = 550
                   h = 700
                   text titulo
                   bounding_box([0, cursor], :width => w, :height => h) do
-                    image "#{rutajpg}", :fit => [w, h]
+                    image "#{rutajpg.to_s}", :fit => [w, h]
                     stroke_bounds
                   end
                 end
