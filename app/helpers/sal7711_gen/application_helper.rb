@@ -38,10 +38,6 @@ module Sal7711Gen
       Rails.configuration.relative_url_root + "buscar/#{id.to_s}"
     end
 
-    def ruta_descarga(id, ext)
-      Rails.configuration.x.ruta_colchon + "buscar/#{id.to_s}"
-    end
-
     # Retorna datos del articulo con la id dada en un vector con:
     # 0- titulo
     # 1- texto
@@ -75,6 +71,13 @@ module Sal7711Gen
               rutajpg, urljpg, 
               rutapdf, urlpdf]
     end
+
+    def url_descarga_jpg(id)
+      titulo, texto, rlocal, rutajpg, urljpg, rutapdf, urlpdf =
+        datos_articulo(id) 
+      return urljpg
+    end
+
 
   end
 end

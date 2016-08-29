@@ -180,5 +180,16 @@
     return
   )
 
+  # Carga vista previa de imagen seleccionada
+  $(document).on('change', '[data-imagenpre]', () ->
+    if (this.files && this.files[0]) 
+      reader = new FileReader();
+      idimg = $(this).attr('data-imagenpre')
+      reader.onload = (e) -> 
+        $('#' + idimg).attr('src', e.target.result);
+     
+      reader.readAsDataURL(this.files[0]);
+  )
+
   return
 

@@ -58,3 +58,8 @@ div.field, div.actions {
   font-size: 12px;
   list-style: square;
 }
+
+.abajocentrado {
+	.center-block();
+	margin-top: 20px;
+}
