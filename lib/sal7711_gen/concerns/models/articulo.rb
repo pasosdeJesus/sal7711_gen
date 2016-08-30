@@ -6,6 +6,8 @@ module Sal7711Gen
       module Articulo
         extend ActiveSupport::Concern
 
+        include Sip::Localizacion
+
         included do
 
           belongs_to :departamento, foreign_key: "departamento_id",
@@ -14,6 +16,8 @@ module Sal7711Gen
             validate: true, class_name: "Sip::Municipio"
           belongs_to :fuenteprensa, foreign_key: "fuenteprensa_id",
             validate: true, class_name: "Sip::Fuenteprensa", required: true
+
+          campofecha_localizado :fecha
 
           has_attached_file :adjunto, :path => :ruta_articulo
 

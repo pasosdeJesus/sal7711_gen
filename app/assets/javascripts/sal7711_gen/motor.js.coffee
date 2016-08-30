@@ -148,12 +148,15 @@
       return
     )
     f = $('[data-behaviour~=datepicker]').first().data('datepicker').o.format
-    if f == 'dd-mm-yyyy' 
+    if f == 'dd-mm-yyyy' || f == 'dd/mm/yyyy'
       p = max.split("-");
       mesmax = p[0] 
       aniomax = p[1] 
       fini = "01-" + min
       ffin = diasEnMes(mesmax,aniomax) + "-" + max
+      if f == 'dd/mm/yyyy'
+        fini = fini.replace('-', '/')
+        ffin = ffin.replace('-', '/')
     else if f == 'yyyy-mm-dd'
       p = max.split("-");
       mesmax = p[1] 

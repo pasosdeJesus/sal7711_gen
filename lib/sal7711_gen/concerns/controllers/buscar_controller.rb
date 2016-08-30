@@ -9,6 +9,8 @@ module Sal7711Gen
 
         extend ActiveSupport::Concern
 
+        include Sip::FormatoFechaHelper
+
         included do
           include ActionView::Helpers::AssetUrlHelper
           include Sal7711Gen::ApplicationHelper
@@ -23,22 +25,25 @@ module Sal7711Gen
           # Prepara una página de resultados
           def prepara_pagina
             @articulos = Articulo.all
-            if (params[:buscar] && params[:buscar][:fechaini] && params[:buscar][:fechaini] != '')
+            if (params[:buscar] && params[:buscar][:fechaini] && 
+                params[:buscar][:fechaini] != '')
               pfi = params[:buscar][:fechaini]
-              if Rails.application.config.x.formato_fecha == 'dd-mm-yyyy'
-                pfid = Date.strptime(pfi, '%d-%m-%Y')
-              else
-                pfid = Date.strptime(pfi, '%Y-%m-%d')
-              end
+              pfid = Date.strptime(fecha_local_estandar(pfi), '%Y-%m-%d')
+#              if Rails.application.config.x.formato_fecha == 'dd-mm-yyyy'
+#                pfid = Date.strptime(pfi, '%d-%m-%Y')
+#              else
+#                pfid = Date.strptime(pfi, '%Y-%m-%d')
+#              end
               @articulos = @articulos.where("fecha >= ?", pfid.strftime('%Y-%m-%d'))
             end
             if(params[:buscar] && params[:buscar][:fechafin] && params[:buscar][:fechafin] != '')
               pff = params[:buscar][:fechafin]
-              if Rails.application.config.x.formato_fecha == 'dd-mm-yyyy'
-                pffd = Date.strptime(pff, '%d-%m-%Y')
-              else
-                pffd = Date.strptime(pff, '%Y-%m-%d')
-              end
+              pffd = Date.strptime(fecha_local_estandar(pff), '%Y-%m-%d')
+#              if Rails.application.config.x.formato_fecha == 'dd-mm-yyyy'
+#                pffd = Date.strptime(pff, '%d-%m-%Y')
+#              else
+#                pffd = Date.strptime(pff, '%Y-%m-%d')
+#              end
               @articulos = @articulos.where("fecha <= ?", 
                                             pffd.strftime('%Y-%m-%d'))
             end
@@ -157,13 +162,15 @@ module Sal7711Gen
               anio = Date.today.strftime("%Y").to_i
               @meses = []
               (0..23).each do |n|
-                if Rails.application.config.x.formato_fecha == 'dd-mm-yyyy'
+                case Rails.application.config.x.formato_fecha 
+                when 'dd-mm-yyyy', 'dd/mm/yyyy'
                   estem = mes.to_s.rjust(2, "0") + "-" + anio.to_s
                 else
                   estem = anio.to_s + "-" + mes.to_s.rjust(2, "0")
                 end
                 @meses += [
-                  [I18n.t("date.month_names")[mes] + " " + anio.to_s, estem]
+                  [I18n.t("date.month_names")[mes] + " " + 
+                   anio.to_s, estem]
                 ]
                 mes-=1
                 if mes == 0 

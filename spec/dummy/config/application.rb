@@ -24,7 +24,8 @@ module Dummy
 
     config.active_record.schema_format = :sql
 
-    config.x.formato_fecha = 'yyyy-mm-dd'
+    #config.x.formato_fecha = 'yyyy-mm-dd'
+    config.x.formato_fecha = 'dd/mm/yyyy'
     
     config.x.url_colchon = 'colchon-articulos'
 

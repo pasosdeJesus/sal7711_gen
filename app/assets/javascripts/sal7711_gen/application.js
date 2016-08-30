@@ -18,7 +18,7 @@
 $(document).on('turbolinks:load ready page:change', function() {
 	var root;
 	root = typeof exports !== "undefined" && exports !== null ? 
-		exports : this;
+		exports : window;
 	sip_prepara_eventos_comunes(root);
 	sal7711_gen_prepara_eventos_comunes(root);
 
