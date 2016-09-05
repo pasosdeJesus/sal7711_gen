@@ -63,7 +63,12 @@ module Sal7711Gen
 
             respond_to do |format|
               if articulo.save
-                format.html { redirect_to "#{Rails.configuration.relative_url_root}/articulos", notice: 'Artículo creado.' }
+                format.html { 
+                  redirect_to articulos_url, notice: 'Artículo creado.' 
+#                  redirect_to File.join(
+#                  Rails.configuration.relative_url_root, 'articulos'), 
+#                  notice: 'Artículo creado.' 
+                }
                 format.json { render :show, status: :created, location: articulo }
               else
                 format.html { render :new }
