@@ -29,21 +29,11 @@ module Sal7711Gen
                 params[:buscar][:fechaini] != '')
               pfi = params[:buscar][:fechaini]
               pfid = Date.strptime(fecha_local_estandar(pfi), '%Y-%m-%d')
-#              if Rails.application.config.x.formato_fecha == 'dd-mm-yyyy'
-#                pfid = Date.strptime(pfi, '%d-%m-%Y')
-#              else
-#                pfid = Date.strptime(pfi, '%Y-%m-%d')
-#              end
               @articulos = @articulos.where("fecha >= ?", pfid.strftime('%Y-%m-%d'))
             end
             if(params[:buscar] && params[:buscar][:fechafin] && params[:buscar][:fechafin] != '')
               pff = params[:buscar][:fechafin]
               pffd = Date.strptime(fecha_local_estandar(pff), '%Y-%m-%d')
-#              if Rails.application.config.x.formato_fecha == 'dd-mm-yyyy'
-#                pffd = Date.strptime(pff, '%d-%m-%Y')
-#              else
-#                pffd = Date.strptime(pff, '%Y-%m-%d')
-#              end
               @articulos = @articulos.where("fecha <= ?", 
                                             pffd.strftime('%Y-%m-%d'))
             end
@@ -230,11 +220,6 @@ module Sal7711Gen
           def descarga(id, rutacolchon) 
             a = Articulo.where("sal7711_gen_articulo.id = ?", id).take
             ruta = a.ruta_articulo
-#            if Rails.application.config.x.formato_fecha == 'dd-mm-yyyy'
-#              titulo = a.fecha.strftime('%d-%m-%Y')
-#            else
-#              titulo = a.fecha.to_s
-#            end
             titulo = a.adjunto_descripcion
             texto = a.texto
             anio = a.fecha.year
@@ -248,24 +233,10 @@ module Sal7711Gen
               id = params[:id].to_i
               titulo, texto, rlocal, rutajpg, urljpg, rutapdf, urlpdf = 
                 datos_articulo(id)
-#              rutapublic = Rails.root.join('public').to_s
-#              urlcolchon = '/colchon-articulos/'
-#              rutacolchon = rutapublic + urlcolchon
-#              if (!File.exists? rutacolchon)
-#                raise "Crear directorio #{rutacolchon}"
-#              end
-#              titulo, rlocal, texto, anio, mes, dia = descarga(id, rutacolchon)
               @titulo = titulo
               @id = id
               @texto = texto
-#              # Convierte a jpg
-#              nomar = titulo.gsub(/[^0-9A-Za-z.\-]/, '_')  + "-" + id.to_s
-#              rutaf = "#{anio.to_i.to_s}/#{mes.to_i.to_s}/#{dia.to_i.to_s}/"
               @descargajpg = urljpg.to_s
-#              rutajpg = rutacolchon + rutaf + nomar + ".jpg"
-              #img = Magick::Image.read(rlocal).first
-              #img.write ""
-              # Image.read falla para algunas imagenes con  Null count for "Tag 34026" (type 1, writecount │-3, passcount 1). `_TIFFVSetField' @ error/tiff.c/TIFFErrors/508):
               if !File.exists? "#{rutajpg.to_s}"
                 FileUtils.mkdir_p rutajpg.dirname
                 system("convert -append #{rlocal} #{rutajpg.to_s}")

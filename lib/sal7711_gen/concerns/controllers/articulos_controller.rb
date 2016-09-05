@@ -14,6 +14,7 @@ module Sal7711Gen
 
           # GET /articulos/new
           def new
+            authorize! :edit, Sal7711Gen::Articulo
             @articulo = Sal7711Gen::Articulo.new
             @articulo.adjunto_descripcion = "J"
             #logger.debug "Anexo salvado: #{@articulo.anexo.inspect}"
@@ -65,9 +66,6 @@ module Sal7711Gen
               if articulo.save
                 format.html { 
                   redirect_to articulos_url, notice: 'Artículo creado.' 
-#                  redirect_to File.join(
-#                  Rails.configuration.relative_url_root, 'articulos'), 
-#                  notice: 'Artículo creado.' 
                 }
                 format.json { render :show, status: :created, location: articulo }
               else
@@ -78,6 +76,7 @@ module Sal7711Gen
           end
 
           def create
+            authorize! :edit, Sal7711Gen::Articulo
             @articulo = Sal7711Gen::Articulo.new(articulo_params)
             @articulo.adjunto_descripcion = gen_descripcion(articulo_params)
             create_gen(@articulo)
@@ -85,11 +84,13 @@ module Sal7711Gen
 
           # GET /articulos/1/edit
           def edit
+            authorize! :edit, Sal7711Gen::Articulo
           end
 
           # PATCH/PUT /articulos/1
           # PATCH/PUT /articulos/1.json
           def update
+            authorize! :edit, Sal7711Gen::Articulo
             @articulo.adjunto_descripcion = gen_descripcion(articulo_params)
             respond_to do |format|
               if @articulo.update(articulo_params)
@@ -109,6 +110,7 @@ module Sal7711Gen
           # DELETE /articulos/1
           # DELETE /articulos/1.json
           def destroy
+            authorize! :edit, Sal7711Gen::Articulo
             @articulo.destroy
             respond_to do |format|
               format.html { 
