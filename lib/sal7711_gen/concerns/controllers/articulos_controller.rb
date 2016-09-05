@@ -55,7 +55,6 @@ module Sal7711Gen
             return articulo_params['fecha_localizada'] + 
               " | " + ncat + " | " +
               nmun + " / " + ndep + " | " + nfuente + " | " + npag
-              
           end
 
           # POST /articulos
@@ -64,7 +63,7 @@ module Sal7711Gen
 
             respond_to do |format|
               if articulo.save
-                format.html { redirect_to '/articulos', notice: 'Artículo creado.' }
+                format.html { redirect_to "#{Rails.configuration.relative_url_root}/articulos", notice: 'Artículo creado.' }
                 format.json { render :show, status: :created, location: articulo }
               else
                 format.html { render :new }
