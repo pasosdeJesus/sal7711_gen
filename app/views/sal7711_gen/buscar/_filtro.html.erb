@@ -1,6 +1,10 @@
   <div class="panel panel-default">
     <div class="panel-heading"><%= Sal7711Gen::Articulo.human_attribute_name(:filtro) %></div>
     <div class="panel-body">
+
+
+      <%= render partial: 'index_inifiltro', locals: {f: f} %>
+
       <div class="rango-fechas">
         <div class="col-md-6">
           <%= f.input :fechaini,

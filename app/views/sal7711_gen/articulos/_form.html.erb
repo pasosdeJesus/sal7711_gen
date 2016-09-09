@@ -7,6 +7,16 @@
     <div id="campos" class="col-sm-offset-0 col-sm-4">
   
       <%= render partial: 'sip/hogar/errores', locals: { f: f } %>
+
+      <% if !f.object || !f.object.id || !f.object.adjunto_file_name %>
+        <%= f.input :adjunto, as: :file, label: 'Archivo (.jpg, .png, .tiff)',
+          input_html: { "data-imagenpre": 'imagen-detalle'} %>
+      <% else %>
+        <div class="articulo_adjunto">
+          <label for="articulo_attributes_<%=f.object.id%>_adjunto">Archivo</label>
+          <a id="articulo_adjunto_attributes_<%=f.object.id%>_adjunto" href="<%= buscar_mostraruno_url(f.object.id) %>", style="text-decoration:none"><%= f.object.adjunto_file_name %></a>
+        </div>
+      <% end %>
   
       <%= f.input :fecha_localizada, 
         :input_html => { "data-behaviour" => "datepicker"}, 
@@ -17,7 +27,9 @@
       <%= f.association :categoriaprensa, 
         collection: Sal7711Gen::Categoriaprensa.habilitados,
         label_method: lambda {|t| t.presenta_nombre },
-        value_method: :id %>
+        value_method: :id,
+        input_html: { class: 'chosen-select' }
+      %>
   
       <%= f.association :fuenteprensa,
         collection: Sip::Fuenteprensa.habilitados,
@@ -31,17 +43,14 @@
   
       <%= f.input :texto %> 
   
-  
-      <% if !f.object || !f.object.id || !f.object.adjunto_file_name %>
-        <%= f.input :adjunto, as: :file, label: 'Archivo (.jpg, .png, .tiff)',
-          input_html: { "data-imagenpre": 'imagen-detalle'} %>
-      <% else %>
-        <div class="articulo_adjunto">
-          <label for="articulo_attributes_<%=f.object.id%>_adjunto">Archivo</label>
-          <a id="articulo_adjunto_attributes_<%=f.object.id%>_adjunto" href="<%= buscar_mostraruno_url(f.object.id) %>", style="text-decoration:none"><%= f.object.adjunto_file_name %></a>
-        </div>
-      <% end %>
-  
+      <div class="form-actions abajocentrado">
+        <%= f.button :submit, :class => 'btn-primary' %>
+
+        <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+          sal7711_gen.articulos_path, :class => 'btn' 
+        %>
+      </div>
+
     </div> <!-- class="col-sm-offset-0 col-sm-7 col-md-8" -->
   
     <div id="resultados" class="col-sm-offset-0 col-sm-8">
@@ -53,12 +62,4 @@
     </div> <!-- id: resultados -->
   </div> <!-- row -->
 
-  <div class="row">
-    <div class="form-actions abajocentrado">
-      <%= f.button :submit, :class => 'btn-primary' %>
-      <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
-        sal7711_gen.articulos_path, :class => 'btn' 
-      %>
-    </div>
-  </div> <!-- row -->
 <% end %>

@@ -22,6 +22,11 @@ module Sal7711Gen
             "fecha"
           end
 
+          # Complemento para aplicar mas filtros
+          def prepara_pagina_comp(articulos, params)
+            return articulos
+          end
+
           # Prepara una página de resultados
           def prepara_pagina
             @articulos = Articulo.all
@@ -83,6 +88,9 @@ module Sal7711Gen
                     "categoriaprensa_id=?", cat)
               end
             end
+
+            @articulos = prepara_pagina_comp(@articulos, params)
+
             @numregistros = @articulos.count
             @articulos = @articulos.order(orden_articulos).select(
               "sal7711_gen_articulo.id AS id, " +
