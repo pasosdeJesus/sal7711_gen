@@ -4,6 +4,9 @@ root = window;
 dirm = root.puntomontaje + 'buscar/<%= CGI.escapeHTML(@id.to_s) %>' 
 $('.modal-title').text("<%= @titulo %>")
 $('#imagen-nueva-ventana').prop('href', dirm)
+rutae = root.puntomontaje + 'articulos/<%= CGI.escapeHTML(@id.to_s) %>'
+$('#editar-articulo').prop('href', rutae + '/edita')
+$('#eliminar-articulo').prop('href', rutae)
 $('.modal-body').html("<%= j(render 'imagen') %>")
 av = window.innerHeight * 0.9 - 100;
 $('.modal-body').css('max-height', av)

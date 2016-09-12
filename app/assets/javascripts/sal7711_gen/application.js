@@ -20,9 +20,18 @@ $(document).on('turbolinks:load ready page:change', function() {
 	root = typeof exports !== "undefined" && exports !== null ? 
 		exports : window;
 	sip_prepara_eventos_comunes(root);
+	/* Formato fecha manejado por sip */
 	sal7711_gen_prepara_eventos_comunes(root);
 
-	/* Formato fecha manejado por sip */
+	var numb = 0;
+	$('#buscar_fuente_chosen').parent().children().each(function () { 
+		if ($(this).attr('id') == 'buscar_fuente_chosen') {
+			numb++;
+			if (numb > 1) {
+				$(this).remove();
+			}
+		}
+	})
 });
 
 
