@@ -53,8 +53,9 @@ module Sal7711Gen
             if articulo_params['pagina'] && articulo_params['pagina'] != ''
               npag = articulo_params['pagina']
             end
-            return articulo_params['fecha_localizada'] + 
-              " | " + ncat + " | " +
+            ap = articulo_params['fecha_localizada'] ? 
+              articulo_params['fecha_localizada'] : ''
+            return ap + " | " + ncat + " | " +
               nmun + " / " + ndep + " | " + nfuente + " | " + npag
           end
 

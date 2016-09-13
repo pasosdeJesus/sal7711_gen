@@ -22,4 +22,16 @@ otro motor que es análogo a este, ver
 * Configure el formato de la fecha en ```config/application.rb``` bien 
   con ```config.x.formato_fecha = 'yyyy-mm-dd'``` o  bien con 
   ```config.x.formato_fecha = 'dd-mm-yyyy'```
+* El directorio donde se almacenan los artículos sin conversión
+  (e.g .tif) es el de anexos configurable en config/initializers/sip.rb
+  Se creará una estructura de directorios con base en la fecha del
+  artículo.
+* El colchón para artículos es un directorio en ```public``` o usable 
+  por el servidor web donde se dejan .jpg y .pdf convertidos a partir de los
+  anexos (tipicamente .tif).  Su ubicación se configura en
+  ```config.x.url_colchon``` por defecto es  ```colchon-articulos```
+* Debe haber un enlace del colchon de artículos a 
+  ```public/images/colchon-articulos```
+* En app/assets/javascripts/application.rb se debe definir root, se espera 
+  que sea window 
 
