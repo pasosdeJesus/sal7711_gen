@@ -267,7 +267,7 @@ ALTER SEQUENCE sal7711_gen_bitacora_id_seq OWNED BY sal7711_gen_bitacora.id;
 CREATE TABLE sal7711_gen_categoriaprensa (
     id integer NOT NULL,
     codigo character varying(15),
-    nombre character varying(500) COLLATE public.es_co_utf_8,
+    nombre character varying(500),
     observaciones character varying(5000),
     fechacreacion date,
     fechadeshabilitacion date,
