@@ -22,9 +22,9 @@ module Sal7711Gen
           has_attached_file :adjunto, :path => :ruta_articulo
 
           def ruta_articulo
-            File.join(Sip.ruta_anexos, fecha.year.to_s,
-            fecha.month.to_s.rjust(2, '0'),
-            fecha.day.to_s.rjust(2, '0'),
+            File.join(Sip.ruta_anexos, created_at.year.to_s,
+            created_at.month.to_s.rjust(2, '0'),
+            created_at.day.to_s.rjust(2, '0'),
             "/#{id}_#{adjunto_file_name}")
           end
 

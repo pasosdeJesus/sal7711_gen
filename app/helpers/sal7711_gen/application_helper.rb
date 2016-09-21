@@ -57,11 +57,11 @@ module Sal7711Gen
       end
       titulo = a.adjunto_descripcion
       texto = a.texto
-      anio = a.fecha.year
-      mes = a.fecha.month
-      dia = a.fecha.day
+      anioc = a.created_at.year
+      mesc = a.created_at.month
+      diac = a.created_at.day
       nomar = titulo.gsub(/[^0-9A-Za-z.\-]/, '_')  + "-" + id.to_s
-      rutaf = "#{anio.to_i.to_s}/#{mes.to_i.to_s}/#{dia.to_i.to_s}/" 
+      rutaf = "#{anioc.to_i.to_s}/#{mesc.to_i.to_s}/#{diac.to_i.to_s}/" 
       rutajpg = rutacolchon.join(rutaf, nomar + '.jpg')
       urljpg = Pathname.new(urlcolchon.to_s).join(rutaf, nomar + '.jpg')
       rutapdf = rutacolchon.join(rutaf, nomar + '.pdf')
