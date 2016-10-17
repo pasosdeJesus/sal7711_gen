@@ -79,5 +79,37 @@ module Sal7711Gen
     end
 
 
+    # Prepara JPG y PDF para visualizar articulo con la identificación dada
+    # y retornar información del mismo
+    def prepara_imagenes(id)
+      titulo, texto, rlocal, rutajpg, urljpg, rutapdf, urlpdf = 
+        datos_articulo(id)
+      # Genera JPG
+      if !File.exists? "#{rutajpg.to_s}"
+        FileUtils.mkdir_p rutajpg.dirname
+        system("convert -append #{rlocal} #{rutajpg.to_s}")
+      end
+      if !File.exists? "#{rutajpg.to_s}"
+        flash[:error] = "No fue posible convertir #{rlocal}"
+        render inline: "No fue posible convertir #{rlocal}"
+        return
+      end
+      # Genera PDF
+      if !File.exists? "#{rutapdf.to_s}"
+        FileUtils.mkdir_p rutapdf.dirname
+        Prawn::Document.generate("#{rutapdf.to_s}") do
+          w = 550
+          h = 700
+          text titulo
+          bounding_box([0, cursor], :width => w, :height => h) do
+            image "#{rutajpg.to_s}", :fit => [w, h]
+            stroke_bounds
+          end
+        end
+      end
+
+      return [titulo, id, texto, urljpg.to_s, urlpdf.to_s, rlocal]
+    end
+
   end
 end

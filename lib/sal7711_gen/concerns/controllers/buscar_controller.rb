@@ -236,38 +236,12 @@ module Sal7711Gen
             return [titulo, ruta, texto, anio, mes, dia]
           end
 
+
           def mostraruno
             if (params[:id] && params[:id].to_i > 0)
               id = params[:id].to_i
-              titulo, texto, rlocal, rutajpg, urljpg, rutapdf, urlpdf = 
-                datos_articulo(id)
-              @titulo = titulo
-              @id = id
-              @texto = texto
-              @descargajpg = urljpg.to_s
-              if !File.exists? "#{rutajpg.to_s}"
-                FileUtils.mkdir_p rutajpg.dirname
-                system("convert -append #{rlocal} #{rutajpg.to_s}")
-              end
-              if !File.exists? "#{rutajpg.to_s}"
-                flash[:error] = "No fue posible convertir #{rlocal}"
-                render inline: "No fue posible convertir #{rlocal}"
-                return
-              end
-              # Genera PDF
-              @descargapdf= urlpdf.to_s
-              if !File.exists? "#{rutapdf.to_s}"
-                FileUtils.mkdir_p rutapdf.dirname
-                Prawn::Document.generate("#{rutapdf.to_s}") do
-                  w = 550
-                  h = 700
-                  text titulo
-                  bounding_box([0, cursor], :width => w, :height => h) do
-                    image "#{rutajpg.to_s}", :fit => [w, h]
-                    stroke_bounds
-                  end
-                end
-              end
+              @titulo, @id, @texto, @descargajpg, @descargapdf, rlocal = 
+                prepara_imagenes(id)
               Sal7711Gen::Bitacora.a( request.remote_ip, current_usuario, 
                          'mostraruno', rlocal)
               respond_to do |format|
@@ -277,6 +251,12 @@ module Sal7711Gen
               end
             end
           end
+
+        end
+
+        class_methods do
+
+
         end
 
       end

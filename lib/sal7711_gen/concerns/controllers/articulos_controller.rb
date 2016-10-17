@@ -9,6 +9,8 @@ module Sal7711Gen
 
         included do
           include ActionView::Helpers::AssetUrlHelper
+          include Sip::FormatoFechaHelper
+          include Sal7711Gen::ApplicationHelper
   
           before_action :set_articulo, only: [:edit, :update, :destroy]
 
@@ -20,51 +22,57 @@ module Sal7711Gen
             #logger.debug "Anexo salvado: #{@articulo.anexo.inspect}"
           end
 
-          def gen_descripcion(articulos_params)
-            ndep = '';
-            if articulo_params['departamento_id'] && 
-              articulo_params['departamento_id'] != ''
-              dep = Sip::Departamento.find(articulo_params['departamento_id'])
-              ndep = dep.nombre;
-            end
-            nmun = '';
-            if articulo_params['municipio_id'] && 
-              articulo_params['municipio_id'] != ''
-              mun= Sip::Municipio.find(articulo_params['municipio_id'])
-              nmun= mun.nombre;
-            end
-            nfuente = '';
-            if articulo_params['fuenteprensa_id'] && 
-              articulo_params['fuenteprensa_id'] != ''
-              fu = Sip::Fuenteprensa.find(articulo_params['fuenteprensa_id'])
-              nfuente = fu.nombre;
-            end
-            ncat = '';
-            if articulo_params['categoriaprensa_ids'] && 
-              articulo_params['categoriaprensa_ids'].count > 0
-              articulo_params['categoriaprensa_ids'].sort.each { |i|
-                if i != ''
-                  cat = Sal7711Gen::Categoriaprensa.find(i)
-                  ncat += (ncat == "" ? "" : ", ") + cat.codigo
-                end
-              }
-            end
-            npag = '';
-            if articulo_params['pagina'] && articulo_params['pagina'] != ''
-              npag = articulo_params['pagina']
-            end
-            ap = articulo_params['fecha_localizada'] ? 
-              articulo_params['fecha_localizada'] : ''
-            return ap + " | " + ncat + " | " +
-              nmun + " / " + ndep + " | " + nfuente + " | " + npag
+          def gen_descripcion_categoria_bd articulo
+            return articulo.articulo_categoriaprensa.to_a.map {|i| 
+              i.categoriaprensa_id 
+            }.uniq.inject("") { 
+              |memo, i| 
+              c = Sal7711Gen::Categoriaprensa.find(i).codigo
+              memo == "" ? c : memo + ", " + c 
+            }
           end
 
-          # POST /articulos
-          # POST /articulos.json
-          def create_gen(articulo)
+          def gen_descripcion_pagina_bd(articulo)
+            if articulo.pagina
+              return " | " + articulo.pagina
+            end
+            return ""
+          end
 
+          def gen_descripcion_bd(articulo)
+            ndep = ''
+            if articulo.departamento_id
+              dep = Sip::Departamento.find(articulo_params['departamento_id'])
+              ndep = articulo.departamento.nombre
+            end
+            nmun = ''
+            if articulo.municipio_id
+              nmun= articulo.municipio.nombre
+            end
+            nfuente = ''
+            if articulo.fuenteprensa_id
+              nfuente = articulo.fuenteprensa.nombre
+            end
+            ncat = gen_descripcion_categoria_bd articulo
+            npag = gen_descripcion_pagina_bd articulo
+            ap = articulo.fecha ?  
+              fecha_estandar_local(articulo.fecha.to_s) : ''
+            return ap + " | " + ncat + " | " +
+              nmun + " / " + ndep + " | " + nfuente + npag
+          end
+
+
+          # Completa @articulo ya guardado. Debe terminar guardando.
+          def ordena_articulo
+            @articulo.adjunto_descripcion = gen_descripcion_bd(@articulo)
+            @articulo.save
+          end
+
+
+          def create_gen(articulo)
             respond_to do |format|
               if articulo.save
+                ordena_articulo
                 format.html { 
                   redirect_to articulos_url, notice: 'Artículo creado.' 
                 }
@@ -76,25 +84,28 @@ module Sal7711Gen
             end
           end
 
+          # POST /articulos
+          # POST /articulos.json
           def create
             authorize! :edit, Sal7711Gen::Articulo
             @articulo = Sal7711Gen::Articulo.new(articulo_params)
-            @articulo.adjunto_descripcion = gen_descripcion(articulo_params)
+            @articulo.adjunto_descripcion = 'J'
             create_gen(@articulo)
           end
 
           # GET /articulos/1/edit
           def edit
             authorize! :edit, Sal7711Gen::Articulo
+            prepara_imagenes(@articulo.id)
           end
 
           # PATCH/PUT /articulos/1
           # PATCH/PUT /articulos/1.json
           def update
             authorize! :edit, Sal7711Gen::Articulo
-            @articulo.adjunto_descripcion = gen_descripcion(articulo_params)
             respond_to do |format|
               if @articulo.update(articulo_params)
+                ordena_articulo
                 format.html { 
                   redirect_to @articulo, notice: 'Artículo actualizado.' 
                 }
