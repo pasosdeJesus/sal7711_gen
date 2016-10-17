@@ -194,5 +194,10 @@
       reader.readAsDataURL(this.files[0]);
   )
 
+  # Deshabilita completación de coordenadas en búsquedas y al crear
+  # artículos:
+  if window.location.pathname.endsWith('/articulos/nuevo') || window.location.pathname.endsWith('/articulos/edita') || window.location.pathname.endsWith('/buscar')
+    root.sip_sincoord = true 
+
   return
 
