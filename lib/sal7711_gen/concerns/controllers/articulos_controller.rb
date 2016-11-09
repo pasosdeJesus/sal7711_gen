@@ -22,7 +22,7 @@ module Sal7711Gen
             #logger.debug "Anexo salvado: #{@articulo.anexo.inspect}"
           end
 
-          def gen_descripcion_categoria_bd articulo
+          def self.gen_descripcion_categoria_bd articulo
             return articulo.articulo_categoriaprensa.to_a.map {|i| 
               i.categoriaprensa_id 
             }.uniq.inject("") { 
@@ -32,17 +32,17 @@ module Sal7711Gen
             }
           end
 
-          def gen_descripcion_pagina_bd(articulo)
+          def self.gen_descripcion_pagina_bd(articulo)
             if articulo.pagina
               return " | " + articulo.pagina
             end
             return ""
           end
 
-          def gen_descripcion_bd(articulo)
+          def self.gen_descripcion_bd(articulo)
             ndep = ''
             if articulo.departamento_id
-              dep = Sip::Departamento.find(articulo_params['departamento_id'])
+              dep = Sip::Departamento.find(articulo.departamento_id)
               ndep = articulo.departamento.nombre
             end
             nmun = ''
@@ -56,7 +56,7 @@ module Sal7711Gen
             ncat = gen_descripcion_categoria_bd articulo
             npag = gen_descripcion_pagina_bd articulo
             ap = articulo.fecha ?  
-              fecha_estandar_local(articulo.fecha.to_s) : ''
+              Sip::FormatoFechaHelper::fecha_estandar_local(articulo.fecha.to_s) : ''
             return ap + " | " + ncat + " | " +
               nmun + " / " + ndep + " | " + nfuente + npag
           end
@@ -64,7 +64,7 @@ module Sal7711Gen
 
           # Completa @articulo ya guardado. Debe terminar guardando.
           def ordena_articulo
-            @articulo.adjunto_descripcion = gen_descripcion_bd(@articulo)
+            @articulo.adjunto_descripcion = Sal7711Gen::ArticulosController.gen_descripcion_bd(@articulo)
             @articulo.save
           end
 

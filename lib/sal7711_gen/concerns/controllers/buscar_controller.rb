@@ -36,7 +36,8 @@ module Sal7711Gen
               pfid = Date.strptime(fecha_local_estandar(pfi), '%Y-%m-%d')
               @articulos = @articulos.where("fecha >= ?", pfid.strftime('%Y-%m-%d'))
             end
-            if(params[:buscar] && params[:buscar][:fechafin] && params[:buscar][:fechafin] != '')
+            if(params[:buscar] && params[:buscar][:fechafin] && 
+               params[:buscar][:fechafin] != '')
               pff = params[:buscar][:fechafin]
               pffd = Date.strptime(fecha_local_estandar(pff), '%Y-%m-%d')
               @articulos = @articulos.where("fecha <= ?", 
@@ -146,15 +147,11 @@ module Sal7711Gen
               end
             end
           end
-       
-         def autentica_especial
-         end
 
-          # Resultado de aplicar filtro
-          def index
-            autentica_especial
-            authorize! :read, Sal7711Gen::Articulo
-            #byebug
+          def autentica_especial
+          end
+
+          def prepara_meses
             if !@meses
               mes = Date.today.strftime("%m").to_i
               anio = Date.today.strftime("%Y").to_i
@@ -177,6 +174,14 @@ module Sal7711Gen
                 end
               end
             end
+          end
+
+          # Resultado de aplicar filtro
+          def index
+            autentica_especial
+            authorize! :read, Sal7711Gen::Articulo
+            #byebug
+            prepara_meses
             prepara_pagina 
             @muestraid = params[:muestraid].to_i
             if params.to_h.count > 2
@@ -190,7 +195,6 @@ module Sal7711Gen
               format.json { head :no_content }
               format.js   { render 'resultados' }
             end
-        
           end
         
           def redirigeindex
