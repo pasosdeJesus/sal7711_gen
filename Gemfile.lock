@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/pasosdeJesus/sip.git
-  revision: 6acf8ab9cb2a9c60863d92418ebb15ef98eaf361
+  revision: 444871dec8ba25f53412829d89e4bff28c2deb10
   specs:
     sip (2.0.b1)
       bootstrap-datepicker-rails
@@ -81,7 +81,7 @@ GEM
       coffee-rails (>= 3.2)
       railties (>= 3.0)
       sass-rails (>= 3.2)
-    chunky_png (1.3.7)
+    chunky_png (1.3.8)
     cldr-plurals-runtime-rb (1.0.1)
     climate_control (0.0.3)
       activesupport (>= 3.0)
