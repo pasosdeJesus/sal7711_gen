@@ -1,7 +1,6 @@
 var root;
 // this es Window
 root = window;
-//debugger
 dirm = root.puntomontaje + 'buscar/<%= CGI.escapeHTML(@id.to_s) %>' 
 $('.modal-title').text("<%= @titulo %>")
 $('#imagen-nueva-ventana').prop('href', dirm)
@@ -48,3 +47,23 @@ $('a.muestra-imagen').removeClass('ultimo-visto')
 if (typeof e != 'undefined') {
   e.addClass('ultimo-visto')
 }
+
+var sal7711_gen_avanza_retrocede = function(e) {
+  if (e.key == 'ArrowRight' && 
+      $("#imagen-siguiente[class*='deshabilitado']").length == 0) {
+    e.preventDefault();
+    $('#imagen-siguiente')[0].click();
+  } else if (e.key == 'ArrowLeft' &&
+      $("#imagen-anterior[class*='deshabilitado']").length == 0) {
+    e.preventDefault();
+    $('#imagen-anterior')[0].click();
+  }
+}
+
+$('#modal-imagen').on('shown.bs.modal', function (e) {
+  $(document).bind('keyup', sal7711_gen_avanza_retrocede)
+})
+
+$('#modal-imagen').on('hidden.bs.modal', function (em) {
+  $(document).unbind('keyup', sal7711_gen_avanza_retrocede)
+})
