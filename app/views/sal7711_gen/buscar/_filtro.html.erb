@@ -63,7 +63,7 @@
 
       <%= render partial: 'index_pagina', locals: {f: f} %>
 
-      <%= f.button :button, {class: 'btn btn-primary'} do %>
+      <%= f.button :button, id: 'buscar', class: 'btn btn-primary' do %>
         <%= fa_icon 'fa search', text: 'Buscar' %> 
       <% end %>
       <%= f.button :button, type: :reset, id: :limpiarfiltro do %>

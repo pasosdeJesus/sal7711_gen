@@ -97,6 +97,7 @@
       df = $(this).attr('data-' + a[i] + 'filtro')
       $('#buscar_' + a[i]).val(df)
     $('#buscar_fuente').trigger("chosen:updated")
+    $('#buscar').click()
     return
   )
 
