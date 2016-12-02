@@ -27,6 +27,17 @@ module Sal7711Gen
             return articulos
           end
 
+          # Forma de buscar categorias
+          def prepara_pagina_categoria(articulos, ccat)
+              cat = Sal7711Gen::Categoriaprensa.where('codigo=?', ccat).take;
+              if cat
+                articulos = articulos.joins(
+                  :articulo_categoriaprensa).where(
+                    "categoriaprensa_id=?", cat)
+              end
+              return articulos
+          end
+
           # Prepara una página de resultados
           def prepara_pagina
             @articulos = Articulo.all
@@ -80,14 +91,10 @@ module Sal7711Gen
               @articulos = @articulos.where("pagina = ?", params[:buscar][:pagina])
             end
             if(params[:buscar] && params[:buscar][:categoria] && 
-               params[:buscar][:categoria] != '')
+              params[:buscar][:categoria] != '')
+
               ccat = params[:buscar][:categoria].upcase.split(' ')[0]
-              cat = Sal7711Gen::Categoriaprensa.where('codigo=?', ccat).take;
-              if cat
-                @articulos = @articulos.joins(
-                  :articulo_categoriaprensa).where(
-                    "categoriaprensa_id=?", cat)
-              end
+              @articulos = prepara_pagina_categoria(@articulos, ccat)
             end
 
             @articulos = prepara_pagina_comp(@articulos, params)
