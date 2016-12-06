@@ -98,9 +98,18 @@ module Sal7711Gen
       if !File.exists? "#{rutapdf.to_s}"
         FileUtils.mkdir_p rutapdf.dirname
         Prawn::Document.generate("#{rutapdf.to_s}") do
+          font_families.update("Tuffy" => {
+            :normal => Sip::Engine.root.join('app', 'assets', 'fonts', 'tuffy', 'Tuffy.ttf'),
+            :italic => Sip::Engine.root.join('app', 'assets', 'fonts', 'tuffy', 'Tuffy_Italic.ttf'),
+            :bold => Sip::Engine.root.join('app', 'assets', 'fonts', 'tuffy', 'Tuffy_Bold.ttf'),
+            :bold_italic => Sip::Engine.root.join('app', 'assets', 'fonts', 'tuffy', 'Tuffy_Bold_Italic.ttf')
+          })
+          font "Tuffy"
+          font_size 16
+          text titulo
+          font_size 12
           w = 550
           h = 700
-          text titulo
           bounding_box([0, cursor], :width => w, :height => h) do
             image "#{rutajpg.to_s}", :fit => [w, h]
             stroke_bounds
