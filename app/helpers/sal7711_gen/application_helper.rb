@@ -105,9 +105,8 @@ module Sal7711Gen
             :bold_italic => Sip::Engine.root.join('app', 'assets', 'fonts', 'tuffy', 'Tuffy_Bold_Italic.ttf')
           })
           font "Tuffy"
-          font_size 16
-          text titulo
           font_size 12
+          text titulo
           w = 550
           h = 700
           bounding_box([0, cursor], :width => w, :height => h) do
