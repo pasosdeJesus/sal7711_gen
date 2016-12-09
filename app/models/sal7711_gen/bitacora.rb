@@ -6,6 +6,8 @@ module Sal7711Gen
     include Sip::Localizacion
 
     serialize :detalle
+    belongs_to :usuario, foreign_key: 'usuario_id',
+      validate: true, class_name: 'Usuario'
 
     campofecha_localizado :fecha
 
