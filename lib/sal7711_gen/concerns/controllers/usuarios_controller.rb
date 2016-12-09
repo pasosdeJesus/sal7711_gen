@@ -5,7 +5,7 @@ require 'bcrypt'
 module Sal7711Gen
   module Concerns
     module Controllers
-      module BitacoraController
+      module UsuariosController
 
         extend ActiveSupport::Concern
 
