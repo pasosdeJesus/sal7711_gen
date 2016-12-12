@@ -72,6 +72,8 @@ module Sal7711Gen
           def create_gen(articulo)
             respond_to do |format|
               if articulo.save
+                Sal7711Gen::Bitacora.a( request.remote_ip, current_usuario, 
+                                       'crea', params, articulo.id)
                 ordena_articulo
                 format.html { 
                   redirect_to articulos_url, notice: 'Artículo creado.' 
@@ -105,6 +107,8 @@ module Sal7711Gen
             authorize! :edit, Sal7711Gen::Articulo
             respond_to do |format|
               if @articulo.update(articulo_params)
+                Sal7711Gen::Bitacora.a( request.remote_ip, current_usuario, 
+                                       'actualiza', params, @articulo.id)
                 ordena_articulo
                 format.html { 
                   redirect_to @articulo, notice: 'Artículo actualizado.' 
@@ -124,6 +128,8 @@ module Sal7711Gen
           def destroy
             authorize! :edit, Sal7711Gen::Articulo
             @articulo.destroy
+            Sal7711Gen::Bitacora.a( request.remote_ip, current_usuario, 
+                                   'elimina', params, @articulo.id)
             respond_to do |format|
               format.html { 
                 redirect_to articulos_url, notice: 'Artículo eliminado.' 
