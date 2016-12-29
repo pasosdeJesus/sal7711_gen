@@ -6,6 +6,10 @@ source 'https://rubygems.org'
 gem "rails", '~> 5.0.0'
 gem "rails-i18n"
 
+
+# Mientras solucionan https://github.com/sparklemotion/nokogiri/issues/1569
+gem 'nokogiri', '1.6.8.1' 
+
 # Postgresql
 gem "pg"
 
@@ -75,11 +79,6 @@ gem "tzinfo-data"
 # Motor de sistemas de información estilo Pasos de Jesús
 gem 'sip', git: "https://github.com/pasosdeJesus/sip.git"
 #gem 'sip', path: '../sip'
-
-group :doc do
-    # Genera documentación en doc/api con bundle exec rake doc:rails
-    gem "sdoc", require: false
-end
 
 # Los siguientes son para desarrollo o para pruebas con generadores
 group :development do
