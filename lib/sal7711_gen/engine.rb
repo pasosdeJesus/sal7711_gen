@@ -1,6 +1,7 @@
 # encoding: UTF-8
 
 require 'sip/engine'
+require 'font-awesome-rails'
 
 module Sal7711Gen
   class Engine < ::Rails::Engine
