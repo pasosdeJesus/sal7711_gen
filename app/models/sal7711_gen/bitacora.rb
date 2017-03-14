@@ -11,7 +11,8 @@ module Sal7711Gen
 
     campofecha_localizado :fecha
 
-    def self.a(ip, usuario, operacion, detalle, detalle2 = nil, detalle3 = nil)
+    def self.a(ip, usuario, operacion, detalle, detalle2 = nil, 
+               detalle3 = nil)
       b = Bitacora.new(fecha: Time.now.utc.iso8601,
                    ip: ip,
                    usuario_id: usuario.id,

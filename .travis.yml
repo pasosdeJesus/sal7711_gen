@@ -3,7 +3,7 @@ rvm:
         - 2.2
 notifications:
         email: false
-script: CODECLIMATE_REPO_TOKEN=a428acc14864346a703c3514c241e97f21c24a69ae6f6f25fb410687e76855ed xvfb-run rspec
+script: CODECLIMATE_REPO_TOKEN=a428acc14864346a703c3514c241e97f21c24a69ae6f6f25fb410687e76855ed rails test
 env:
         global:
                 - NOKOGIRI_USE_SYSTEM_LIBRARIES=true
@@ -12,7 +12,7 @@ before_install:
         - sudo apt-get update
         - sudo apt-get install libqt5webkit5-dev qtdeclarative5-dev qtlocation5-dev qtsensors5-dev libgstreamer0.10-dev libgstreamer-plugins-base0.10-dev qt4-default language-pack-es
         - sudo locale-gen --no-archive es_CO.UTF-8
-        - cd spec/dummy
+        - cd test/dummy
         - psql -c 'CREATE DATABASE sal7711gen_pru;' -U postgres
         - bundle install
         - cp db/structure.sql db/structure.sql.conlock

@@ -28,9 +28,5 @@ module Dummy
     config.x.formato_fecha = 'dd/mm/yyyy'
     
     config.x.url_colchon = 'colchon-articulos'
-
-    FactoryGirl.definition_file_paths << Pathname.new("../factories") 
-    FactoryGirl.definition_file_paths.uniq! 
-    FactoryGirl.find_definitions
   end
 end
