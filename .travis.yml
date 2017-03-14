@@ -1,6 +1,6 @@
 language: ruby
 rvm:
-        - 2.2
+        - 2.4
 notifications:
         email: false
 script: CODECLIMATE_REPO_TOKEN=a428acc14864346a703c3514c241e97f21c24a69ae6f6f25fb410687e76855ed rails test
