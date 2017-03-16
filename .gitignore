@@ -28,3 +28,4 @@ test/dummy/public/colchon-articulos
 test/dummy/.byebug_history
 *_test.rb.copia
 .byebug_history
+coverage/
