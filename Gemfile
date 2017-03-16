@@ -98,7 +98,7 @@ group :test do
   gem "connection_pool"
   gem "minitest-reporters" 
 
-  gem 'byebug'
+  #gem 'byebug'
 
   # https://www.relishapp.com/womply/rails-style-guide/docs/developing-rails-applications/bundler
   # Lanza programas para examinar resultados
