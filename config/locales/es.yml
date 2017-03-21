@@ -25,8 +25,9 @@ es:
         Categoriaprensa: Categoria de Prensa
         Categoriasprensa: Categorias de Prensa
       "sal7711_gen/articulo":
+        categoriaprensa: Categoria de Prensa
         fecha_localizada: Fecha
         filtro: Filtro
-        categoriaprensa: Categoria de Prensa
         fuenteprensa: Fuente de Prensa
+        pagina: Página
 
