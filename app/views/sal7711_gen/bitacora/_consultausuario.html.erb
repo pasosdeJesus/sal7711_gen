@@ -18,7 +18,9 @@
                 'data-mundepfiltro': CGI.escapeHTML(d['buscar']['mundep']),
                 'data-categoriafiltro': CGI.escapeHTML(d['buscar']['categoria']),
                 'data-fuentefiltro': CGI.escapeHTML(d['buscar']['fuente']),
-                'data-paginafiltro': CGI.escapeHTML(d['buscar']['pagina'])
+                'data-paginafiltro': CGI.escapeHTML( d['buscar']['pagina'] ? 
+                                                    d['buscar']['pagina'] : ''
+                                                   )
               end
             %>
         </td></tr>
