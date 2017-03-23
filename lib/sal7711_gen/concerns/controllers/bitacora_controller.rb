@@ -8,6 +8,7 @@ module Sal7711Gen
         extend ActiveSupport::Concern
 
         included do
+          helper ::Sal7711Gen::ApplicationHelper
 
           # historia por mostrar
           @@porpag = 20 
