@@ -41,11 +41,11 @@ module Sal7711Gen
     # Retorna datos del articulo con la id dada en un vector con:
     # 0- titulo
     # 1- texto
-    # 1- rlocal Ruta a fuente (e.g TIF) en sistema de archivos
-    # 2- rutajpg Pathname al jpg en colchón en sistema de archivos
-    # 3- urljpg Pathname con url relativo al jpg de colchón
-    # 4- rutapdf Pathname al pdf en colchón en sistema de archivos
-    # 5- urlpdf Pathname con url relativo al pdf en colchón
+    # 2- rlocal Ruta a fuente (e.g TIF) en sistema de archivos
+    # 3- rutajpg Pathname al jpg en colchón en sistema de archivos
+    # 4- urljpg Pathname con url relativo al jpg de colchón
+    # 5- rutapdf Pathname al pdf en colchón en sistema de archivos
+    # 6- urlpdf Pathname con url relativo al pdf en colchón
     def datos_articulo(id) 
       a = Articulo.where("sal7711_gen_articulo.id = ?", id).take
       rlocal = Pathname.new(a.ruta_articulo)
