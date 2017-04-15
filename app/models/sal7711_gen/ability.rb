@@ -9,6 +9,7 @@ module Sal7711Gen
       Sip::Ability::BASICAS_PROPIAS + BASICAS_PROPIAS - [
         ['Sip', 'clase'],
         ['Sip', 'etiqueta'],
+        ['Sip', 'grupo'],
         ['Sip', 'oficina'],
         ['Sip', 'tclase'],
         ['Sip', 'tdocumento'],
