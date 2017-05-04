@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/pasosdeJesus/sip.git
-  revision: 84da85e89fb2a346edd26df9e44a2184f5c927bf
+  revision: ea79ff2bbe5ca48c71ddca38b063f4559ace950f
   specs:
     sip (2.0.b3)
       bootstrap-datepicker-rails
@@ -154,10 +154,10 @@ GEM
       nokogiri (>= 1.5.9)
     mail (2.6.5)
       mime-types (>= 1.16, < 4)
-    meta_request (0.4.0)
+    meta_request (0.4.2)
       callsite (~> 0.0, >= 0.0.11)
       rack-contrib (~> 1.1)
-      railties (>= 3.0.0, < 5.1.0)
+      railties (>= 3.0.0, < 5.2.0)
     method_source (0.8.2)
     mime-types (3.1)
       mime-types-data (~> 3.2015)
@@ -274,7 +274,7 @@ GEM
     ttfunk (1.5.1)
     turbolinks (5.0.1)
       turbolinks-source (~> 5)
-    turbolinks-source (5.0.0)
+    turbolinks-source (5.0.2)
     twitter-bootstrap-rails (4.0.0)
       actionpack (~> 5.0, >= 5.0.1)
       execjs (~> 2.7)
