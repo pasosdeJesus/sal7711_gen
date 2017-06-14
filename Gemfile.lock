@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/pasosdeJesus/sip.git
-  revision: 3b730f2e9f6226b90ebbf18589de83e3fdf7ea63
+  revision: 0bb5d88168dd99a20caa064f5fa5430bc65da0d9
   specs:
     sip (2.0.b3)
       bootstrap-datepicker-rails
@@ -153,7 +153,7 @@ GEM
       tilt
     loofah (2.0.3)
       nokogiri (>= 1.5.9)
-    mail (2.6.5)
+    mail (2.6.6)
       mime-types (>= 1.16, < 4)
     meta_request (0.4.3)
       callsite (~> 0.0, >= 0.0.11)
@@ -183,7 +183,7 @@ GEM
       mime-types
       mimemagic (~> 0.3.0)
     pdf-core (0.7.0)
-    pg (0.20.0)
+    pg (0.21.0)
     prawn (2.2.2)
       pdf-core (~> 0.7.0)
       ttfunk (~> 1.5)
