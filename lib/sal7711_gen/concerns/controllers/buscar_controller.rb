@@ -57,14 +57,24 @@ module Sal7711Gen
             if (params[:buscar] && params[:buscar][:mundep] && params[:buscar][:mundep] != '')
               pmd = params[:buscar][:mundep].split(" / ")
               if pmd.length == 1 # solo departamento
-                dep = Sip::Departamento.all.where('nombre=?', pmd[0]).take
+                ldep = Sip::Departamento.all.where('nombre=?', pmd[0])
+                if Sip.paisomision 
+                  ldep = ldep.where(
+                    'id_pais=?', Sip.paisomision)
+                end
+                dep = ldep.take
                 if dep
                   @articulos = @articulos.where("departamento_id = ?", dep.id)
                 else
                   @articulos = @articulos.where("departamento_id = '-1'")
                 end
               else # departamento y municipio
-                dep = Sip::Departamento.all.where('nombre=?', pmd[1]).take
+                ldep = Sip::Departamento.all.where('nombre=?', pmd[1])
+                if Sip.paisomision
+                  ldep = ldep.where(
+                    'id_pais=?', Sip.paisomision)
+                end
+                dep = ldep.take
                 if dep
                   mun = Sip::Municipio.all.where(
                     'nombre=? AND id_departamento=?', pmd[0], dep.id).take

@@ -28,5 +28,6 @@ module Dummy
     config.x.formato_fecha = 'dd/mm/yyyy'
     
     config.x.url_colchon = 'colchon-articulos'
+
   end
 end
