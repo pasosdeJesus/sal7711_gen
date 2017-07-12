@@ -89,8 +89,6 @@ end
 group :test do
 
   gem 'simplecov'
-  # Envia resultados de pruebas desde travis a codeclimate
-  gem "codeclimate-test-reporter"
 
   # Acelera ejecutando en fondo.  https://github.com/jonleighton/spring
   gem "spring"
