@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/pasosdeJesus/sip.git
-  revision: af48112e712d741df548207a4510bcdf7c8a8d99
+  revision: 6214b17dfa0d632a01e912d6e557d3eb1b2b9d9a
   specs:
     sip (2.0.b4)
       bootstrap-datepicker-rails
@@ -164,7 +164,7 @@ GEM
     mimemagic (0.3.2)
     mini_portile2 (2.2.0)
     minitest (5.10.3)
-    minitest-reporters (1.1.14)
+    minitest-reporters (1.1.15)
       ansi
       builder
       minitest (>= 5.0)
@@ -196,7 +196,7 @@ GEM
       binding_of_caller (>= 0.7)
       pry (>= 0.9.11)
     public_suffix (2.0.5)
-    puma (3.9.1)
+    puma (3.10.0)
     rack (2.0.3)
     rack-contrib (1.2.0)
       rack (>= 0.9.1)
