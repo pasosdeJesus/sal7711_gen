@@ -16,8 +16,6 @@ before_install:
         - cd test/dummy
         - psql -c 'CREATE DATABASE sal7711gen_pru;' -U postgres
         - bundle install
-        - cp db/structure.sql db/structure.sql.conlock
-        - sed -e "s/SET lock_timeout = 0;//g" db/structure.sql.conlock >db/structure.sql
         - cp config/database.travis.yml config/database.yml
         - rake db:setup
         - rake sip:indices
