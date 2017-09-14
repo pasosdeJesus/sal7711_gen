@@ -6,9 +6,9 @@
         <h4 class="modal-title">Modal title</h4>
     </div>
       <div class="modal-body" style="overflow:scroll; max-height: 200px; width:auto; position: relative">
+        <div style='display: none' id='modal-texto'>Por completar</div>
         <! -- Aqui mostraruno.js.erb insertará la imagen de _imagen -->
       </div>
-      <div style='display: none' id='modal-texto'>Por completar</div>
       <div class="modal-footer">
 
         <% if can? :manage, Sal7711Gen::Articulo %>
@@ -29,26 +29,7 @@
             class: 'btn btn-xs btn-danger',
             id: 'eliminar-articulo' %>
         <% end %> 
-        <a href="#" id="imagen-anterior" class="btn" data-remote="true">
-          <i class="fa fa-arrow-left"></i>Anterior
-        </a>
-
-        <button type="button" class="btn btn-default" data-dismiss="modal">
-          <i class="fa fa-close"></i> Cerrar
-        </button>
-        <a href="#" id="imagen-acercar" class="btn">
-          <i class="fa fa-search-plus"></i> Acercar
-        </a>
-        <a href="#" id="imagen-alejar" class="btn">
-          <i class="fa fa-search-minus"></i> Alejar
-        </a>
-        <a href="#" id="imagen-nueva-ventana" class="btn" target="_blank">
-          <i class="fa fa-external-link"></i> Abrir en Nueva Ventana
-        </a>
-
-        <a href="#" id="imagen-siguiente" class="btn" data-remote="true">
-          <i class="fa fa-arrow-right"></i>Siguiente
-        </a>
+        <%= render 'modal_articulo_botones' %>
 
 
       </div>
