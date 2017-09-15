@@ -3,7 +3,7 @@ var root;
 root = window;
 dirm = root.puntomontaje + 'buscar/<%= escape_javascript(CGI.escapeHTML(@id.to_s)) %>' 
 $('.modal-title').text("<%= escape_javascript(CGI.escapeHTML(@titulo)) %>")
-$('#modal-texto').html("<%= escape_javascript(CGI.escapeHTML(@texto)) %>")
+$('#modal-texto').html("<%= escape_javascript(simple_format(@texto)) %>")
 $('#imagen-nueva-ventana').prop('href', dirm)
 rutae = root.puntomontaje + 'articulos/<%= escape_javascript(CGI.escapeHTML(@id.to_s)) %>'
 $('#editar-articulo').prop('href', rutae + '/edita')
