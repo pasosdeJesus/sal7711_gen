@@ -6,9 +6,10 @@
         <h4 class="modal-title">Modal title</h4>
     </div>
       <div class="modal-body" style="overflow:scroll; max-height: 200px; width:auto; position: relative">
-        <div style='display: none' id='modal-texto'>Por completar</div>
         <! -- Aqui mostraruno.js.erb insertará la imagen de _imagen -->
       </div>
+      <div style='display: none' id='modal-texto'>Por completar</div>
+      <div style='display: none' id='modal-imgtmp'></div>
       <div class="modal-footer">
 
         <% if can? :manage, Sal7711Gen::Articulo %>
@@ -29,7 +30,7 @@
             class: 'btn btn-xs btn-danger',
             id: 'eliminar-articulo' %>
         <% end %> 
-        <%= render 'modal_articulo_botones' %>
+        <%= render '/sal7711_gen/buscar/modal_articulo_botones' %>
 
 
       </div>

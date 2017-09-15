@@ -2,7 +2,6 @@ var root;
 // this es Window
 root = window;
 dirm = root.puntomontaje + 'buscar/<%= CGI.escapeHTML(@id.to_s) %>' 
-debugger
 $('.modal-title').text("<%= CGI.escapeHTML(@titulo) %>")
 $('#modal-texto').html('<%= CGI.escapeHTML(@texto) %>')
 $('#imagen-nueva-ventana').prop('href', dirm)
