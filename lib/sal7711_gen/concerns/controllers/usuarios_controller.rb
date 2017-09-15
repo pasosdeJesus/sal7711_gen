@@ -1,6 +1,6 @@
 # encoding: UTF-8
 
-require 'bcrypt'
+require 'sip/concerns/controllers/usuarios_controller'
 
 module Sal7711Gen
   module Concerns
@@ -8,7 +8,7 @@ module Sal7711Gen
       module UsuariosController
 
         extend ActiveSupport::Concern
-
+        include Sip::Concerns::Controllers::UsuariosController  
         included do
 
           def destroy

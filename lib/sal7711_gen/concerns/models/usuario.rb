@@ -7,6 +7,7 @@ module Sal7711Gen
     module Models
       module Usuario
         extend ActiveSupport::Concern
+
         include Sip::Concerns::Models::Usuario
 
         included do
