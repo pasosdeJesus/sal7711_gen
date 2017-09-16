@@ -8,8 +8,9 @@ module Sal7711Gen
       module UsuariosController
 
         extend ActiveSupport::Concern
-        include Sip::Concerns::Controllers::UsuariosController  
+
         included do
+          include Sip::Concerns::Controllers::UsuariosController  
 
           def destroy
             id = params[:id].to_i
