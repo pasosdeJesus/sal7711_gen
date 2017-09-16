@@ -1,11 +1,13 @@
 var root;
 // this es Window
 root = window;
-dirm = root.puntomontaje + 'buscar/<%= CGI.escapeHTML(@id.to_s) %>' 
-$('.modal-title').text("<%= CGI.escapeHTML(@titulo) %>")
-$('#modal-texto').html('<%= CGI.escapeHTML(@texto) %>')
+dirm = root.puntomontaje + 'buscar/<%= escape_javascript(CGI.escapeHTML(@id.to_s)) %>' 
+$('.modal-title').text("<%= escape_javascript(CGI.escapeHTML(@titulo)) %>")
+$('#modal-texto').html("<%= escape_javascript(simple_format(@texto)) %>")
+$('#modal-imgtmp').html('');
+$('#ver-texto').html($('#ver-texto').html().replace('imagen', 'texto'))
 $('#imagen-nueva-ventana').prop('href', dirm)
-rutae = root.puntomontaje + 'articulos/<%= CGI.escapeHTML(@id.to_s) %>'
+rutae = root.puntomontaje + 'articulos/<%= escape_javascript(CGI.escapeHTML(@id.to_s)) %>'
 $('#editar-articulo').prop('href', rutae + '/edita')
 $('#eliminar-articulo').prop('href', rutae)
 $('.modal-body').html("<%= j(render 'imagen') %>")
