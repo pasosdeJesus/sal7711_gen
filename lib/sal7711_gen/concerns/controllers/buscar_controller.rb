@@ -257,12 +257,16 @@ module Sal7711Gen
             return [titulo, ruta, texto, anio, mes, dia]
           end
 
+          def mostraruno_mejoratexto(texto, params)
+            return texto
+          end
 
           def mostraruno
             if (params[:id] && params[:id].to_i > 0)
               id = params[:id].to_i
               @titulo, @id, @texto, @descargajpg, @descargapdf, rlocal = 
                 prepara_imagenes(id)
+              texto = mostraruno_mejoratexto(texto, params)
               Sal7711Gen::Bitacora.a( request.remote_ip, current_usuario, 
                          'mostraruno', rlocal)
               respond_to do |format|
