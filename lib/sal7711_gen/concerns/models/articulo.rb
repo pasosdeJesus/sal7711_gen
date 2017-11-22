@@ -6,9 +6,11 @@ module Sal7711Gen
       module Articulo
         extend ActiveSupport::Concern
 
-        include Sip::Localizacion
 
         included do
+
+          include Sip::Localizacion
+          include Sip::Modelo
 
           belongs_to :departamento, foreign_key: "departamento_id",
             validate: true, class_name: "Sip::Departamento"

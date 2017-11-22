@@ -11,6 +11,7 @@ module Sal7711Gen
           include ActionView::Helpers::AssetUrlHelper
           include Sip::FormatoFechaHelper
           include Sal7711Gen::ApplicationHelper
+          helper Sal7711Gen::ApplicationHelper
   
           before_action :set_articulo, only: [:edit, :update, :destroy]
 
