@@ -87,7 +87,7 @@ module Sal7711Gen
       # Genera JPG
       if !File.exists? "#{rutajpg.to_s}"
         FileUtils.mkdir_p rutajpg.dirname
-        system("convert -append #{rlocal} #{rutajpg.to_s}")
+        system('convert', '-append', rlocal.to_s, rutajpg.to_s)
       end
       if !File.exists? "#{rutajpg.to_s}"
         flash[:error] = "No fue posible convertir #{rlocal}"
