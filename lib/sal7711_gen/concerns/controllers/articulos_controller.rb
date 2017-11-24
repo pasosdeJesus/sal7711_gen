@@ -15,6 +15,21 @@ module Sal7711Gen
   
           before_action :set_articulo, only: [:edit, :update, :destroy]
 
+          def clase
+            "Sal7711Gen::Articulo"
+          end
+
+          def index_reordenar(c)
+            c.reorder([:id])
+          end
+
+          # Campos de la tabla por presentar en listado 
+          def atributos_index
+            ["id", 
+             'url',
+             "fechacreacion_localizada", "fechadeshabilitacion_localizada"]
+          end
+
           # GET /articulos/new
           def new
             authorize! :edit, Sal7711Gen::Articulo
