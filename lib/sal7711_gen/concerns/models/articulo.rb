@@ -17,7 +17,7 @@ module Sal7711Gen
           belongs_to :municipio, foreign_key: "municipio_id",
             validate: true, class_name: "Sip::Municipio"
           belongs_to :fuenteprensa, foreign_key: "fuenteprensa_id",
-            validate: true, class_name: "Sip::Fuenteprensa", required: true
+            validate: true, class_name: "Sip::Fuenteprensa"
 
           campofecha_localizado :fecha
 
@@ -29,14 +29,16 @@ module Sal7711Gen
             created_at.day.to_s.rjust(2, '0'),
             "/#{id}_#{adjunto_file_name}")
           end
-
+          #validates_attachment_presence :adjunto, 
+          #  if: Rails.application.config.x.sal7711_presencia_adjunto
           validates_attachment_content_type :adjunto, 
             :content_type => ['text/plain', /.*/]
-          validates_attachment_presence :adjunto
           validates :adjunto_file_name, length: { maximum: 255 }
           validates :adjunto_content_type, length: { maximum: 255 }
-          validates :adjunto_descripcion, presence: true, allow_blank: false, 
-              length: { maximum: 1500 } 
+          validates :adjunto_descripcion, 
+            presence: Rails.application.config.x.sal7711_presencia_adjuntodesc, 
+            allow_blank: Rails.application.config.x.sal7711_presencia_adjuntodesc,
+            length: { maximum: 1500 } 
 
           has_many :articulo_categoriaprensa, 
             class_name: 'Sal7711Gen::ArticuloCategoriaprensa',
@@ -44,9 +46,10 @@ module Sal7711Gen
           has_many :categoriaprensa, class_name: 'Sal7711Gen::Categoriaprensa',
             through: :articulo_categoriaprensa
 
-          validates :fuenteprensa_id, presence: true
-          validates :fecha, presence: true
-          validates :pagina, presence: true, length: { maximum: 20 }
+          validates :fuenteprensa_id, 
+            presence: Rails.application.config.x.sal7711_presencia_fuenteprensa
+          validates :fecha, presence: Rails.application.config.x.sal7711_presencia_fecha
+          validates :pagina, presence: Rails.application.config.x.sal7711_presencia_pagina, length: { maximum: 20 }
 
           validate :departamento_y_municipio_coinciden
           def departamento_y_municipio_coinciden

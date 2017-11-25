@@ -29,5 +29,11 @@ module Dummy
     
     config.x.url_colchon = 'colchon-articulos'
 
+    config.x.sal7711_presencia_adjunto = true
+    config.x.sal7711_presencia_adjuntodesc = true
+    config.x.sal7711_presencia_fuenteprensa = true
+    config.x.sal7711_presencia_fecha = true
+    config.x.sal7711_presencia_pagina = true
+
   end
 end

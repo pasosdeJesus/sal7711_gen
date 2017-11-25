@@ -1,4 +1,4 @@
-class CreaSal7711GenBitacora < ActiveRecord::Migration
+class CreaSal7711GenBitacora < ActiveRecord::Migration[4.2]
   def change
     create_table :sal7711_gen_bitacora do |t|
       t.timestamp :fecha

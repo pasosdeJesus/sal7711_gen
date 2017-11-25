@@ -1,4 +1,4 @@
-class CreaCombinadaArticuloCategoriaprensa < ActiveRecord::Migration
+class CreaCombinadaArticuloCategoriaprensa < ActiveRecord::Migration[4.2]
   def change
     create_join_table :articulo, :categoriaprensa, {
       table_name: 'sal7711_gen_articulo_categoriaprensa' 

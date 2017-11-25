@@ -1,6 +1,6 @@
 # encoding: UTF-8
 
-class CambiaAdjuntos < ActiveRecord::Migration
+class CambiaAdjuntos < ActiveRecord::Migration[4.2]
   def up
     add_attachment :sal7711_gen_articulo, :adjunto
     add_column :sal7711_gen_articulo, :anexo_id_antiguo, :integer

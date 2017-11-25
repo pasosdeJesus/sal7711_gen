@@ -1,4 +1,4 @@
-class CreateCategoriaprensa < ActiveRecord::Migration
+class CreateCategoriaprensa < ActiveRecord::Migration[4.2]
   def up
     create_table :sal7711_gen_categoriaprensa do |t|
       t.string :codigo, limit: 15

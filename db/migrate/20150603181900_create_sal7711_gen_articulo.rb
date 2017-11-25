@@ -1,4 +1,4 @@
-class CreateSal7711GenArticulo < ActiveRecord::Migration
+class CreateSal7711GenArticulo < ActiveRecord::Migration[4.2]
   def change
     create_table :sal7711_gen_articulo do |t|
       t.integer   :departamento_id
