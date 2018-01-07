@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/pasosdeJesus/sip.git
-  revision: bd854ffdeb3b0fb600ad42d3d66709d38cc272e2
+  revision: 8da4ee70f82d5b41d66cfa621360a625a0c5ce28
   specs:
     sip (2.0.b4)
       bootstrap-datepicker-rails
@@ -96,7 +96,7 @@ GEM
     connection_pool (2.2.1)
     crass (1.0.3)
     debug_inspector (0.0.3)
-    devise (4.3.0)
+    devise (4.4.0)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
       railties (>= 4.1.0, < 5.2)
@@ -151,7 +151,7 @@ GEM
     mimemagic (0.3.2)
     mini_mime (1.0.0)
     mini_portile2 (2.3.0)
-    minitest (5.10.3)
+    minitest (5.11.1)
     minitest-reporters (1.1.19)
       ansi
       builder
@@ -229,7 +229,7 @@ GEM
       actionpack (>= 4.2.0, < 5.3)
       railties (>= 4.2.0, < 5.3)
     ruby-progressbar (1.9.0)
-    sass (3.5.4)
+    sass (3.5.5)
       sass-listen (~> 4.0.0)
     sass-listen (4.0.0)
       rb-fsevent (~> 0.9, >= 0.9.4)
@@ -277,7 +277,7 @@ GEM
       thread_safe (~> 0.1)
     tzinfo-data (1.2017.3)
       tzinfo (>= 1.0.0)
-    uglifier (4.1.1)
+    uglifier (4.1.2)
       execjs (>= 0.3.0, < 3)
     unicorn (5.4.0)
       kgio (~> 2.6)
@@ -340,4 +340,4 @@ DEPENDENCIES
   will_paginate
 
 BUNDLED WITH
-   1.16.0
+   1.16.1
