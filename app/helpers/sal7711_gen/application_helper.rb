@@ -96,6 +96,13 @@ module Sal7711Gen
       end
       # Genera PDF
       if !File.exists? "#{rutapdf.to_s}"
+        cmd = "rm -rf /tmp/_sal7711_cinep_mp*"
+        puts cmd
+        system(cmd)
+        cmd = "/usr/local/bin/convert #{rlocal} /tmp/_sal7711_cinep_mp-%d.jpg"
+        puts cmd
+        system(cmd)
+        jpgs = Dir.glob('/tmp/_sal7711_cinep_mp-*jpg')
         FileUtils.mkdir_p rutapdf.dirname
         Prawn::Document.generate("#{rutapdf.to_s}") do
           font_families.update("Tuffy" => {
@@ -106,12 +113,20 @@ module Sal7711Gen
           })
           font "Tuffy"
           font_size 12
-          text titulo
-          w = 550
-          h = 700
-          bounding_box([0, cursor], :width => w, :height => h) do
-            image "#{rutajpg.to_s}", :fit => [w, h]
-            stroke_bounds
+          ini = true
+          jpgs.each do |im|
+            if ini then
+              ini = false
+            else
+              start_new_page
+            end
+            text titulo
+            w = 550
+            h = 700
+            bounding_box([0, cursor], :width => w, :height => h) do
+              image "#{im}", :fit => [w, h]
+              stroke_bounds
+            end
           end
         end
       end
