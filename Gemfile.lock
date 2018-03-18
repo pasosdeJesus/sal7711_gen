@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/pasosdeJesus/sip.git
-  revision: 916f6c010b55bb426f2d0cc4cdb390a279d8ef3e
+  revision: 5251feede4dcd9cb206c90ea3ccc35c181fb52d1
   specs:
     sip (2.0.b4)
       bootstrap-datepicker-rails
@@ -167,7 +167,7 @@ GEM
       mimemagic (~> 0.3.0)
       terrapin (~> 0.6.0)
     pdf-core (0.7.0)
-    pg (0.21.0)
+    pg (1.0.0)
     prawn (2.2.2)
       pdf-core (~> 0.7.0)
       ttfunk (~> 1.5)
@@ -315,7 +315,7 @@ DEPENDENCIES
   meta_request
   minitest-reporters
   paperclip
-  pg (~> 0.21)
+  pg
   prawn
   pry-rescue
   pry-stack_explorer
