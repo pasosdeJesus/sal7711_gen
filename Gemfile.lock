@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/pasosdeJesus/sip.git
-  revision: 5251feede4dcd9cb206c90ea3ccc35c181fb52d1
+  revision: 743da820744d0ef727c7a6f77bff2f20403c5cff
   specs:
     sip (2.0.b4)
       bootstrap-datepicker-rails
@@ -133,7 +133,7 @@ GEM
       less (~> 2.6.0)
       sprockets (> 2, < 4)
       tilt
-    loofah (2.2.0)
+    loofah (2.2.1)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
     mail (2.7.0)
