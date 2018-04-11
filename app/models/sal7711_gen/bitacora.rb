@@ -13,10 +13,12 @@ module Sal7711Gen
 
     def self.a(ip, usuario, operacion, detalle, detalle2 = nil, 
                detalle3 = nil)
-      operacion = operacion[0..49] if operacion.length > 50
-      detalle = detalle[0..4999] if detalle.length > 5000
-      detalle2 = detalle2[0..499] if detalle2.length > 500
-      detalle3 = detalle3[0..499] if detalle3.length > 500
+      operacion = operacion ? operacion.to_s : ''
+      operacion = operacion[0..49] if operacion && operacion.length > 50
+      detalle2 = detalle2 ? detalle2.to_s : ''
+      detalle2 = detalle2[0..499] if detalle2 && detalle2.length > 500
+      detalle3 = detalle3 ? detalle3.to_s : ''
+      detalle3 = detalle3[0..499] if detalle3 && detalle3.length > 500
       b = Bitacora.new(fecha: Time.now.utc.iso8601,
                    ip: ip,
                    usuario_id: usuario.id,
@@ -24,6 +26,9 @@ module Sal7711Gen
                    detalle: detalle,
                    detalle2: detalle2,
                    detalle3: detalle3)
+      if b.detalle && b.detalle.to_yaml.length > 5000
+       b.detalle = b.detalle.to_yaml[0..4000]
+      end
       b.save!
     end
   end
