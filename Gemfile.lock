@@ -86,13 +86,6 @@ GIT
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
 
-GIT
-  remote: https://github.com/vtamara/cocoon.git
-  revision: f8fbad8d9d6bb087223221d70733b58a3d2efd8a
-  branch: new_id_with_ajax
-  specs:
-    cocoon (1.2.11)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -324,7 +317,6 @@ DEPENDENCIES
   bootstrap-datepicker-rails
   cancancan
   chosen-rails
-  cocoon!
   coffee-rails
   colorize
   connection_pool
