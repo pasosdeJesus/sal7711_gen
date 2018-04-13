@@ -3,7 +3,10 @@ source 'https://rubygems.org'
 #ruby "2.2.2"
 
 # Rails (internacionalización)
-gem "rails", '~> 5.1.0'
+gem "rails", '~> 5.2.0'
+
+gem 'bootsnap',  '>=1.1.0', require: false
+
 gem "rails-i18n"
 
 # Postgresql
@@ -69,10 +72,9 @@ gem "paperclip"#, "~> 4.1"
 
 # Zonas horarias
 gem "tzinfo"
-gem "tzinfo-data"
 
 # Motor de sistemas de información estilo Pasos de Jesús
-gem 'sip', git: "https://github.com/pasosdeJesus/sip.git"
+gem 'sip', git: "https://github.com/pasosdeJesus/sip.git", branch: 'rails5.2'
 #gem 'sip', path: '../sip'
 
 # Los siguientes son para desarrollo o para pruebas con generadores
