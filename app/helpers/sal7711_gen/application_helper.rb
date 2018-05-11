@@ -68,8 +68,8 @@ module Sal7711Gen
       urlpdf = Pathname.new(urlcolchon.to_s).join(rutaf, nomar + '.pdf')
 
       return [titulo, texto, rlocal,
-              rutajpg, urljpg, 
-              rutapdf, urlpdf]
+              rutajpg, urljpg.to_s, 
+              rutapdf, urlpdf.to_s]
     end
 
     def url_descarga_jpg(id)
