@@ -36,7 +36,18 @@ if (test "$SINMIG" != "1") then {
 	} fi;
 } fi;
 
-(cd test/dummy; RAILS_ENV=test bundle exec rake db:drop db:setup db:migrate sip:indices)
+(cd test/dummy; RAILS_ENV=test bundle exec bin/rails db:drop > /dev/null 2>&1) 
+if (test "$?" != "0") then {
+	echo "No puede eliminarse base de prueba";
+} fi;
+(cd test/dummy; bundle exec bin/rails db:create)
+if (test "$?" != "0") then {
+	echo "No puede crearse base";
+	exit 1;
+} fi;
+
+
+(cd test/dummy; RAILS_ENV=test bundle exec bin/rails db:setup db:migrate sip:indices)
 if (test "$?" != "0") then {
 	echo "No puede preparse base de prueba";
 	exit 1;
@@ -52,9 +63,10 @@ if (test "$?" != "0") then {
 b=`git branch | grep "^*" | sed -e  "s/^* //g"`
 git status -s
 if (test "$MENSCONS" = "") then {
-	MENSCONS="Actualiza"
+	git commit -a
+} else {
+	git commit -m $MENSCONS -a
 } fi;
-git commit -m "$MENSCONS" -a
 git push origin ${b}
 if (test "$?" != "0") then {
 	echo "No pudo subirse el cambio a github";
