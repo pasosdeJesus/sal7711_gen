@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/pasosdeJesus/sip.git
-  revision: 5b760d415ff3de52a75fb75f45afeb2401f3e8f9
+  revision: e1f7a0b76990d89f05be940f13b735e11dabaa80
   specs:
     sip (2.0.b5)
       bootstrap-datepicker-rails
@@ -201,7 +201,7 @@ GEM
       mimemagic (~> 0.3.0)
       terrapin (~> 0.6.0)
     pdf-core (0.7.0)
-    pg (1.0.0)
+    pg (1.1.0)
     prawn (2.2.2)
       pdf-core (~> 0.7.0)
       ttfunk (~> 1.5)
@@ -354,4 +354,4 @@ DEPENDENCIES
   will_paginate
 
 BUNDLED WITH
-   1.16.3
+   1.16.4
