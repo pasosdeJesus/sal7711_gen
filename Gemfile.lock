@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/pasosdeJesus/sip.git
-  revision: 3c93615802fdaf5152728fa4916ab4e7763d7902
+  revision: fa025664ab912c1f500d07d8ca10ab3a5c5bbad5
   specs:
     sip (2.0.b5)
       bootstrap-datepicker-rails
@@ -183,7 +183,7 @@ GEM
     mini_mime (1.0.1)
     mini_portile2 (2.3.0)
     minitest (5.11.3)
-    minitest-reporters (1.3.3)
+    minitest-reporters (1.3.4)
       ansi
       builder
       minitest (>= 5.0)
@@ -201,7 +201,7 @@ GEM
       mimemagic (~> 0.3.0)
       terrapin (~> 0.6.0)
     pdf-core (0.7.0)
-    pg (1.1.2)
+    pg (1.1.3)
     prawn (2.2.2)
       pdf-core (~> 0.7.0)
       ttfunk (~> 1.5)
@@ -298,7 +298,7 @@ GEM
       raindrops (~> 0.7)
     warden (1.2.7)
       rack (>= 1.0)
-    web-console (3.6.2)
+    web-console (3.7.0)
       actionview (>= 5.0)
       activemodel (>= 5.0)
       bindex (>= 0.4.0)
