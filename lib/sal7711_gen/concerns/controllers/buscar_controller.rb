@@ -268,7 +268,8 @@ module Sal7711Gen
                 prepara_imagenes(id)
               texto = mostraruno_mejoratexto(texto, params)
               Sal7711Gen::Bitacora.a( request.remote_ip, current_usuario, 
-                         'mostraruno', rlocal)
+                                     'mostraruno', rlocal)
+              #puts "OJO aqui1"
               respond_to do |format|
                 format.html { render 'sal7711_gen/articulos/show', layout: nil}
                 format.json { head :no_content }
