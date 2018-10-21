@@ -134,7 +134,7 @@ module Sal7711Gen
                 limite = paginador.per_page + 2
               end
               c += " LIMIT #{limite} OFFSET #{desp}"
-              puts "OJO c=#{c}"
+              #puts "OJO c=#{c}"
               result = ActiveRecord::Base.connection.execute(c)
               puts result
               arr = []
@@ -269,11 +269,23 @@ module Sal7711Gen
               texto = mostraruno_mejoratexto(texto, params)
               Sal7711Gen::Bitacora.a( request.remote_ip, current_usuario, 
                                      'mostraruno', rlocal)
-              #puts "OJO aqui1"
+              puts "OJO aqui1"
               respond_to do |format|
-                format.html { render 'sal7711_gen/articulos/show', layout: nil}
-                format.json { head :no_content }
-                format.js   { render action: :mostraruno }
+                format.html { 
+                  #puts "OJO aqui1.html"
+                  render 'sal7711_gen/articulos/show', layout: nil
+                  return
+                }
+                format.json { 
+                  #puts "OJO aqui2.json"
+                  head :no_content 
+                  return
+                }
+                format.js   { 
+                  #puts "OJO aqui3.js"
+                  render action: :mostraruno 
+                  return
+                }
               end
             end
           end
