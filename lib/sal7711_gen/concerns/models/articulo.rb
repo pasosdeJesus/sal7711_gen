@@ -40,10 +40,16 @@ module Sal7711Gen
             allow_blank: Rails.application.config.x.sal7711_presencia_adjuntodesc,
             length: { maximum: 1500 } 
 
+          # Sería mejor con has_and_belongs_to_man en sal7711_gen
+          # pero se requiere con has_many through en sal7711_cinep
+          # Falta experimentar si puede sobrecargarse un has_and_belongs_to
+          # de sal7711_gen con dos has_many y through en sal7711_cinep
+          # Mientras no se prueba no usar con config.load_defaults 5.2
           has_many :articulo_categoriaprensa, 
             class_name: 'Sal7711Gen::ArticuloCategoriaprensa',
             dependent: :delete_all, foreign_key: 'articulo_id'
-          has_many :categoriaprensa, class_name: 'Sal7711Gen::Categoriaprensa',
+          has_many :categoriaprensa, 
+            class_name: 'Sal7711Gen::Categoriaprensa',
             through: :articulo_categoriaprensa
 
           validates :fuenteprensa_id, 
