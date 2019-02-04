@@ -33,8 +33,9 @@ module Sal7711Gen
           # GET /articulos/new
           def new
             authorize! :edit, Sal7711Gen::Articulo
-            @articulo = Sal7711Gen::Articulo.new
+            @registro = @articulo = Sal7711Gen::Articulo.new
             @articulo.adjunto_descripcion = "J"
+            render layout: 'application'
             #logger.debug "Anexo salvado: #{@articulo.anexo.inspect}"
           end
 
