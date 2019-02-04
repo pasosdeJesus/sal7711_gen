@@ -20,8 +20,12 @@ module Sal7711Gen
 
       def atributos_index
         [
-          "id", "codigo", "nombre", "observaciones", 
-          "fechacreacion_localizada", "fechadeshabilitacion_localizada"
+          "id", 
+          "codigo", 
+          "nombre", 
+          "observaciones", 
+          "fechacreacion_localizada", 
+          "habilitado"
         ]
       end
 
