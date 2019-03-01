@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/pasosdeJesus/sip.git
-  revision: abac00c152c97f6e254e2b948bae139d352f96a8
+  revision: 12f49950d47b34fbb185901a9234851054ab4519
   specs:
     sip (2.0.b5)
       bootstrap-datepicker-rails
@@ -164,7 +164,7 @@ GEM
       builder
       minitest (>= 5.0)
       ruby-progressbar
-    msgpack (1.2.6)
+    msgpack (1.2.7)
     multi_json (1.13.1)
     nio4r (2.3.1)
     nokogiri (1.10.1)
