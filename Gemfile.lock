@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/pasosdeJesus/sip.git
-  revision: affa3af5640483bef360de691e7ff5851946a655
+  revision: f3f455ddb06bb42bf89527a45bc19cddfea031d3
   specs:
     sip (2.0.b5)
       bootstrap-datepicker-rails
@@ -97,7 +97,7 @@ GEM
     coffee-script-source (1.12.2)
     colorize (0.8.1)
     commonjs (0.2.7)
-    concurrent-ruby (1.1.4)
+    concurrent-ruby (1.1.5)
     connection_pool (2.2.2)
     crass (1.0.4)
     debug_inspector (0.0.3)
@@ -164,7 +164,7 @@ GEM
       builder
       minitest (>= 5.0)
       ruby-progressbar
-    msgpack (1.2.7)
+    msgpack (1.2.9)
     multi_json (1.13.1)
     nio4r (2.3.1)
     nokogiri (1.10.1)
