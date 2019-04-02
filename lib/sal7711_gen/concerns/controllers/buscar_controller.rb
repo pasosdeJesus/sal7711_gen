@@ -236,7 +236,7 @@ module Sal7711Gen
                 where = " mundep  @@ to_tsquery('spanish', '#{consNom}')";
                 # autocomplete de jquery requiere label, val
                 qstring = "SELECT nombre as label, idlocal as value
-                FROM sip_mundep 
+                FROM public.sip_mundep 
                 WHERE #{where} ORDER BY 1;"
         
                 r = ActiveRecord::Base.connection.select_all qstring

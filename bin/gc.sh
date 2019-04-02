@@ -47,7 +47,7 @@ if (test "$?" != "0") then {
 } fi;
 
 
-(cd test/dummy; RAILS_ENV=test bundle exec bin/rails db:setup db:migrate sip:indices)
+(cd test/dummy; RAILS_ENV=test bundle exec bin/rails db:setup, RAILS_ENV=test bin/rails db:migrate sip:indices)
 if (test "$?" != "0") then {
 	echo "No puede preparse base de prueba";
 	exit 1;
