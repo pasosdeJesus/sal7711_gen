@@ -22,8 +22,9 @@ gem 'bigdecimal'
 gem "colorize"
 
 # Para generar CSS
-gem "sass"
 gem "sass-rails"
+
+gem 'webpacker'
 
 # Cuadros de selección para búsquedas
 gem 'chosen-rails', git: "https://github.com/vtamara/chosen-rails.git", branch: 'several-fixes'
