@@ -8,7 +8,7 @@ module Sal7711Gen
     isolate_namespace Sal7711Gen
 
     config.generators do |g|
-      g.test_framework      :rspec,        :fixture => false
+      g.test_framework      :minitest,        :fixture => false
       g.fixture_replacement :factory_girl, :dir => 'spec/factories'
       g.assets false
       g.helper false
@@ -26,10 +26,6 @@ module Sal7711Gen
 
     # Adaptado de http://guides.rubyonrails.org/engines.html
     config.to_prepare do |app|
-#      Dir.glob(Engine.root.to_s + "/app/decorators/**/*_decorator*.rb").each do |c|
-#        puts "engine decorator #{c}"
-#        require_dependency(c)
-#      end
       Dir.glob(Rails.root + "app/decorators/**/*_decorator*.rb").each do |c|
         require_dependency(c)
       end
