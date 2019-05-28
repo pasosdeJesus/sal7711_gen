@@ -13,11 +13,11 @@ module Sal7711Gen
           include Sip::Modelo
 
           belongs_to :departamento, foreign_key: "departamento_id",
-            validate: true, class_name: "Sip::Departamento"
+            validate: true, class_name: "Sip::Departamento", optional: true
           belongs_to :municipio, foreign_key: "municipio_id",
-            validate: true, class_name: "Sip::Municipio"
+            validate: true, class_name: "Sip::Municipio", optional: true
           belongs_to :fuenteprensa, foreign_key: "fuenteprensa_id",
-            validate: true, class_name: "Sip::Fuenteprensa"
+            validate: true, class_name: "Sip::Fuenteprensa", optional: true
 
           campofecha_localizado :fecha
 
