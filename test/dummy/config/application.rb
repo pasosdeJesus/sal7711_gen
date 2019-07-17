@@ -39,5 +39,7 @@ module Dummy
     config.x.sal7711_presencia_pagina = true
 
     config.relative_url_root = '/sal7711'
+
+    config.hosts << ENV['CONFIG_HOSTS'] || '127.0.0.1'
   end
 end
