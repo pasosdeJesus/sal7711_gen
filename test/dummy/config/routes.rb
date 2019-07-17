@@ -1,7 +1,8 @@
+# encoding: utf-8
 
 Rails.application.routes.draw do
 
-  scope 'sal7711' do
+  scope '/sal7711' do
     devise_scope :usuario do
       get 'sign_out' => 'devise/sessions#destroy'
       # El siguiente para superar mala generación del action en el formulario
