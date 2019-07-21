@@ -85,10 +85,13 @@ gem 'tzinfo'
 gem 'sip', git: 'https://github.com/pasosdeJesus/sip.git'
 #gem 'sip', path: '../sip'
 
-# Los siguientes son para desarrollo o para pruebas con generadores
-group :development do
+group :development, :test do
   # Depurar
   #gem 'byebug'
+end
+
+# Los siguientes son para desarrollo o para pruebas con generadores
+group :development do
 
   # Consola irb en páginas con excepciones o usando <%= console %> en vistas
   gem 'web-console'
@@ -104,8 +107,6 @@ group :test do
 
   gem 'connection_pool'
   gem 'minitest-reporters' 
-
-  #gem 'byebug'
 
   # https://www.relishapp.com/womply/rails-style-guide/docs/developing-rails-applications/bundler
   # Lanza programas para examinar resultados
