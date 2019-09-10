@@ -64,8 +64,8 @@ gem 'simple_form'
 
 
 # Autenticación y roles
-gem 'devise'
-gem 'devise-i18n'
+gem 'devise', '>= 4.7.1'
+gem 'devise-i18n', '>= 1.8.1'
 gem 'cancancan'
 gem 'bcrypt'
 
