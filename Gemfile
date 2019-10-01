@@ -1,132 +1,113 @@
 source 'https://rubygems.org'
 
+git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-# Resuelve problema con minitest y rails 5.2.0
-gem 'rails', '~> 6.0.0.rc1'
+gemspec
 
-gem 'bootsnap',  '>=1.1.0', require: false
 
-gem 'rails-i18n'
-
-# Postgresql
-gem 'pg'#, '~> 0.21'
-
-gem 'puma'
+gem 'bcrypt'
 
 gem 'bigdecimal'
 
-# Colores en consola
-gem 'colorize'
+gem 'bootsnap',  '>=1.1.0', require: false
 
-# Para generar CSS
-gem 'sass-rails'
+gem 'bootstrap-datepicker-rails'
 
-gem 'webpacker'
+gem 'cancancan'
 
 # Cuadros de selección para búsquedas
 gem 'chosen-rails', git: 'https://github.com/vtamara/chosen-rails.git', branch: 'several-fixes'
 
+gem 'coffee-rails'# CoffeeScript para recuersos .js.coffee y vistas
 
-# Para generar PDF
-gem 'prawn'
+gem 'colorize' # Colores en consola
 
-# API JSON facil. Ver: https://github.com/rails/jbuilder
-gem 'jbuilder'
+gem 'devise' # Autenticación 
 
-# Uglifier comprime recursos Javascript
-gem 'uglifier'#, '>= 1.3.0'
+gem 'devise-i18n'
 
-# CoffeeScript para recuersos .js.coffee y vistas
-gem 'coffee-rails'#, '~> 4.1.0'
+gem 'font-awesome-rails'
 
-# jquery como librería JavaScript
-gem 'jquery-rails'
+gem 'jbuilder' # API JSON facil. Ver: https://github.com/rails/jbuilder
+
+gem 'jquery-rails' # jquery como librería JavaScript
 
 gem 'jquery-ui-rails'
 
-# Seguir enlaces más rápido. Ver: https://github.com/rails/turbolinks
-gem 'turbolinks'
+gem 'paperclip'#, '~> 4.1' # Maneja adjuntos
 
-# Ambiente de CSS
-gem 'twitter-bootstrap-rails'
-gem 'bootstrap-datepicker-rails'
-gem 'font-awesome-rails'
+gem 'pick-a-color-rails' # Facilita elegir colores en tema
 
-# Facilita elegir colores en tema
-gem 'pick-a-color-rails'
-gem 'tiny-color-rails'
+gem 'pg' # Postgresql
 
-# Formularios simples 
-gem 'simple_form'
+gem 'puma'
 
-# Formularios anidados (algunos con ajax)
-#gem 'cocoon', git: 'https://github.com/vtamara/cocoon.git', branch: 'new_id_with_ajax'
+gem 'prawn' # Para generar PDF
 
+gem 'rails', '~> 6.0.0.rc1'
 
-# Autenticación y roles
-gem 'devise'
-gem 'devise-i18n'
-gem 'cancancan'
-gem 'bcrypt'
-
-# Listados en páginas
-gem 'will_paginate'
-
-# ICU con CLDR
-gem 'twitter_cldr'
-
-# Maneja adjuntos
-gem 'paperclip'#, '~> 4.1'
-
-# Zonas horarias
-gem 'tzinfo'
+gem 'rails-i18n'
 
 # Motor de sistemas de información estilo Pasos de Jesús
 gem 'sip', git: 'https://github.com/pasosdeJesus/sip.git'
 #gem 'sip', path: '../sip'
 
+gem 'sass-rails' # Para generar CSS
+
+gem 'simple_form' # Formularios simples 
+
+gem 'tiny-color-rails'
+
+gem 'turbolinks' # Seguir enlaces más rápido. 
+
+gem 'twitter-bootstrap-rails' # Ambiente de CSS
+
+gem 'twitter_cldr' # ICU con CLDR
+
+gem 'tzinfo' # Zonas horarias
+
+gem 'uglifier' # Uglifier comprime recursos Javascript
+
+gem 'webpacker'
+
+gem 'will_paginate' # Listados en páginas
+
+
+
 group :development, :test do
-  # Depurar
-  #gem 'byebug'
+  
+  #gem 'byebug' # Depurar
+
 end
 
-# Los siguientes son para desarrollo o para pruebas con generadores
+
+
 group :development do
 
-  # Consola irb en páginas con excepciones o usando <%= console %> en vistas
-  gem 'web-console'
+  gem 'web-console' # Consola irb en páginas 
+
 end
 
-# Los siguientes son para pruebas y no tiene generadores requeridos en desarrollo
+
 group :test do
+
+  gem 'connection_pool'
+ 
+  gem 'meta_request'
+  
+  gem 'minitest-reporters' 
 
   gem 'simplecov'
 
-  # Acelera ejecutando en fondo.  https://github.com/jonleighton/spring
-  gem 'spring'
+  gem 'spring' # Acelera ejecutando en fondo
 
-  gem 'connection_pool'
-  gem 'minitest-reporters' 
-
-  # https://www.relishapp.com/womply/rails-style-guide/docs/developing-rails-applications/bundler
-  # Lanza programas para examinar resultados
-  gem 'launchy'
-
-  #gem 'codeclimate-test-reporter', require: nil
-  # Para examinar errores, usar 'rescue rspec' en lugar de 'rspec'
-  gem 'pry-rescue'
-  gem 'pry-stack_explorer'
-
-  gem 'meta_request'
 end
 
 
 group :production do
-  # Para despliegue
-  gem 'unicorn'
+  
+  gem 'unicorn' # Para despliegue
 
-  # Requerido por heroku para usar stdout como bitacora
-  gem 'rails_12factor'
 end
 
 

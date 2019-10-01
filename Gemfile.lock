@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/pasosdeJesus/sip.git
-  revision: 9e1c56e1e1937372bb39346e0c3403339b9a56db
+  revision: 17f3af95a93852e577920144bddf2305af678c2f
   specs:
     sip (2.0.b6)
       bootstrap-datepicker-rails
@@ -29,6 +29,13 @@ GIT
       coffee-rails (>= 3.2)
       railties (>= 3.0)
       sass-rails (>= 3.2)
+
+PATH
+  remote: .
+  specs:
+    sal7711_gen (1.0.b2)
+      rails
+      sip
 
 GEM
   remote: https://rubygems.org/
@@ -88,14 +95,10 @@ GEM
       minitest (~> 5.1)
       tzinfo (~> 1.1)
       zeitwerk (~> 2.1, >= 2.1.8)
-    addressable (2.7.0)
-      public_suffix (>= 2.0.2, < 5.0)
     ansi (1.5.0)
     bcrypt (3.1.13)
     bigdecimal (1.4.4)
     bindex (0.8.1)
-    binding_of_caller (0.8.0)
-      debug_inspector (>= 0.0.1)
     bootsnap (1.4.5)
       msgpack (~> 1.0)
     bootstrap-datepicker-rails (1.8.0.1)
@@ -105,7 +108,6 @@ GEM
     cancancan (3.0.1)
     cldr-plurals-runtime-rb (1.0.1)
     climate_control (0.2.0)
-    coderay (1.1.2)
     coffee-rails (5.0.0)
       coffee-script (>= 2.2.0)
       railties (>= 5.2.0)
@@ -118,7 +120,6 @@ GEM
     concurrent-ruby (1.1.5)
     connection_pool (2.2.2)
     crass (1.0.4)
-    debug_inspector (0.0.3)
     devise (4.7.1)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
@@ -137,7 +138,6 @@ GEM
       activesupport (>= 4.2.0)
     i18n (1.6.0)
       concurrent-ruby (~> 1.0)
-    interception (0.5)
     jbuilder (2.9.1)
       activesupport (>= 4.2.0)
     jquery-rails (4.3.5)
@@ -148,8 +148,6 @@ GEM
       railties (>= 3.2.16)
     json (2.2.0)
     kgio (2.11.2)
-    launchy (2.4.3)
-      addressable (~> 2.3)
     less (2.6.0)
       commonjs (~> 0.2.7)
     less-rails (4.0.0)
@@ -199,16 +197,6 @@ GEM
     prawn (2.2.2)
       pdf-core (~> 0.7.0)
       ttfunk (~> 1.5)
-    pry (0.12.2)
-      coderay (~> 1.1.0)
-      method_source (~> 0.9.0)
-    pry-rescue (1.5.0)
-      interception (>= 0.5)
-      pry (>= 0.12.0)
-    pry-stack_explorer (0.4.9.3)
-      binding_of_caller (>= 0.7)
-      pry (>= 0.9.11)
-    public_suffix (4.0.1)
     puma (4.2.0)
       nio4r (~> 2.0)
     rack (2.0.7)
@@ -241,11 +229,6 @@ GEM
     rails-i18n (6.0.0)
       i18n (>= 0.7, < 2)
       railties (>= 6.0.0, < 7)
-    rails_12factor (0.0.3)
-      rails_serve_static_assets
-      rails_stdout_logging
-    rails_serve_static_assets (0.0.5)
-    rails_stdout_logging (0.0.5)
     railties (6.0.0)
       actionpack (= 6.0.0)
       activesupport (= 6.0.0)
@@ -347,19 +330,16 @@ DEPENDENCIES
   jbuilder
   jquery-rails
   jquery-ui-rails
-  launchy
   meta_request
   minitest-reporters
   paperclip
   pg
   pick-a-color-rails
   prawn
-  pry-rescue
-  pry-stack_explorer
   puma
   rails (~> 6.0.0.rc1)
   rails-i18n
-  rails_12factor
+  sal7711_gen!
   sass-rails
   simple_form
   simplecov
