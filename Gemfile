@@ -48,10 +48,6 @@ gem 'rails', '~> 6.0.0.rc1'
 
 gem 'rails-i18n'
 
-# Motor de sistemas de información estilo Pasos de Jesús
-gem 'sip', git: 'https://github.com/pasosdeJesus/sip.git'
-#gem 'sip', path: '../sip'
-
 gem 'sass-rails' # Para generar CSS
 
 gem 'simple_form' # Formularios simples 
@@ -72,6 +68,13 @@ gem 'webpacker'
 
 gem 'will_paginate' # Listados en páginas
 
+#####
+# Motores que se sobrecargan vistas (deben ponerse en orden de apilamiento 
+# lógico y no alfabetico como las gemas anteriores)
+
+gem 'sip', # Motor generico
+  git: 'https://github.com/pasosdeJesus/sip.git'
+#gem 'sip', path: '../sip'
 
 
 group :development, :test do
