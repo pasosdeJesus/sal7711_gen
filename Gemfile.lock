@@ -1,15 +1,7 @@
 GIT
-  remote: https://github.com/vtamara/chosen-rails.git
-  revision: 48c457fc9ef1c4c573b4dcdb9dc07034b46ed6b4
-  branch: several-fixes
-  specs:
-    chosen-rails (1.8.7)
-      coffee-rails (>= 3.2)
-      railties (>= 3.0)
-      sass-rails (>= 3.2)
-
-PATH
-  remote: ../sip-bs4
+  remote: https://github.com/pasosdeJesus/sip.git
+  revision: af5c36835b444994866f115da2decd4b34dd613b
+  branch: bs4
   specs:
     sip (2.0.b6)
       cancancan
@@ -26,6 +18,16 @@ PATH
       simple_form
       twitter_cldr
       will_paginate
+
+GIT
+  remote: https://github.com/vtamara/chosen-rails.git
+  revision: 48c457fc9ef1c4c573b4dcdb9dc07034b46ed6b4
+  branch: several-fixes
+  specs:
+    chosen-rails (1.8.7)
+      coffee-rails (>= 3.2)
+      railties (>= 3.0)
+      sass-rails (>= 3.2)
 
 PATH
   remote: .
@@ -160,7 +162,7 @@ GEM
     mimemagic (0.3.3)
     mini_mime (1.0.2)
     mini_portile2 (2.4.0)
-    minitest (5.12.2)
+    minitest (5.13.0)
     minitest-reporters (1.4.2)
       ansi
       builder
