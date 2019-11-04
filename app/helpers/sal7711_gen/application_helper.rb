@@ -2,7 +2,6 @@
 module Sal7711Gen
   module ApplicationHelper
 
-    include ::FontAwesome::Rails::IconHelper
     include Sip::PaginacionAjaxHelper
 
     def desc_bitacora(entrada)

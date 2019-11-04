@@ -21,25 +21,17 @@
     <%= javascript_include_tag "application" %>
   </head>
   <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <a class="navbar-brand" href="<%= main_app.root_url %>">
-        <%= content_for?(:titulo) ? yield(:titulo) : Sip.titulo %>
-      </a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navegation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <%= yield :menu %>
-      </div>
-    </nav>
+    <%= barra_navegacion(
+      marca: content_for?(:titulo) ? yield(:titulo) : Sip.titulo,
+      enlace_marca: main_app.root_path) do %>
+      <%= yield :menu %>
+    <% end %>
 
     <div class="container master-container">
 	    <ul class="breadcrumb">
         <%= yield :breadcrumb %>
-	    </ul>
-      <% flash.each do |tipo, mensaje|  %>
-        <%= mensaje %>
-      <% end %>
+      </ul>
+      <%= anuncios_bootstrap %>
 	    <%= yield %>
     </div>
 
