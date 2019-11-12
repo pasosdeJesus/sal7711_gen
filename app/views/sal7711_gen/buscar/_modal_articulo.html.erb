@@ -15,7 +15,7 @@
         <% if can? :manage, Sal7711Gen::Articulo %>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
             "#", 
-            class: 'btn btn-xs',
+            class: 'btn btn-sm',
             id: 'editar-articulo',
             onclick: "$('#modal-imagen').modal('hide');" +
               " $('.modal-backdrop').remove();" %>
@@ -27,7 +27,7 @@
                             t("helpers.links.confirm", 
                               :default => 'Está seguro(a)?'))
             },
-            class: 'btn btn-xs btn-danger',
+            class: 'btn btn-sm btn-danger',
             id: 'eliminar-articulo' %>
         <% end %> 
         <%= render '/sal7711_gen/buscar/modal_articulo_botones' %>

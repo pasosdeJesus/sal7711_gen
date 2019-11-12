@@ -1,17 +1,19 @@
-<div id="filtro" class="col-sm-offset-0 col-sm-5 col-md-4">
-  <%= simple_form_for :buscar, 
-    { url: buscar_path, method: "get", remote: true } do |f|
-  %>
-    <%= render 'filtro', {f: f} %>
-  <% end %>
+<div class='row'>
+
+  <div id="filtro" class="col-sm-5 col-md-4">
+    <%= simple_form_for :buscar, 
+      { url: buscar_path, method: "get", remote: true } do |f|
+    %>
+  <%= render 'filtro', {f: f} %>
+<% end %>
+  </div>
+
+  <div id="resultados" class="col-sm-7 col-md-8">
+    <% if @entradas %>
+      <%= render 'sal7711_gen/buscar/resultados_busqueda' %>
+    <% end %>
+  </div> <!-- id: resultados -->
+
 </div>
-
-<div id="resultados" class="col-sm-offset-0 col-sm-7 col-md-8">
-  <% if @entradas %>
-    <%= render 'sal7711_gen/buscar/resultados_busqueda' %>
-  <% end %>
-</div> <!-- id: resultados -->
-
-
 <%= render 'modal_articulo' %>
 

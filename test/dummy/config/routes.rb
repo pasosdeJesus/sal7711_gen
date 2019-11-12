@@ -24,7 +24,7 @@ Rails.application.routes.draw do
     end
     resources :usuarios, path_names: { new: 'nuevo', edit: 'edita' } 
 
-    root to: 'sal7711_gen/hogar#index'
+    root to: 'sip/hogar#index'
   end
 
   mount Sip::Engine, at: "/sal7711", as: 'sip'

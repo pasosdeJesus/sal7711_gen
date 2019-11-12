@@ -11,9 +11,12 @@ module Sal7711Gen
         ['Sip', 'etiqueta'],
         ['Sip', 'grupo'],
         ['Sip', 'oficina'],
+        ['Sip', 'perfilactorsocial'],
+        ['Sip', 'sectoractor'],
         ['Sip', 'tclase'],
         ['Sip', 'tdocumento'],
         ['Sip', 'trelacion'],
+        ['Sip', 'trivalente'],
         ['Sip', 'tsitio']
       ] 
     end

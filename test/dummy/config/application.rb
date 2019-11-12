@@ -11,7 +11,7 @@ require 'sal7711_gen'
 module Dummy
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
-    config.load_defaults 5.0
+    config.load_defaults 6.0
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers
@@ -37,6 +37,8 @@ module Dummy
     config.x.sal7711_presencia_fuenteprensa = true
     config.x.sal7711_presencia_fecha = true
     config.x.sal7711_presencia_pagina = true
+
+    config.railties_order = [:main_app, Sip::Engine, :all]
 
     config.relative_url_root = '/sal7711'
 
