@@ -1,5 +1,6 @@
-PATH
-  remote: ../sip
+GIT
+  remote: https://github.com/pasosdeJesus/sip.git
+  revision: 5d018c7206397bb19d0a361af04e45254911c9b5
   specs:
     sip (2.0.b7)
       cancancan
