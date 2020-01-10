@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/pasosdeJesus/sip.git
-  revision: 32db02022eab4569985ec11c81d60db0aa68553d
+  revision: ad94453d2f45c945b1fca19e06f1cd1c71b7c8d0
   specs:
     sip (2.0.b7)
       cancancan
@@ -121,14 +121,14 @@ GEM
     ffi (1.11.3)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
-    i18n (1.7.0)
+    i18n (1.8.1)
       concurrent-ruby (~> 1.0)
     jbuilder (2.9.1)
       activesupport (>= 4.2.0)
     jquery-ui-rails (6.0.1)
       railties (>= 3.2.16)
     json (2.3.0)
-    kgio (2.11.2)
+    kgio (2.11.3)
     loofah (2.4.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
@@ -164,7 +164,7 @@ GEM
       mimemagic (~> 0.3.0)
       terrapin (~> 0.6.0)
     pdf-core (0.7.0)
-    pg (1.2.1)
+    pg (1.2.2)
     prawn (2.2.2)
       pdf-core (~> 0.7.0)
       ttfunk (~> 1.5)
@@ -206,7 +206,7 @@ GEM
       method_source
       rake (>= 0.8.7)
       thor (>= 0.20.3, < 2.0)
-    raindrops (0.19.0)
+    raindrops (0.19.1)
     rake (13.0.1)
     responders (3.0.0)
       actionpack (>= 5.0)
@@ -241,7 +241,7 @@ GEM
     thor (1.0.1)
     thread_safe (0.3.6)
     tilt (2.0.10)
-    ttfunk (1.6.0)
+    ttfunk (1.6.1)
     twitter_cldr (5.3.0)
       camertron-eprun
       cldr-plurals-runtime-rb (~> 1.0)
