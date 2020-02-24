@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/pasosdeJesus/sip.git
-  revision: 6e56581d02b9dc3ba5e629ad1bc1368e8e54e46f
+  revision: 4f29b16d409623e86d2c3ace9c428ebc5e09e5ad
   specs:
     sip (2.0.b10)
       cancancan
@@ -222,10 +222,10 @@ GEM
     simple_form (5.0.2)
       actionpack (>= 5.0)
       activemodel (>= 5.0)
-    simplecov (0.18.2)
+    simplecov (0.18.3)
       docile (~> 1.1)
       simplecov-html (~> 0.11)
-    simplecov-html (0.12.0)
+    simplecov-html (0.12.1)
     spring (2.1.0)
     sprockets (4.0.0)
       concurrent-ruby (~> 1.0)
