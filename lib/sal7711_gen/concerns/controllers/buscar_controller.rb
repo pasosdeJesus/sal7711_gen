@@ -269,10 +269,10 @@ module Sal7711Gen
               texto = mostraruno_mejoratexto(texto, params)
               Sal7711Gen::Bitacora.a( request.remote_ip, current_usuario, 
                                      'mostraruno', rlocal)
-              puts "OJO aqui1"
+              puts "OJO mostraruno antes respond_to"
               respond_to do |format|
                 format.html { 
-                  #puts "OJO aqui1.html"
+                  puts "OJO mostrarno en format.html"
                   render 'sal7711_gen/articulos/show', layout: nil
                   return
                 }
