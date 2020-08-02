@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/pasosdeJesus/sip.git
-  revision: 1501f4828cc04773ad9df52297534369675ef53b
+  revision: 56d2309d8f04c4667097303a2260570c129b4d28
   specs:
     sip (2.0.b10)
       cancancan
@@ -162,11 +162,11 @@ GEM
       mime-types
       mimemagic (~> 0.3.0)
       terrapin (~> 0.6.0)
-    pdf-core (0.7.0)
+    pdf-core (0.8.1)
     pg (1.2.3)
-    prawn (2.2.2)
-      pdf-core (~> 0.7.0)
-      ttfunk (~> 1.5)
+    prawn (2.3.0)
+      pdf-core (~> 0.8.1)
+      ttfunk (~> 1.6)
     puma (4.3.5)
       nio4r (~> 2.0)
     rack (2.2.3)
@@ -241,7 +241,7 @@ GEM
     thread_safe (0.3.6)
     tilt (2.0.10)
     ttfunk (1.6.2.1)
-    twitter_cldr (6.0.1)
+    twitter_cldr (6.0.2)
       camertron-eprun
       cldr-plurals-runtime-rb (~> 1.0)
       tzinfo
