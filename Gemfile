@@ -29,7 +29,7 @@ gem 'puma'
 
 gem 'prawn' # Para generar PDF
 
-gem 'rails', '~> 6.0.0.rc1'
+gem 'rails', '~> 6.0.3.4'
 
 gem 'rails-i18n'
 
