@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/pasosdeJesus/sip.git
-  revision: 152f46958a7a5dbe2eba65f5c9bd2d8c66f108e5
+  revision: 7162fbb2b0d6cbbdc4ac3e763709ad9108547dc0
   branch: rails6.1
   specs:
     sip (2.0.b10)
@@ -93,7 +93,6 @@ GEM
     bootsnap (1.5.1)
       msgpack (~> 1.0)
     builder (3.2.4)
-    byebug (11.1.3)
     camertron-eprun (1.1.1)
     cancancan (3.2.0)
     chosen-rails (1.9.0)
@@ -282,7 +281,6 @@ DEPENDENCIES
   bcrypt
   bigdecimal
   bootsnap (>= 1.1.0)
-  byebug
   cancancan
   coffee-rails
   colorize
