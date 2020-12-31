@@ -21,6 +21,8 @@ gem 'devise-i18n'
 
 gem 'jbuilder' # API JSON facil. Ver: https://github.com/rails/jbuilder
 
+gem 'nokogiri', '>=1.11.0.rc4'
+
 gem 'paperclip'#, '~> 4.1' # Maneja adjuntos
 
 gem 'pg' # Postgresql
