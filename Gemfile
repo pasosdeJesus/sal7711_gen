@@ -21,7 +21,7 @@ gem 'devise-i18n'
 
 gem 'jbuilder' # API JSON facil. Ver: https://github.com/rails/jbuilder
 
-gem 'nokogiri', '>=1.11.0.rc4'
+gem 'nokogiri', '>=1.11.1'
 
 gem 'paperclip'#, '~> 4.1' # Maneja adjuntos
 
@@ -31,7 +31,7 @@ gem 'puma'
 
 gem 'prawn' # Para generar PDF
 
-gem 'rails', '~> 6.1.0'
+gem 'rails', '~> 6.0.3.4'
 
 gem 'rails-i18n'
 
