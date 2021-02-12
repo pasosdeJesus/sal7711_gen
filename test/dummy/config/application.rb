@@ -27,10 +27,19 @@ module Dummy
 
     config.active_record.schema_format = :sql
 
-    #config.x.formato_fecha = 'yyyy-mm-dd'
-    config.x.formato_fecha = 'dd/mm/yyyy'
-    
-    config.x.url_colchon = 'colchon-articulos'
+    config.railties_order = [:main_app, Sip::Engine, :all]
+
+    config.relative_url_root = ENV.fetch('RUTA_RELATIVA', '/sal7711')
+
+    config.hosts << ENV.fetch('CONFIG_HOSTS', '127.0.0.1')
+
+    #sip
+    config.x.formato_fecha = ENV.fetch(
+      'SIP_FORMATO_FECHA', 'dd/mm/yyyy')
+   
+    #sal7711
+    config.x.url_colchon = ENV.fetch(
+      'SAL7711_COLCHON_ARTICULOS', 'colchon-articulos')
 
     config.x.sal7711_presencia_adjunto = true
     config.x.sal7711_presencia_adjuntodesc = true
@@ -38,10 +47,5 @@ module Dummy
     config.x.sal7711_presencia_fecha = true
     config.x.sal7711_presencia_pagina = true
 
-    config.railties_order = [:main_app, Sip::Engine, :all]
-
-    config.relative_url_root = '/sal7711'
-
-    config.hosts << ENV['CONFIG_HOSTS'] || '127.0.0.1'
   end
 end

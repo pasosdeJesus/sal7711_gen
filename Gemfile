@@ -27,8 +27,6 @@ gem 'paperclip'#, '~> 4.1' # Maneja adjuntos
 
 gem 'pg' # Postgresql
 
-gem 'puma'
-
 gem 'prawn' # Para generar PDF
 
 gem 'rails', '~> 6.0.3.4'
@@ -52,7 +50,7 @@ gem 'will_paginate' # Listados en páginas
 # lógico y no alfabetico como las gemas anteriores)
 
 gem 'sip', # Motor generico
-  git: 'https://github.com/pasosdeJesus/sip.git'
+  git: 'https://github.com/pasosdeJesus/sip.git', branch: :main
   #path: '../sip'
 
 
@@ -62,11 +60,14 @@ group :development, :test do
 
   gem 'colorize' # Colores en consola
 
+  gem 'dotenv-rails'
 end
 
 
 
 group :development do
+
+  gem 'puma'
 
   gem 'web-console' # Consola irb en páginas 
 

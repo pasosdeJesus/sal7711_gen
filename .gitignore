@@ -30,3 +30,6 @@ test/dummy/node_modules/
 *_test.rb.copia
 .byebug_history
 coverage/
+.env
+test/dummy/public/packs/
+test/dummy/public/sal7711/assets/
