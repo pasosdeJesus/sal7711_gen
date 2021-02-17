@@ -277,12 +277,12 @@ module Sal7711Gen
                   return
                 }
                 format.json { 
-                  #puts "OJO aqui2.json"
+                  puts "OJO aqui2.json"
                   head :no_content 
                   return
                 }
                 format.js   { 
-                  #puts "OJO aqui3.js"
+                  puts "OJO aqui3.js"
                   render action: :mostraruno 
                   return
                 }

@@ -29,7 +29,7 @@ module Dummy
 
     config.railties_order = [:main_app, Sip::Engine, :all]
 
-    config.relative_url_root = ENV.fetch('RUTA_RELATIVA', '/sal7711')
+    #config.relative_url_root = ENV.fetch('RUTA_RELATIVA', '/sal7711')
 
     config.hosts << ENV.fetch('CONFIG_HOSTS', '127.0.0.1')
 
