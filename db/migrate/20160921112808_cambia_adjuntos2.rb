@@ -25,7 +25,7 @@ class CambiaAdjuntos2 < ActiveRecord::Migration[5.0]
       )
       puts "#{rutaorig}->#{rutadest}"
       if rutaorig != rutadest
-        FileUtils.mv rutaorig, rutadest, verbose: true
+        FileUtils.mv rutaorig, rutadest, verbose: true, force: true
       end
     end
   end
