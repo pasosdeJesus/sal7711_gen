@@ -5,6 +5,7 @@ SET client_encoding = 'UTF8';
 SET standard_conforming_strings = on;
 SELECT pg_catalog.set_config('search_path', '', false);
 SET check_function_bodies = false;
+SET xmloption = content;
 SET client_min_messages = warning;
 SET row_security = off;
 
@@ -27,6 +28,57 @@ CREATE EXTENSION IF NOT EXISTS unaccent WITH SCHEMA public;
 --
 
 COMMENT ON EXTENSION unaccent IS 'text search dictionary that removes accents';
+
+
+--
+-- Name: completa_obs(character varying, character varying); Type: FUNCTION; Schema: public; Owner: -
+--
+
+CREATE FUNCTION public.completa_obs(obs character varying, nuevaobs character varying) RETURNS character varying
+    LANGUAGE plpgsql
+    AS $$
+      BEGIN
+        RETURN CASE WHEN obs IS NULL THEN nuevaobs
+          WHEN obs='' THEN nuevaobs
+          WHEN RIGHT(obs, 1)='.' THEN obs || ' ' || nuevaobs
+          ELSE obs || '. ' || nuevaobs
+        END;
+      END; $$;
+
+
+--
+-- Name: f_unaccent(text); Type: FUNCTION; Schema: public; Owner: -
+--
+
+CREATE FUNCTION public.f_unaccent(text) RETURNS text
+    LANGUAGE sql IMMUTABLE
+    AS $_$
+      SELECT public.unaccent('public.unaccent', $1)  
+      $_$;
+
+
+--
+-- Name: sip_edad_de_fechanac_fecharef(integer, integer, integer, integer, integer, integer); Type: FUNCTION; Schema: public; Owner: -
+--
+
+CREATE FUNCTION public.sip_edad_de_fechanac_fecharef(anionac integer, mesnac integer, dianac integer, anioref integer, mesref integer, diaref integer) RETURNS integer
+    LANGUAGE sql IMMUTABLE
+    AS $$
+        SELECT CASE 
+          WHEN anionac IS NULL THEN NULL
+          WHEN anioref IS NULL THEN NULL
+          WHEN mesnac IS NULL OR dianac IS NULL OR mesref IS NULL OR diaref IS NULL THEN 
+            anioref-anionac 
+          WHEN mesnac < mesref THEN
+            anioref-anionac
+          WHEN mesnac > mesref THEN
+            anioref-anionac-1
+          WHEN dianac > diaref THEN
+            anioref-anionac-1
+          ELSE 
+            anioref-anionac
+        END 
+      $$;
 
 
 --
@@ -140,7 +192,7 @@ $$;
 
 SET default_tablespace = '';
 
-SET default_with_oids = false;
+SET default_table_access_method = heap;
 
 --
 -- Name: ar_internal_metadata; Type: TABLE; Schema: public; Owner: -
@@ -298,7 +350,8 @@ CREATE TABLE public.sip_actorsocial (
     pais_id integer,
     web character varying(500),
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    fechadeshabilitacion date
 );
 
 
@@ -331,7 +384,9 @@ CREATE TABLE public.sip_actorsocial_persona (
     actorsocial_id integer,
     perfilactorsocial_id integer,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    correo character varying(100),
+    cargo character varying(254)
 );
 
 
@@ -382,7 +437,7 @@ CREATE SEQUENCE public.sip_anexo_id_seq
 
 CREATE TABLE public.sip_anexo (
     id integer DEFAULT nextval('public.sip_anexo_id_seq'::regclass) NOT NULL,
-    descripcion character varying(1500) COLLATE public.es_co_utf_8 NOT NULL,
+    descripcion character varying(1500) NOT NULL COLLATE public.es_co_utf_8,
     archivo character varying(255),
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
@@ -391,6 +446,45 @@ CREATE TABLE public.sip_anexo (
     adjunto_file_size integer,
     adjunto_updated_at timestamp without time zone
 );
+
+
+--
+-- Name: sip_bitacora; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.sip_bitacora (
+    id bigint NOT NULL,
+    fecha timestamp without time zone NOT NULL,
+    ip character varying(100),
+    usuario_id integer,
+    url character varying(1023),
+    params character varying(5000),
+    modelo character varying(511),
+    modelo_id integer,
+    operacion character varying(63),
+    detalle json,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: sip_bitacora_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.sip_bitacora_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: sip_bitacora_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.sip_bitacora_id_seq OWNED BY public.sip_bitacora.id;
 
 
 --
@@ -411,7 +505,7 @@ CREATE SEQUENCE public.sip_clase_id_seq
 
 CREATE TABLE public.sip_clase (
     id_clalocal integer,
-    nombre character varying(500) COLLATE public.es_co_utf_8 NOT NULL,
+    nombre character varying(500) NOT NULL COLLATE public.es_co_utf_8,
     id_tclase character varying(10) DEFAULT 'CP'::character varying NOT NULL,
     latitud double precision,
     longitud double precision,
@@ -444,7 +538,7 @@ CREATE SEQUENCE public.sip_departamento_id_seq
 
 CREATE TABLE public.sip_departamento (
     id_deplocal integer,
-    nombre character varying(500) COLLATE public.es_co_utf_8 NOT NULL,
+    nombre character varying(500) NOT NULL COLLATE public.es_co_utf_8,
     latitud double precision,
     longitud double precision,
     fechacreacion date DEFAULT ('now'::text)::date NOT NULL,
@@ -476,7 +570,7 @@ CREATE SEQUENCE public.sip_etiqueta_id_seq
 
 CREATE TABLE public.sip_etiqueta (
     id integer DEFAULT nextval('public.sip_etiqueta_id_seq'::regclass) NOT NULL,
-    nombre character varying(500) COLLATE public.es_co_utf_8 NOT NULL,
+    nombre character varying(500) NOT NULL COLLATE public.es_co_utf_8,
     observaciones character varying(5000) COLLATE public.es_co_utf_8,
     fechacreacion date DEFAULT ('now'::text)::date NOT NULL,
     fechadeshabilitacion date,
@@ -526,7 +620,7 @@ ALTER SEQUENCE public.sip_fuenteprensa_id_seq OWNED BY public.sip_fuenteprensa.i
 
 CREATE TABLE public.sip_grupo (
     id integer NOT NULL,
-    nombre character varying(500) COLLATE public.es_co_utf_8 NOT NULL,
+    nombre character varying(500) NOT NULL COLLATE public.es_co_utf_8,
     observaciones character varying(5000),
     fechacreacion date NOT NULL,
     fechadeshabilitacion date,
@@ -570,7 +664,7 @@ CREATE TABLE public.sip_grupo_usuario (
 
 CREATE TABLE public.sip_grupoper (
     id bigint NOT NULL,
-    nombre character varying(500) COLLATE public.es_co_utf_8 NOT NULL,
+    nombre character varying(500) NOT NULL COLLATE public.es_co_utf_8,
     anotaciones character varying(1000)
 );
 
@@ -619,7 +713,7 @@ CREATE SEQUENCE public.sip_municipio_id_seq
 
 CREATE TABLE public.sip_municipio (
     id_munlocal integer,
-    nombre character varying(500) COLLATE public.es_co_utf_8 NOT NULL,
+    nombre character varying(500) NOT NULL COLLATE public.es_co_utf_8,
     latitud double precision,
     longitud double precision,
     fechacreacion date DEFAULT ('now'::text)::date NOT NULL,
@@ -681,7 +775,7 @@ CREATE SEQUENCE public.sip_oficina_id_seq
 
 CREATE TABLE public.sip_oficina (
     id integer DEFAULT nextval('public.sip_oficina_id_seq'::regclass) NOT NULL,
-    nombre character varying(500) COLLATE public.es_co_utf_8 NOT NULL,
+    nombre character varying(500) NOT NULL COLLATE public.es_co_utf_8,
     fechacreacion date DEFAULT ('now'::text)::date NOT NULL,
     fechadeshabilitacion date,
     created_at timestamp without time zone,
@@ -779,8 +873,8 @@ CREATE SEQUENCE public.sip_persona_id_seq
 
 CREATE TABLE public.sip_persona (
     id integer DEFAULT nextval('public.sip_persona_id_seq'::regclass) NOT NULL,
-    nombres character varying(100) COLLATE public.es_co_utf_8 NOT NULL,
-    apellidos character varying(100) COLLATE public.es_co_utf_8 NOT NULL,
+    nombres character varying(100) NOT NULL COLLATE public.es_co_utf_8,
+    apellidos character varying(100) NOT NULL COLLATE public.es_co_utf_8,
     anionac integer,
     mesnac integer,
     dianac integer,
@@ -867,7 +961,7 @@ ALTER SEQUENCE public.sip_sectoractor_id_seq OWNED BY public.sip_sectoractor.id;
 
 CREATE TABLE public.sip_tclase (
     id character varying(10) NOT NULL,
-    nombre character varying(500) COLLATE public.es_co_utf_8 NOT NULL,
+    nombre character varying(500) NOT NULL COLLATE public.es_co_utf_8,
     fechacreacion date NOT NULL,
     fechadeshabilitacion date,
     created_at timestamp without time zone,
@@ -883,7 +977,7 @@ CREATE TABLE public.sip_tclase (
 
 CREATE TABLE public.sip_tdocumento (
     id integer NOT NULL,
-    nombre character varying(500) COLLATE public.es_co_utf_8 NOT NULL,
+    nombre character varying(500) NOT NULL COLLATE public.es_co_utf_8,
     sigla character varying(100),
     formatoregex character varying(500),
     fechacreacion date NOT NULL,
@@ -914,12 +1008,67 @@ ALTER SEQUENCE public.sip_tdocumento_id_seq OWNED BY public.sip_tdocumento.id;
 
 
 --
+-- Name: sip_tema; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.sip_tema (
+    id bigint NOT NULL,
+    nombre character varying(500) NOT NULL,
+    observaciones character varying(5000),
+    nav_ini character varying(8),
+    nav_fin character varying(8),
+    nav_fuente character varying(8),
+    fondo_lista character varying(8),
+    fechacreacion date NOT NULL,
+    fechadeshabilitacion date,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL,
+    btn_primario_fondo_ini character varying(127),
+    btn_primario_fondo_fin character varying(127),
+    btn_primario_fuente character varying(127),
+    btn_peligro_fondo_ini character varying(127),
+    btn_peligro_fondo_fin character varying(127),
+    btn_peligro_fuente character varying(127),
+    btn_accion_fondo_ini character varying(127),
+    btn_accion_fondo_fin character varying(127),
+    btn_accion_fuente character varying(127),
+    alerta_exito_fondo character varying(127),
+    alerta_exito_fuente character varying(127),
+    alerta_problema_fondo character varying(127),
+    alerta_problema_fuente character varying(127),
+    fondo character varying(127),
+    color_fuente character varying(127),
+    color_flota_subitem_fuente character varying,
+    color_flota_subitem_fondo character varying
+);
+
+
+--
+-- Name: sip_tema_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.sip_tema_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: sip_tema_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.sip_tema_id_seq OWNED BY public.sip_tema.id;
+
+
+--
 -- Name: sip_trelacion; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE public.sip_trelacion (
     id character(2) NOT NULL,
-    nombre character varying(500) COLLATE public.es_co_utf_8 NOT NULL,
+    nombre character varying(500) NOT NULL COLLATE public.es_co_utf_8,
     observaciones character varying(5000) COLLATE public.es_co_utf_8,
     fechacreacion date NOT NULL,
     fechadeshabilitacion date,
@@ -928,6 +1077,40 @@ CREATE TABLE public.sip_trelacion (
     updated_at timestamp without time zone,
     CONSTRAINT trelacion_check CHECK (((fechadeshabilitacion IS NULL) OR (fechadeshabilitacion >= fechacreacion)))
 );
+
+
+--
+-- Name: sip_trivalente; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.sip_trivalente (
+    id bigint NOT NULL,
+    nombre character varying(500) NOT NULL,
+    observaciones character varying(5000),
+    fechacreacion date NOT NULL,
+    fechadeshabilitacion date,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: sip_trivalente_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.sip_trivalente_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: sip_trivalente_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.sip_trivalente_id_seq OWNED BY public.sip_trivalente.id;
 
 
 --
@@ -948,7 +1131,7 @@ CREATE SEQUENCE public.sip_tsitio_id_seq
 
 CREATE TABLE public.sip_tsitio (
     id integer DEFAULT nextval('public.sip_tsitio_id_seq'::regclass) NOT NULL,
-    nombre character varying(500) COLLATE public.es_co_utf_8 NOT NULL,
+    nombre character varying(500) NOT NULL COLLATE public.es_co_utf_8,
     fechacreacion date DEFAULT ('now'::text)::date NOT NULL,
     fechadeshabilitacion date,
     created_at timestamp without time zone,
@@ -988,6 +1171,47 @@ CREATE TABLE public.sip_ubicacion (
     id_municipio integer,
     id_clase integer
 );
+
+
+--
+-- Name: sip_ubicacionpre; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.sip_ubicacionpre (
+    id bigint NOT NULL,
+    nombre character varying(2000) NOT NULL COLLATE public.es_co_utf_8,
+    pais_id integer,
+    departamento_id integer,
+    municipio_id integer,
+    clase_id integer,
+    lugar character varying(500),
+    sitio character varying(500),
+    tsitio_id integer,
+    latitud double precision,
+    longitud double precision,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL,
+    nombre_sin_pais character varying(500)
+);
+
+
+--
+-- Name: sip_ubicacionpre_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.sip_ubicacionpre_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: sip_ubicacionpre_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.sip_ubicacionpre_id_seq OWNED BY public.sip_ubicacionpre.id;
 
 
 --
@@ -1032,6 +1256,7 @@ CREATE TABLE public.usuario (
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
     regionsjr_id integer,
+    tema_id integer,
     CONSTRAINT usuario_check CHECK (((fechadeshabilitacion IS NULL) OR (fechadeshabilitacion >= fechacreacion))),
     CONSTRAINT usuario_rol_check CHECK ((rol >= 1))
 );
@@ -1070,6 +1295,13 @@ ALTER TABLE ONLY public.sip_actorsocial ALTER COLUMN id SET DEFAULT nextval('pub
 --
 
 ALTER TABLE ONLY public.sip_actorsocial_persona ALTER COLUMN id SET DEFAULT nextval('public.sip_actorsocial_persona_id_seq'::regclass);
+
+
+--
+-- Name: sip_bitacora id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sip_bitacora ALTER COLUMN id SET DEFAULT nextval('public.sip_bitacora_id_seq'::regclass);
 
 
 --
@@ -1112,6 +1344,27 @@ ALTER TABLE ONLY public.sip_sectoractor ALTER COLUMN id SET DEFAULT nextval('pub
 --
 
 ALTER TABLE ONLY public.sip_tdocumento ALTER COLUMN id SET DEFAULT nextval('public.sip_tdocumento_id_seq'::regclass);
+
+
+--
+-- Name: sip_tema id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sip_tema ALTER COLUMN id SET DEFAULT nextval('public.sip_tema_id_seq'::regclass);
+
+
+--
+-- Name: sip_trivalente id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sip_trivalente ALTER COLUMN id SET DEFAULT nextval('public.sip_trivalente_id_seq'::regclass);
+
+
+--
+-- Name: sip_ubicacionpre id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sip_ubicacionpre ALTER COLUMN id SET DEFAULT nextval('public.sip_ubicacionpre_id_seq'::regclass);
 
 
 --
@@ -1192,6 +1445,14 @@ ALTER TABLE ONLY public.sip_actorsocial_persona
 
 ALTER TABLE ONLY public.sip_actorsocial
     ADD CONSTRAINT sip_actorsocial_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: sip_bitacora sip_bitacora_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sip_bitacora
+    ADD CONSTRAINT sip_bitacora_pkey PRIMARY KEY (id);
 
 
 --
@@ -1339,6 +1600,30 @@ ALTER TABLE ONLY public.sip_sectoractor
 
 
 --
+-- Name: sip_tema sip_tema_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sip_tema
+    ADD CONSTRAINT sip_tema_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: sip_trivalente sip_trivalente_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sip_trivalente
+    ADD CONSTRAINT sip_trivalente_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: sip_ubicacionpre sip_ubicacionpre_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sip_ubicacionpre
+    ADD CONSTRAINT sip_ubicacionpre_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: sip_tclase tclase_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -1401,6 +1686,34 @@ CREATE INDEX index_sip_actorsocial_on_pais_id ON public.sip_actorsocial USING bt
 
 
 --
+-- Name: index_sip_ubicacion_on_id_clase; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_sip_ubicacion_on_id_clase ON public.sip_ubicacion USING btree (id_clase);
+
+
+--
+-- Name: index_sip_ubicacion_on_id_departamento; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_sip_ubicacion_on_id_departamento ON public.sip_ubicacion USING btree (id_departamento);
+
+
+--
+-- Name: index_sip_ubicacion_on_id_municipio; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_sip_ubicacion_on_id_municipio ON public.sip_ubicacion USING btree (id_municipio);
+
+
+--
+-- Name: index_sip_ubicacion_on_id_pais; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_sip_ubicacion_on_id_pais ON public.sip_ubicacion USING btree (id_pais);
+
+
+--
 -- Name: index_usuario_on_email; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -1412,6 +1725,13 @@ CREATE UNIQUE INDEX index_usuario_on_email ON public.usuario USING btree (email)
 --
 
 CREATE INDEX sip_busca_mundep ON public.sip_mundep USING gin (mundep);
+
+
+--
+-- Name: sip_nombre_ubicacionpre_b; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX sip_nombre_ubicacionpre_b ON public.sip_ubicacionpre USING gin (to_tsvector('spanish'::regconfig, public.f_unaccent((nombre)::text)));
 
 
 --
@@ -1446,11 +1766,43 @@ ALTER TABLE ONLY public.sip_municipio
 
 
 --
+-- Name: sip_bitacora fk_rails_2db961766c; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sip_bitacora
+    ADD CONSTRAINT fk_rails_2db961766c FOREIGN KEY (usuario_id) REFERENCES public.usuario(id);
+
+
+--
+-- Name: sip_ubicacionpre fk_rails_2e86701dfb; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sip_ubicacionpre
+    ADD CONSTRAINT fk_rails_2e86701dfb FOREIGN KEY (departamento_id) REFERENCES public.sip_departamento(id);
+
+
+--
+-- Name: sip_ubicacionpre fk_rails_3b59c12090; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sip_ubicacionpre
+    ADD CONSTRAINT fk_rails_3b59c12090 FOREIGN KEY (clase_id) REFERENCES public.sip_clase(id);
+
+
+--
 -- Name: sip_actorsocial_persona fk_rails_4672f6cbcd; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.sip_actorsocial_persona
     ADD CONSTRAINT fk_rails_4672f6cbcd FOREIGN KEY (persona_id) REFERENCES public.sip_persona(id);
+
+
+--
+-- Name: sip_ubicacion fk_rails_4dd7a7f238; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sip_ubicacion
+    ADD CONSTRAINT fk_rails_4dd7a7f238 FOREIGN KEY (id_departamento) REFERENCES public.sip_departamento(id);
 
 
 --
@@ -1475,6 +1827,14 @@ ALTER TABLE ONLY public.sip_actorsocial
 
 ALTER TABLE ONLY public.sal7711_gen_articulo
     ADD CONSTRAINT fk_rails_65eae7449f FOREIGN KEY (departamento_id) REFERENCES public.sip_departamento(id);
+
+
+--
+-- Name: sip_ubicacion fk_rails_6ed05ed576; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sip_ubicacion
+    ADD CONSTRAINT fk_rails_6ed05ed576 FOREIGN KEY (id_pais) REFERENCES public.sip_pais(id);
 
 
 --
@@ -1542,11 +1902,59 @@ ALTER TABLE ONLY public.sip_actorsocial_sectoractor
 
 
 --
+-- Name: sip_ubicacion fk_rails_a1d509c79a; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sip_ubicacion
+    ADD CONSTRAINT fk_rails_a1d509c79a FOREIGN KEY (id_clase) REFERENCES public.sip_clase(id);
+
+
+--
+-- Name: sip_ubicacion fk_rails_b82283d945; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sip_ubicacion
+    ADD CONSTRAINT fk_rails_b82283d945 FOREIGN KEY (id_municipio) REFERENCES public.sip_municipio(id);
+
+
+--
+-- Name: sip_ubicacionpre fk_rails_c08a606417; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sip_ubicacionpre
+    ADD CONSTRAINT fk_rails_c08a606417 FOREIGN KEY (municipio_id) REFERENCES public.sip_municipio(id);
+
+
+--
+-- Name: sip_ubicacionpre fk_rails_c8024a90df; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sip_ubicacionpre
+    ADD CONSTRAINT fk_rails_c8024a90df FOREIGN KEY (tsitio_id) REFERENCES public.sip_tsitio(id);
+
+
+--
+-- Name: usuario fk_rails_cc636858ad; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.usuario
+    ADD CONSTRAINT fk_rails_cc636858ad FOREIGN KEY (tema_id) REFERENCES public.sip_tema(id);
+
+
+--
 -- Name: sal7711_gen_articulo fk_rails_d3b628101f; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.sal7711_gen_articulo
     ADD CONSTRAINT fk_rails_d3b628101f FOREIGN KEY (fuenteprensa_id) REFERENCES public.sip_fuenteprensa(id);
+
+
+--
+-- Name: sip_ubicacionpre fk_rails_eba8cc9124; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sip_ubicacionpre
+    ADD CONSTRAINT fk_rails_eba8cc9124 FOREIGN KEY (pais_id) REFERENCES public.sip_pais(id);
 
 
 --
@@ -1750,6 +2158,31 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20180921120954'),
 ('20181011104537'),
 ('20190109125417'),
-('20190110191802');
+('20190110191802'),
+('20190331111015'),
+('20190401175521'),
+('20190612111043'),
+('20190618135559'),
+('20190625112649'),
+('20190715083916'),
+('20190715182611'),
+('20190818013251'),
+('20190926104116'),
+('20191205200007'),
+('20191205202150'),
+('20191205204511'),
+('20191219011910'),
+('20200228235200'),
+('20200319183515'),
+('20200722210144'),
+('20200723133542'),
+('20200907165157'),
+('20200907174303'),
+('20200916022934'),
+('20200919003430'),
+('20201119125643'),
+('20210401194637'),
+('20210401210102'),
+('20210414201956');
 
 

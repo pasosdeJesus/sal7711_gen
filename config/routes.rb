@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 Sal7711Gen::Engine.routes.draw do
 
   get 'buscar/:id', to: 'buscar#mostraruno', as: 'buscar_mostraruno'

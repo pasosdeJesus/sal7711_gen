@@ -4,7 +4,7 @@
 %>
 
   <div class="row">
-    <div id="campos" class="col-sm-offset-0 col-sm-4">
+    <div id="campos" class="offset-sm-0 col-sm-4">
   
       <%= render partial: 'sip/hogar/errores', locals: { f: f } %>
 
@@ -47,9 +47,9 @@
         %>
       </div>
 
-    </div> <!-- class="col-sm-offset-0 col-sm-7 col-md-8" -->
+    </div> <!-- class="offset-sm-0 col-sm-7 col-md-8" -->
   
-    <div id="resultados" class="col-sm-offset-0 col-sm-8">
+    <div id="resultados" class="offset-sm-0 col-sm-8">
       <% if f.object && f.object.id && f.object.adjunto_file_name %>
         <%= image_tag url_descarga_jpg(f.object.id), width: "100%", id: 'imagen-detalle' %> 
       <% else %>

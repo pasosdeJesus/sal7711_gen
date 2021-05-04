@@ -236,7 +236,7 @@ module Sal7711Gen
                 where = " mundep  @@ to_tsquery('spanish', '#{consNom}')";
                 # autocomplete de jquery requiere label, val
                 qstring = "SELECT nombre as label, idlocal as value
-                FROM sip_mundep 
+                FROM public.sip_mundep 
                 WHERE #{where} ORDER BY 1;"
         
                 r = ActiveRecord::Base.connection.select_all qstring
@@ -269,20 +269,20 @@ module Sal7711Gen
               texto = mostraruno_mejoratexto(texto, params)
               Sal7711Gen::Bitacora.a( request.remote_ip, current_usuario, 
                                      'mostraruno', rlocal)
-              puts "OJO aqui1"
+              puts "OJO mostraruno antes respond_to"
               respond_to do |format|
                 format.html { 
-                  #puts "OJO aqui1.html"
+                  puts "OJO mostrarno en format.html"
                   render 'sal7711_gen/articulos/show', layout: nil
                   return
                 }
                 format.json { 
-                  #puts "OJO aqui2.json"
+                  puts "OJO aqui2.json"
                   head :no_content 
                   return
                 }
                 format.js   { 
-                  #puts "OJO aqui3.js"
+                  puts "OJO aqui3.js"
                   render action: :mostraruno 
                   return
                 }

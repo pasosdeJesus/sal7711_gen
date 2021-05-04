@@ -2,7 +2,6 @@
 module Sal7711Gen
   module ApplicationHelper
 
-    include ::FontAwesome::Rails::IconHelper
     include Sip::PaginacionAjaxHelper
 
     def desc_bitacora(entrada)
@@ -63,10 +62,9 @@ module Sal7711Gen
       nomar = titulo.gsub(/[^0-9A-Za-z.\-]/, '_')  + "-" + id.to_s
       rutaf = "#{anioc.to_i.to_s}/#{mesc.to_i.to_s}/#{diac.to_i.to_s}/" 
       rutajpg = rutacolchon.join(rutaf, nomar + '.jpg')
-      urljpg = Pathname.new(urlcolchon.to_s).join(rutaf, nomar + '.jpg')
+      urljpg = Pathname.new(Rails.configuration.relative_url_root).join(urlcolchon.to_s).join(rutaf, nomar + '.jpg')
       rutapdf = rutacolchon.join(rutaf, nomar + '.pdf')
-      urlpdf = Pathname.new(urlcolchon.to_s).join(rutaf, nomar + '.pdf')
-
+      urlpdf = Pathname.new(Rails.configuration.relative_url_root).join(urlcolchon.to_s).join(rutaf, nomar + '.pdf')
       return [titulo, texto, rlocal,
               rutajpg, urljpg.to_s, 
               rutapdf, urlpdf.to_s]
