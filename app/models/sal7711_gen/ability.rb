@@ -1,4 +1,3 @@
-# encoding: UTF-8
 module Sal7711Gen
 	class Ability  < Sip::Ability
 
@@ -11,8 +10,8 @@ module Sal7711Gen
         ['Sip', 'etiqueta'],
         ['Sip', 'grupo'],
         ['Sip', 'oficina'],
-        ['Sip', 'perfilactorsocial'],
-        ['Sip', 'sectoractor'],
+        ['Sip', 'perfilorgsocial'],
+        ['Sip', 'sectororgsocial'],
         ['Sip', 'tclase'],
         ['Sip', 'tdocumento'],
         ['Sip', 'trelacion'],
