@@ -21,9 +21,10 @@ gem 'devise-i18n'
 
 gem 'jbuilder' # API JSON facil. Ver: https://github.com/rails/jbuilder
 
-gem 'nokogiri', '>=1.11.1'
+gem 'kt-paperclip',                 # Anexos
+  git: 'https://github.com/kreeti/kt-paperclip.git'
 
-gem 'paperclip'#, '~> 4.1' # Maneja adjuntos
+gem 'nokogiri', '>=1.11.1'
 
 gem 'pg' # Postgresql
 
