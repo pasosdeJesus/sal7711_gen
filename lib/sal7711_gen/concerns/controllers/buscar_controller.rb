@@ -261,11 +261,38 @@ module Sal7711Gen
             return texto
           end
 
+          def forzar_salida?
+            false
+          end
+
           def mostraruno
             if (params[:id] && params[:id].to_i > 0)
               id = params[:id].to_i
               @titulo, @id, @texto, @descargajpg, @descargapdf, rlocal = 
                 prepara_imagenes(id)
+              if forzar_salida?
+                respond_to do |format|
+                  format.html { 
+                    puts "OJO salida forzada HTML"
+                    redirect_to main_app.sign_out_path
+                    byebug
+                    return
+                  }
+                  format.json { 
+                    puts "OJO salida forzada JSON"
+                    head :no_content 
+                    return
+                  }
+                  format.js   { 
+                    puts "OJO salida forzada JS"
+                    render action: :salidaforzada
+                    return
+                  }
+                end
+
+                
+                return
+              end
               texto = mostraruno_mejoratexto(texto, params)
               Sal7711Gen::Bitacora.a( request.remote_ip, current_usuario, 
                                      'mostraruno', rlocal)

@@ -4,7 +4,7 @@ Rails.application.routes.draw do
 
   scope '/sal7711' do
     devise_scope :usuario do
-      get 'sign_out' => 'devise/sessions#destroy'
+      get 'sign_out' => 'devise/sessions#destroy', as: :sign_out
       # El siguiente para superar mala generación del action en el formulario
       # cuando se autentica mal y esta montado no en / (genera 
       # /puntomontaje/puntomontaje/usuarios/sign_in )
