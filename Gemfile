@@ -43,7 +43,8 @@ gem 'twitter_cldr' # ICU con CLDR
 
 gem 'tzinfo' # Zonas horarias
 
-gem 'webpacker'
+gem 'webpacker',#, '~> 5.4'       # Traduce y compila modulos Javascript
+  git: 'https://github.com/rails/webpacker'
 
 gem 'will_paginate' # Listados en páginas
 
@@ -52,7 +53,7 @@ gem 'will_paginate' # Listados en páginas
 # lógico y no alfabetico como las gemas anteriores)
 
 gem 'sip', # Motor generico
-  git: 'https://github.com/pasosdeJesus/sip.git', branch: :main
+  git: 'https://github.com/pasosdeJesus/sip.git', branch: :webpacker6
   #path: '../sip'
 
 
