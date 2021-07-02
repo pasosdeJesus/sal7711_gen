@@ -11,8 +11,8 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sip.git
-  revision: d5d373d3038be7a4080f84d54320326bab629aea
-  branch: webpacker6
+  revision: e35094edba13b6fdf0a24ceaa70ac1504751dea5
+  branch: main
   specs:
     sip (2.0.b12)
       cancancan
