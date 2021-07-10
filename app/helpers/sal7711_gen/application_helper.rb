@@ -59,6 +59,9 @@ module Sal7711Gen
       anioc = a.created_at.year
       mesc = a.created_at.month
       diac = a.created_at.day
+      if titulo.nil?
+        byebug
+      end
       nomar = titulo.gsub(/[^0-9A-Za-z.\-]/, '_')  + "-" + id.to_s
       rutaf = "#{anioc.to_i.to_s}/#{mesc.to_i.to_s}/#{diac.to_i.to_s}/" 
       rutajpg = rutacolchon.join(rutaf, nomar + '.jpg')

@@ -6,7 +6,9 @@
     <p><%= @titulo %></p>
     <hr>
     <div class="imagen-contenido">
-      <%= image_tag @descargajpg %>
+      <% if @descargajgp %>
+        <%= image_tag @descargajpg %>
+      <% end %>
     </div>
   </body>
 </html>
