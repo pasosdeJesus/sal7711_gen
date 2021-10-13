@@ -11,7 +11,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sip.git
-  revision: 9abf330f584de9afabb943e06d02e99907314dbd
+  revision: 6d73352f61c4220cf8ec8b9ab14648561ac6e4c7
   branch: main
   specs:
     sip (2.0.b12)
@@ -164,7 +164,7 @@ GEM
     mimemagic (0.3.10)
       nokogiri (~> 1)
       rake
-    mini_mime (1.1.1)
+    mini_mime (1.1.2)
     mini_portile2 (2.6.1)
     minitest (5.14.4)
     minitest-reporters (1.4.3)
@@ -189,7 +189,7 @@ GEM
     prawn (2.4.0)
       pdf-core (~> 0.9.0)
       ttfunk (~> 1.7)
-    puma (5.5.0)
+    puma (5.5.2)
       nio4r (~> 2.0)
     racc (1.5.2)
     rack (2.2.3)
