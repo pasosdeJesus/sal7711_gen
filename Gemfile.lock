@@ -11,7 +11,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sip.git
-  revision: 10491e19f326b4ad4ed4b4e77b8b80b78cd34a2d
+  revision: e9ad2ec6e86800db83d7cd189abc397240cc2600
   branch: main
   specs:
     sip (2.0.b12)
@@ -191,7 +191,7 @@ GEM
       ttfunk (~> 1.7)
     puma (5.5.2)
       nio4r (~> 2.0)
-    racc (1.5.2)
+    racc (1.6.0)
     rack (2.2.3)
     rack-contrib (2.3.0)
       rack (~> 2.0)
