@@ -1,5 +1,3 @@
-# encoding: UTF-8
-
 module Sal7711Gen
   class ArticuloCategoriaprensa < ActiveRecord::Base
     belongs_to :articulo, class_name: 'Sal7711Gen::Articulo', 

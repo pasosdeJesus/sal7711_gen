@@ -1,5 +1,3 @@
-# encoding: UTF-8
-
 module Sal7711Gen
   class AnexoArticulo < ActiveRecord::Base
     belongs_to :anexo, class_name: 'Sip::Anexo', 

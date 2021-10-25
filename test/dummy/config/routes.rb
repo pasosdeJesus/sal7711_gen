@@ -1,5 +1,3 @@
-# encoding: utf-8
-
 Rails.application.routes.draw do
 
   scope '/sal7711' do

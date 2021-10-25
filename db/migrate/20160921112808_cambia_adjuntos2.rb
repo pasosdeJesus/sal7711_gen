@@ -1,5 +1,3 @@
-# encoding: UTF-8
-
 class CambiaAdjuntos2 < ActiveRecord::Migration[5.0]
   def up
     r=Sal7711Gen::Articulo.all

@@ -1,4 +1,3 @@
-# encoding: UTF-8
 require 'sal7711_gen/concerns/models/categoriaprensa'
 
 module Sal7711Gen

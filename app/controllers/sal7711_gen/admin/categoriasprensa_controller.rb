@@ -1,4 +1,3 @@
-# encoding: UTF-8
 module Sal7711Gen
   module Admin
     class CategoriasprensaController < Sip::Admin::BasicasController
