@@ -11,8 +11,6 @@ module Sal7711Gen
           include Sal7711Gen::ApplicationHelper
           helper Sal7711Gen::ApplicationHelper
   
-          before_action :set_articulo, only: [:edit, :update, :destroy]
-
           def clase
             "Sal7711Gen::Articulo"
           end
