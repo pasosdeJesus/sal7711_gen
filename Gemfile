@@ -24,6 +24,8 @@ gem 'devise-i18n'
 
 gem 'jbuilder' # API JSON facil. Ver: https://github.com/rails/jbuilder
 
+gem 'jsbundling-rails'
+
 gem 'kt-paperclip',                 # Anexos
   git: 'https://github.com/kreeti/kt-paperclip.git'
 
@@ -42,11 +44,11 @@ gem 'sassc-rails' # Para generar CSS
 
 gem 'simple_form' # Formularios simples 
 
+gem 'sprockets-rails'
+
 gem 'twitter_cldr' # ICU con CLDR
 
 gem 'tzinfo' # Zonas horarias
-
-gem 'webpacker', '~> 6.0.0.rc.1'       # Traduce y compila modulos Javascript
 
 gem 'will_paginate' # Listados en páginas
 
@@ -87,7 +89,7 @@ group :test do
   
   gem 'minitest-reporters' 
 
-  gem 'simplecov', '<0.18' # Debido a https://github.com/codeclimate/test-reporter/issues/418
+  gem 'simplecov'
 
   gem 'spring' # Acelera ejecutando en fondo
 
