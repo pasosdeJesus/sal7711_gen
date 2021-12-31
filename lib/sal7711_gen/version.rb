@@ -1,3 +1,3 @@
 module Sal7711Gen
-  VERSION = "1.0.b4"
+  VERSION = "2.1a1"
 end
