@@ -34,3 +34,4 @@ coverage/
 test/dummy/public/packs/
 test/dummy/public/sal7711/assets/
 test/dummy/public/packs-test
+test/dummy/app/assets/builds/
