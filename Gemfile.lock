@@ -11,7 +11,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sip.git
-  revision: a63326dc9855766a7d9e0b5e63b8e60408b6e4e7
+  revision: 1490cac92f982de45f2dd69db3dcb4b840a20191
   branch: rails7jses
   specs:
     sip (2.1a1)
@@ -24,6 +24,13 @@ GIT
       rails-i18n
       simple_form
       twitter_cldr
+
+GIT
+  remote: https://github.com/vtamara/cocoon.git
+  revision: 9f1892403c3dbdb8f7d457a06f237ff58e7dfb07
+  branch: new_id_with_ajax
+  specs:
+    cocoon (1.2.11)
 
 PATH
   remote: .
@@ -285,6 +292,7 @@ DEPENDENCIES
   bigdecimal
   bootsnap (>= 1.1.0)
   cancancan
+  cocoon!
   coffee-rails
   colorize
   connection_pool
