@@ -5,7 +5,7 @@ module Sal7711Gen
 
     serialize :detalle
     belongs_to :usuario, foreign_key: 'usuario_id',
-      validate: true, class_name: 'Usuario'
+      validate: true, class_name: 'Usuario', optional: false
 
     campofecha_localizado :fecha
 
