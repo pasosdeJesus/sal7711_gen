@@ -67,8 +67,7 @@ gem 'sip', # Motor generico
 
 
 group :development, :test do
-  
-  #gem 'debug' # Depurar
+  gem 'debug' # Depurar
 
   gem 'colorize' # Colores en consola
 
