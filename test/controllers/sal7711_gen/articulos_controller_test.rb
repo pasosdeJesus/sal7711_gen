@@ -1,8 +1,9 @@
-require_relative '../../test_helper'
+require 'test_helper'
 
 module Sal7711Gen
   class ArticulosControllerTest < ActionDispatch::IntegrationTest
-    include Engine.routes.url_helpers
+
+    include Rails.application.routes.url_helpers
     include Devise::Test::IntegrationHelpers
 
     setup do

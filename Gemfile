@@ -31,6 +31,7 @@ gem 'pg' # Postgresql
 gem 'prawn' # Para generar PDF
 
 gem 'rails', '~> 6.1'
+  #path: '../rails'
   #git: 'https://github.com/rails/rails.git', branch: '6-1-stable'
 
 gem 'rails-i18n'
@@ -58,7 +59,7 @@ gem 'sip', # Motor generico
 
 group :development, :test do
   
-  #gem 'byebug' # Depurar
+  gem 'debug' # Depurar
 
   gem 'colorize' # Colores en consola
 
