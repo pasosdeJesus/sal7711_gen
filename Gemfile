@@ -4,6 +4,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 gemspec
 
+gem 'babel-transpiler'
 
 gem 'bcrypt'
 
@@ -45,6 +46,10 @@ gem 'sassc-rails' # Para generar CSS
 gem 'simple_form' # Formularios simples 
 
 gem 'sprockets-rails'
+
+gem 'stimulus-rails'
+
+gem 'turbo-rails'
 
 gem 'twitter_cldr' # ICU con CLDR
 
