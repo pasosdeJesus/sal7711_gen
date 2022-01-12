@@ -93,7 +93,7 @@ module Sal7711Gen
                 }
                 format.json { render :show, status: :created, location: articulo }
               else
-                format.html { render :new }
+                format.html { render :new, layout: 'application' }
                 format.json { render json: articulo.errors, status: :unprocessable_entity }
               end
             end
