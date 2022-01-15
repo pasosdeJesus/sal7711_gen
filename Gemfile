@@ -88,11 +88,8 @@ end
 group :test do
   gem 'cuprite'
 
-
   gem 'connection_pool'
  
-  gem 'meta_request'
-  
   gem 'minitest-reporters' 
 
   gem 'simplecov'
