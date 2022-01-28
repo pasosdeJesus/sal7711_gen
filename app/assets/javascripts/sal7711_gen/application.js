@@ -14,23 +14,3 @@
 //= require sal7711_gen/motor
 //= require_tree .
 
-document.addEventListener('turbo:load', function() {
-	var root;
-	root = typeof exports !== "undefined" && exports !== null ? 
-		exports : window ;
-	sip_prepara_eventos_comunes(root, true);
-	/* Formato fecha manejado por sip */
-	sal7711_gen_prepara_eventos_comunes(root);
-
-	var numb = 0;
-	$('#buscar_fuente_chosen').parent().children().each(function () { 
-		if ($(this).attr('id') == 'buscar_fuente_chosen') {
-			numb++;
-			if (numb > 1) {
-				$(this).remove();
-			}
-		}
-	})
-});
-
-

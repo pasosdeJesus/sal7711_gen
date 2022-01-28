@@ -11,7 +11,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sip.git
-  revision: 2c103a60a74b1ce921f989f274816ea61ee10cb5
+  revision: fe6a248bde0daa98923c16c84f0e6fc10309fc1b
   branch: main
   specs:
     sip (2.1a1)
@@ -119,7 +119,7 @@ GEM
     bcrypt (3.1.16)
     bigdecimal (3.1.2)
     bindex (0.8.1)
-    bootsnap (1.10.1)
+    bootsnap (1.10.2)
       msgpack (~> 1.2)
     builder (3.2.4)
     camertron-eprun (1.1.1)
@@ -177,7 +177,7 @@ GEM
     ffi (1.15.5)
     globalid (1.0.0)
       activesupport (>= 5.0)
-    i18n (1.8.11)
+    i18n (1.9.1)
       concurrent-ruby (~> 1.0)
     io-console (0.5.11)
     io-wait (0.2.1)
@@ -208,7 +208,7 @@ GEM
       builder
       minitest (>= 5.0)
       ruby-progressbar
-    msgpack (1.4.2)
+    msgpack (1.4.4)
     net-imap (0.2.3)
       digest
       net-protocol
@@ -230,12 +230,12 @@ GEM
       racc (~> 1.4)
     orm_adapter (0.5.0)
     pdf-core (0.9.0)
-    pg (1.2.3)
+    pg (1.3.0)
     prawn (2.4.0)
       pdf-core (~> 0.9.0)
       ttfunk (~> 1.7)
     public_suffix (4.0.6)
-    puma (5.5.2)
+    puma (5.6.1)
       nio4r (~> 2.0)
     racc (1.6.0)
     rack (2.2.3)
@@ -337,7 +337,7 @@ GEM
     will_paginate (3.3.1)
     xpath (3.2.0)
       nokogiri (~> 1.8)
-    zeitwerk (2.5.3)
+    zeitwerk (2.5.4)
 
 PLATFORMS
   x86_64-openbsd
