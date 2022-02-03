@@ -11,7 +11,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sip.git
-  revision: fe6a248bde0daa98923c16c84f0e6fc10309fc1b
+  revision: a1baed425b12a76d43ba3e7ec1d3a5c92f24de4b
   branch: main
   specs:
     sip (2.1a1)
@@ -119,7 +119,7 @@ GEM
     bcrypt (3.1.16)
     bigdecimal (3.1.2)
     bindex (0.8.1)
-    bootsnap (1.10.2)
+    bootsnap (1.10.3)
       msgpack (~> 1.2)
     builder (3.2.4)
     camertron-eprun (1.1.1)
@@ -230,7 +230,7 @@ GEM
       racc (~> 1.4)
     orm_adapter (0.5.0)
     pdf-core (0.9.0)
-    pg (1.3.0)
+    pg (1.3.1)
     prawn (2.4.0)
       pdf-core (~> 0.9.0)
       ttfunk (~> 1.7)
