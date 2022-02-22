@@ -62,3 +62,4 @@ document.addEventListener('turbo:load', (e) => {
 
 })
 
+import "./controllers"
