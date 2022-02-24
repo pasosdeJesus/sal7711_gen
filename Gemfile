@@ -30,6 +30,10 @@ gem 'jsbundling-rails'
 gem 'kt-paperclip',                 # Anexos
   git: 'https://github.com/kreeti/kt-paperclip.git'
 
+gem 'matrix' # requerido por ruby 3.1
+
+gem 'net-smtp' # requerido por ruby 3.1
+
 gem 'nokogiri', '>=1.11.1'
 
 gem 'pg' # Postgresql
