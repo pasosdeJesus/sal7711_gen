@@ -11,7 +11,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sip.git
-  revision: b7b146c91dcaa904e94608454ffa68fe96ae47d1
+  revision: dfd35b99433b7d3c5156b3f44aec3d4ff59f5769
   branch: main
   specs:
     sip (2.1a1)
@@ -207,7 +207,7 @@ GEM
       builder
       minitest (>= 5.0)
       ruby-progressbar
-    msgpack (1.5.0)
+    msgpack (1.5.1)
     net-imap (0.2.3)
       digest
       net-protocol
