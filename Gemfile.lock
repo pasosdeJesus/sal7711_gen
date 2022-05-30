@@ -11,7 +11,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sip.git
-  revision: 35a41e1ebb9a8180266768ae3fd4ea7dfb843d32
+  revision: d460aa31682992e4a51cd7c56299624c8d35f2b3
   branch: main
   specs:
     sip (2.1a1)
@@ -119,7 +119,7 @@ GEM
     bcrypt (3.1.18)
     bigdecimal (3.1.2)
     bindex (0.8.1)
-    bootsnap (1.11.1)
+    bootsnap (1.12.0)
       msgpack (~> 1.2)
     builder (3.2.4)
     camertron-eprun (1.1.1)
@@ -207,7 +207,7 @@ GEM
       builder
       minitest (>= 5.0)
       ruby-progressbar
-    msgpack (1.5.1)
+    msgpack (1.5.2)
     net-imap (0.2.3)
       digest
       net-protocol
@@ -236,7 +236,7 @@ GEM
     puma (5.6.4)
       nio4r (~> 2.0)
     racc (1.6.0)
-    rack (2.2.3)
+    rack (2.2.3.1)
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
     rails (7.0.3)
@@ -270,7 +270,7 @@ GEM
       zeitwerk (~> 2.5)
     raindrops (0.20.0)
     rake (13.0.6)
-    regexp_parser (2.4.0)
+    regexp_parser (2.5.0)
     reline (0.3.1)
       io-console (~> 0.5)
     responders (3.0.1)
@@ -309,10 +309,11 @@ GEM
       climate_control (>= 0.0.3, < 1.0)
     thor (1.2.1)
     tilt (2.0.10)
-    timeout (0.2.0)
+    timeout (0.3.0)
     ttfunk (1.7.0)
-    turbo-rails (1.0.1)
+    turbo-rails (1.1.1)
       actionpack (>= 6.0.0)
+      activejob (>= 6.0.0)
       railties (>= 6.0.0)
     twitter_cldr (6.11.3)
       camertron-eprun
@@ -384,4 +385,4 @@ DEPENDENCIES
   will_paginate
 
 BUNDLED WITH
-   2.3.13
+   2.3.14
