@@ -11,7 +11,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sip.git
-  revision: c10f00c043468d7e4ddc5a074bd441b7a1c2556c
+  revision: 15066e523a1e36e7644c26b3a8a30158ebbaf70c
   branch: main
   specs:
     sip (2.1a1)
@@ -123,7 +123,7 @@ GEM
       msgpack (~> 1.2)
     builder (3.2.4)
     camertron-eprun (1.1.1)
-    cancancan (3.3.0)
+    cancancan (3.4.0)
     capybara (3.37.1)
       addressable
       matrix
@@ -201,7 +201,7 @@ GEM
     mime-types-data (3.2022.0105)
     mini_mime (1.1.2)
     mini_portile2 (2.8.0)
-    minitest (5.16.0)
+    minitest (5.16.1)
     minitest-reporters (1.5.0)
       ansi
       builder
@@ -228,7 +228,7 @@ GEM
       racc (~> 1.4)
     orm_adapter (0.5.0)
     pdf-core (0.9.0)
-    pg (1.4.0)
+    pg (1.4.1)
     prawn (2.4.0)
       pdf-core (~> 0.9.0)
       ttfunk (~> 1.7)
