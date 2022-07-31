@@ -11,7 +11,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sip.git
-  revision: 699e46effcb766429499ed6bb740599963958669
+  revision: 1fbbb0119103461b953dfc100f9ceb5a13030570
   branch: main
   specs:
     sip (2.1a2)
@@ -119,7 +119,7 @@ GEM
     bcrypt (3.1.18)
     bigdecimal (3.1.2)
     bindex (0.8.1)
-    bootsnap (1.12.0)
+    bootsnap (1.13.0)
       msgpack (~> 1.2)
     builder (3.2.4)
     camertron-eprun (1.1.1)
@@ -163,9 +163,9 @@ GEM
       devise (>= 4.8.0)
     digest (3.1.0)
     docile (1.4.0)
-    dotenv (2.8.0)
-    dotenv-rails (2.8.0)
-      dotenv (= 2.8.0)
+    dotenv (2.8.1)
+    dotenv-rails (2.8.1)
+      dotenv (= 2.8.1)
       railties (>= 3.2)
     erubi (1.10.0)
     execjs (2.8.1)
