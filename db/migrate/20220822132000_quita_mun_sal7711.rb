@@ -8,6 +8,5 @@ class QuitaMunSal7711 < ActiveRecord::Migration[7.0]
   end
 
   def down
-    raise IrreversibleMigration
   end
 end
