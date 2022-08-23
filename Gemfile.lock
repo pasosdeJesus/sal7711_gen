@@ -11,7 +11,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sip.git
-  revision: cfce234050c2f5b494ed4636808bcf4db62a5194
+  revision: a2b2b90e6569a8076aa46aab64ba961fc59510ca
   branch: main
   specs:
     sip (2.1a2)
@@ -207,7 +207,7 @@ GEM
       builder
       minitest (>= 5.0)
       ruby-progressbar
-    msgpack (1.5.4)
+    msgpack (1.5.6)
     net-imap (0.2.3)
       digest
       net-protocol
@@ -233,7 +233,7 @@ GEM
       pdf-core (~> 0.9.0)
       ttfunk (~> 1.7)
     public_suffix (5.0.0)
-    puma (5.6.4)
+    puma (5.6.5)
       nio4r (~> 2.0)
     racc (1.6.0)
     rack (2.2.4)
