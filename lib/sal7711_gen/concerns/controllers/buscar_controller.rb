@@ -7,7 +7,7 @@ module Sal7711Gen
 
         extend ActiveSupport::Concern
 
-        include Sip::FormatoFechaHelper
+        include Msip::FormatoFechaHelper
 
         included do
           include ActionView::Helpers::AssetUrlHelper
@@ -55,10 +55,10 @@ module Sal7711Gen
             if (params[:buscar] && params[:buscar][:mundep] && params[:buscar][:mundep] != '')
               pmd = params[:buscar][:mundep].split(" / ")
               if pmd.length == 1 # solo departamento
-                ldep = Sip::Departamento.all.where('nombre=?', pmd[0])
-                if Sip.paisomision 
+                ldep = Msip::Departamento.all.where('nombre=?', pmd[0])
+                if Msip.paisomision 
                   ldep = ldep.where(
-                    'id_pais=?', Sip.paisomision)
+                    'id_pais=?', Msip.paisomision)
                 end
                 dep = ldep.take
                 if dep
@@ -67,14 +67,14 @@ module Sal7711Gen
                   @articulos = @articulos.where("departamento_id = '-1'")
                 end
               else # departamento y municipio
-                ldep = Sip::Departamento.all.where('nombre=?', pmd[1])
-                if Sip.paisomision
+                ldep = Msip::Departamento.all.where('nombre=?', pmd[1])
+                if Msip.paisomision
                   ldep = ldep.where(
-                    'id_pais=?', Sip.paisomision)
+                    'id_pais=?', Msip.paisomision)
                 end
                 dep = ldep.take
                 if dep
-                  mun = Sip::Municipio.all.where(
+                  mun = Msip::Municipio.all.where(
                     'nombre=? AND id_departamento=?', pmd[0], dep.id).take
                   if mun
                     @articulos = @articulos.where("municipio_id = ?", mun.id)
@@ -87,7 +87,7 @@ module Sal7711Gen
         
             if(params[:buscar] && params[:buscar][:fuente] && 
                params[:buscar][:fuente]  != '')
-              fu = Sip::Fuenteprensa.all.find(params[:buscar][:fuente])
+              fu = Msip::Fuenteprensa.all.find(params[:buscar][:fuente])
               if fu
                 @articulos = @articulos.where("fuenteprensa_id = ?", fu.id)
               else
@@ -203,7 +203,7 @@ module Sal7711Gen
               # 2 params que siempre estan son controller y action si hay
               # más sería una consulta iniciada por usuario
               Sal7711Gen::Bitacora.a( request.remote_ip, current_usuario, 
-                                     'index', params)
+                                     'index', params.to_s)
             end
             respond_to do |format|
               format.html { }
@@ -225,7 +225,7 @@ module Sal7711Gen
                   format.json { render inline: 'Falta variable term' }
                 end
               else
-                term = Sip::Municipio.connection.quote_string(params[:term])
+                term = Msip::Municipio.connection.quote_string(params[:term])
                 consNom = term.downcase.strip #sin_tildes
                 consNom.gsub!(/ +/, ":* & ")
                 if consNom.length > 0
@@ -234,7 +234,7 @@ module Sal7711Gen
                 where = " mundep  @@ to_tsquery('spanish', '#{consNom}')";
                 # autocomplete de jquery requiere label, val
                 qstring = "SELECT nombre as label, idlocal as value
-                FROM public.sip_mundep 
+                FROM public.msip_mundep 
                 WHERE #{where} ORDER BY 1;"
         
                 r = ActiveRecord::Base.connection.select_all qstring
@@ -293,7 +293,7 @@ module Sal7711Gen
               end
               texto = mostraruno_mejoratexto(texto, params)
               Sal7711Gen::Bitacora.a( request.remote_ip, current_usuario, 
-                                     'mostraruno', rlocal)
+                                     'mostraruno', rlocal.to_s)
               puts "OJO mostraruno antes respond_to"
               respond_to do |format|
                 format.html { 

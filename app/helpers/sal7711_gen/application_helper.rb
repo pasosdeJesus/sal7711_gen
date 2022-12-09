@@ -1,7 +1,7 @@
 module Sal7711Gen
   module ApplicationHelper
 
-    include Sip::PaginacionAjaxHelper
+    include Msip::PaginacionAjaxHelper
 
     def desc_bitacora(entrada)
       r = ''
@@ -20,7 +20,7 @@ module Sal7711Gen
         r += "Categoria: #{entrada[:buscar]['categoria']}. "
       end
       if (entrada[:buscar]['fuente'] && entrada[:buscar]['fuente'] != '')
-        f = Sip::Fuenteprensa.find(entrada[:buscar]['fuente'])
+        f = Msip::Fuenteprensa.find(entrada[:buscar]['fuente'])
         if f
           r += "Fuente: #{f.nombre}. "
         end
@@ -106,10 +106,10 @@ module Sal7711Gen
         FileUtils.mkdir_p rutapdf.dirname
         Prawn::Document.generate("#{rutapdf.to_s}") do
           font_families.update("Tuffy" => {
-            :normal => Sip::Engine.root.join('app', 'assets', 'fonts', 'tuffy', 'Tuffy.ttf'),
-            :italic => Sip::Engine.root.join('app', 'assets', 'fonts', 'tuffy', 'Tuffy_Italic.ttf'),
-            :bold => Sip::Engine.root.join('app', 'assets', 'fonts', 'tuffy', 'Tuffy_Bold.ttf'),
-            :bold_italic => Sip::Engine.root.join('app', 'assets', 'fonts', 'tuffy', 'Tuffy_Bold_Italic.ttf')
+            :normal => Msip::Engine.root.join('app', 'assets', 'fonts', 'tuffy', 'Tuffy.ttf'),
+            :italic => Msip::Engine.root.join('app', 'assets', 'fonts', 'tuffy', 'Tuffy_Italic.ttf'),
+            :bold => Msip::Engine.root.join('app', 'assets', 'fonts', 'tuffy', 'Tuffy_Bold.ttf'),
+            :bold_italic => Msip::Engine.root.join('app', 'assets', 'fonts', 'tuffy', 'Tuffy_Bold_Italic.ttf')
           })
           font "Tuffy"
           font_size 12

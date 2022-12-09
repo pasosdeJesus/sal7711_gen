@@ -1,4 +1,4 @@
-require 'sip/engine'
+require 'msip/engine'
 
 module Sal7711Gen
   class Engine < ::Rails::Engine

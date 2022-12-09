@@ -1,4 +1,4 @@
-require 'sip/concerns/models/usuario'
+require 'msip/concerns/models/usuario'
 
 module Sal7711Gen
   module Concerns
@@ -7,7 +7,7 @@ module Sal7711Gen
         extend ActiveSupport::Concern
 
         included do
-          include Sip::Concerns::Models::Usuario
+          include Msip::Concerns::Models::Usuario
 
           has_many :bitacoras, foreign_key: 'usuario_id',
             dependent: :destroy, class_name: 'Sal7711Gen::Bitacora'

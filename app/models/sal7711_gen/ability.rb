@@ -1,33 +1,33 @@
 module Sal7711Gen
-	class Ability  < Sip::Ability
+	class Ability  < Msip::Ability
 
     BASICAS_PROPIAS = [
       ['Sal7711Gen', 'categoriaprensa']
     ]
     def tablasbasicas 
-      Sip::Ability::BASICAS_PROPIAS + BASICAS_PROPIAS - [
-        ['Sip', 'clase'],
-        ['Sip', 'etiqueta'],
-        ['Sip', 'grupo'],
-        ['Sip', 'oficina'],
-        ['Sip', 'perfilorgsocial'],
-        ['Sip', 'sectororgsocial'],
-        ['Sip', 'tclase'],
-        ['Sip', 'tdocumento'],
-        ['Sip', 'trelacion'],
-        ['Sip', 'trivalente'],
-        ['Sip', 'tsitio']
+      Msip::Ability::BASICAS_PROPIAS + BASICAS_PROPIAS - [
+        ['Msip', 'clase'],
+        ['Msip', 'etiqueta'],
+        ['Msip', 'grupo'],
+        ['Msip', 'oficina'],
+        ['Msip', 'perfilorgsocial'],
+        ['Msip', 'sectororgsocial'],
+        ['Msip', 'tclase'],
+        ['Msip', 'tdocumento'],
+        ['Msip', 'trelacion'],
+        ['Msip', 'trivalente'],
+        ['Msip', 'tsitio']
       ] 
     end
 
     BASICAS_ID_NOAUTO = []
-    # Hereda basicas_id_noauto de sip
+    # Hereda basicas_id_noauto de msip
    
     NOBASICAS_INDSEQID =  []
-    # Hereda nobasicas_indice_seq_con_id de sip
+    # Hereda nobasicas_indice_seq_con_id de msip
    
     BASICAS_PRIO = []
-    # Hereda tablasbasicas_prio de sip
+    # Hereda tablasbasicas_prio de msip
 
 
     # Se definen habilidades con cancancan
@@ -37,7 +37,7 @@ module Sal7711Gen
     # motores
     # @usuario Usuario que hace petición
     def initialize_sal7711_gen(usuario = nil)
-      initialize_sip(usuario)
+      initialize_msip(usuario)
       if usuario && usuario.rol then
         can :read, Sal7711Gen::Articulo
         case usuario.rol 

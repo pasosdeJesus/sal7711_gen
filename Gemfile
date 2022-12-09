@@ -65,9 +65,9 @@ gem 'will_paginate' # Listados en páginas
 # Motores que se sobrecargan vistas (deben ponerse en orden de apilamiento 
 # lógico y no alfabetico como las gemas anteriores)
 
-gem 'sip', # Motor generico
-  git: 'https://github.com/pasosdeJesus/sip.git', branch: :main
-  #path: '../sip'
+gem 'msip', # Motor generico
+  git: 'https://github.com/pasosdeJesus/msip.git', branch: :main
+  #path: '../msip'
 
 
 group :development, :test do

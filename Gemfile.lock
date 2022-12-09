@@ -10,22 +10,24 @@ GIT
       terrapin (~> 0.6.0)
 
 GIT
-  remote: https://github.com/pasosdeJesus/sip.git
-  revision: a3e756f998528ef6124c654a62f41498ebb7bc2e
+  remote: https://github.com/pasosdeJesus/msip.git
+  revision: 0bd8237429dbef8fc3e4148a91c7d4acd479dde7
   branch: main
   specs:
-    sip (2.1.0.beta1)
-      cancancan
-      coffee-rails
-      devise
-      devise-i18n
-      kt-paperclip
-      minitest
-      rails
-      rails-i18n
-      sassc-rails
-      simple_form
-      twitter_cldr
+    msip (2.2.0.alfa3)
+      cancancan (~> 3)
+      devise (~> 4)
+      devise-i18n (~> 1)
+      kt-paperclip (~> 7)
+      pg (~> 1)
+      rails (~> 7.0)
+      rails-i18n (~> 7)
+      sassc-rails (~> 2)
+      simple_form (~> 5)
+      sprockets-rails (~> 3)
+      stimulus-rails (~> 1)
+      twitter_cldr (~> 6)
+      will_paginate (~> 3)
 
 GIT
   remote: https://github.com/vtamara/cocoon.git
@@ -38,8 +40,8 @@ PATH
   remote: .
   specs:
     sal7711_gen (2.1.0.beta1)
+      msip
       rails
-      sip
 
 GEM
   remote: https://rubygems.org/
@@ -359,6 +361,7 @@ DEPENDENCIES
   kt-paperclip!
   matrix
   minitest-reporters
+  msip!
   net-smtp
   nokogiri (>= 1.11.1)
   pg
@@ -370,7 +373,6 @@ DEPENDENCIES
   sassc-rails
   simple_form
   simplecov
-  sip!
   spring
   sprockets-rails
   stimulus-rails

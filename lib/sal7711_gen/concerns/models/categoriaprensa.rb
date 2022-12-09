@@ -3,14 +3,16 @@ module Sal7711Gen
     module Models
       module Categoriaprensa
         extend ActiveSupport::Concern
-        include Sip::Basica
+        include Msip::Basica
 
         included do
 
-          has_many :articulo_categoriaprensa, 
+
+          has_and_belongs_to_many :articulo, 
+            class_name: "Sal7711Gen::Articulo",
             foreign_key: "categoriaprensa_id", 
-            validate: true,
-            class_name: 'Sal7711Gen::ArticuloCategoriaprensa'
+            association_foreign_key: "articulo_id",
+            join_table: "sal7711_gen_articulo_categoriaprensa"
 
           validates :codigo, presence: true, allow_blank: false, 
             uniqueness: { case_senstivie: false }

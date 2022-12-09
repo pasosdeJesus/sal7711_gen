@@ -50,7 +50,7 @@
   <%= render partial: 'index_categoria', locals: {f: f} %>
 
   <%= f.input :fuente,
-    collection: Sip::Fuenteprensa.habilitados,
+    collection: Msip::Fuenteprensa.habilitados,
     label: 'Fuente',
     label_method: :nombre,
     value_method: :id,

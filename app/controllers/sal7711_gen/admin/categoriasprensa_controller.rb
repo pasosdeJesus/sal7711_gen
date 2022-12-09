@@ -1,6 +1,6 @@
 module Sal7711Gen
   module Admin
-    class CategoriasprensaController < Sip::Admin::BasicasController
+    class CategoriasprensaController < Msip::Admin::BasicasController
       before_action :set_categoriaprensa, 
         only: [:show, :edit, :update, :destroy]
       load_and_authorize_resource  class: Sal7711Gen::Categoriaprensa

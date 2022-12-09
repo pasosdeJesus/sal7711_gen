@@ -27,7 +27,7 @@ module Dummy
 
     config.active_record.schema_format = :sql
 
-    config.railties_order = [:main_app, Sip::Engine, :all]
+    config.railties_order = [:main_app, Msip::Engine, :all]
 
     #config.relative_url_root = ENV.fetch('RUTA_RELATIVA', '/sal7711')
 
@@ -35,7 +35,7 @@ module Dummy
     config.hosts.concat(
       ENV.fetch('CONFIG_HOSTS', 'defensor.info').downcase.split(";"))
 
-    #sip
+    #msip
     config.x.formato_fecha = ENV.fetch(
       'SIP_FORMATO_FECHA', 'dd/mm/yyyy')
    
