@@ -1,5 +1,5 @@
 module Sal7711Gen
-  class HogarController < Sip::HogarController
+  class HogarController < Msip::HogarController
 
     # Sin definir autorizacion porque es para no autenticados
     

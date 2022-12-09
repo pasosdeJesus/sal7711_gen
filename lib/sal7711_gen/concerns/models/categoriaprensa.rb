@@ -3,7 +3,7 @@ module Sal7711Gen
     module Models
       module Categoriaprensa
         extend ActiveSupport::Concern
-        include Sip::Basica
+        include Msip::Basica
 
         included do
 

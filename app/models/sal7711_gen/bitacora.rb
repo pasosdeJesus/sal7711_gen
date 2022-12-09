@@ -1,7 +1,7 @@
 module Sal7711Gen
   class Bitacora < ActiveRecord::Base
 
-    include Sip::Localizacion
+    include Msip::Localizacion
 
     serialize :detalle
     belongs_to :usuario, foreign_key: 'usuario_id',

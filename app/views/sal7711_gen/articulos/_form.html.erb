@@ -6,7 +6,7 @@
   <div class="row">
     <div id="campos" class="offset-sm-0 col-sm-4">
   
-      <%= render partial: 'sip/hogar/errores', locals: { f: f } %>
+      <%= render partial: 'msip/hogar/errores', locals: { f: f } %>
 
       <% if !f.object || !f.object.id || !f.object.adjunto_file_name %>
         <%= f.input :adjunto, as: :file, label: 'Archivo (.jpg, .png, .tiff)',
@@ -27,7 +27,7 @@
       <%= render partial: 'articulos_categoria', locals: { f: f } %>
 
       <%= f.association :fuenteprensa,
-        collection: Sip::Fuenteprensa.habilitados,
+        collection: Msip::Fuenteprensa.habilitados,
         label_method: :nombre, 
         value_method: :id,
         include_blank: false %>

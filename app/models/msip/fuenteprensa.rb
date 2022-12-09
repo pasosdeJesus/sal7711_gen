@@ -1,6 +1,6 @@
 require 'sal7711_gen/concerns/models/fuenteprensa'
 
-module Sip
+module Msip
   class Fuenteprensa < ActiveRecord::Base
     include Sal7711Gen::Concerns::Models::Fuenteprensa
   end

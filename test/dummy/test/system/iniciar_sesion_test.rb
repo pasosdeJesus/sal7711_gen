@@ -4,7 +4,7 @@ class IniciarSesionTest < ApplicationSystemTestCase
 
   test "iniciar sesión" do
     skip
-    Sip::CapybaraHelper.iniciar_sesion(
+    Msip::CapybaraHelper.iniciar_sesion(
       self, Rails.configuration.relative_url_root, 'sal7711', 'sal7711')
     
   end

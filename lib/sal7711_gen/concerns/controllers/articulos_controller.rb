@@ -7,7 +7,7 @@ module Sal7711Gen
 
         included do
           include ActionView::Helpers::AssetUrlHelper
-          include Sip::FormatoFechaHelper
+          include Msip::FormatoFechaHelper
           include Sal7711Gen::ApplicationHelper
           helper Sal7711Gen::ApplicationHelper
   
@@ -53,7 +53,7 @@ module Sal7711Gen
           def self.gen_descripcion_bd(articulo)
             ndep = ''
             if articulo.departamento_id
-              dep = Sip::Departamento.find(articulo.departamento_id)
+              dep = Msip::Departamento.find(articulo.departamento_id)
               ndep = articulo.departamento.nombre
             end
             nmun = ''
@@ -67,7 +67,7 @@ module Sal7711Gen
             ncat = gen_descripcion_categoria_bd articulo
             npag = gen_descripcion_pagina_bd articulo
             ap = articulo.fecha ?  
-              Sip::FormatoFechaHelper::fecha_estandar_local(articulo.fecha.to_s) : ''
+              Msip::FormatoFechaHelper::fecha_estandar_local(articulo.fecha.to_s) : ''
             return ap + " | " + ncat + " | " +
               nmun + " / " + ndep + " | " + nfuente + npag
           end
@@ -84,7 +84,7 @@ module Sal7711Gen
             respond_to do |format|
               if articulo.save
                 Sal7711Gen::Bitacora.a( request.remote_ip, current_usuario, 
-                                       'crea', params, articulo.id)
+                                       'crea', params.to_s, articulo.id)
                 ordena_articulo
                 format.html { 
                   redirect_to articulos_url, notice: 'Artículo creado.' 
@@ -119,7 +119,7 @@ module Sal7711Gen
             respond_to do |format|
               if @articulo.update(articulo_params)
                 Sal7711Gen::Bitacora.a( request.remote_ip, current_usuario, 
-                                       'actualiza', params, @articulo.id)
+                                       'actualiza', params.to_s, @articulo.id)
                 ordena_articulo
                 format.html { 
                   redirect_to @articulo, notice: 'Artículo actualizado.' 
@@ -140,7 +140,7 @@ module Sal7711Gen
             authorize! :edit, Sal7711Gen::Articulo
             @articulo.destroy
             Sal7711Gen::Bitacora.a( request.remote_ip, current_usuario, 
-                                   'elimina', params, @articulo.id)
+                                   'elimina', params.to_s, @articulo.id)
             respond_to do |format|
               format.html { 
                 redirect_to articulos_url, notice: 'Artículo eliminado.' 

@@ -1,4 +1,4 @@
-require 'sip/concerns/controllers/usuarios_controller'
+require 'msip/concerns/controllers/usuarios_controller'
 
 module Sal7711Gen
   module Concerns
@@ -8,7 +8,7 @@ module Sal7711Gen
         extend ActiveSupport::Concern
 
         included do
-          include Sip::Concerns::Controllers::UsuariosController  
+          include Msip::Concerns::Controllers::UsuariosController  
 
           def destroy
             id = params[:id].to_i

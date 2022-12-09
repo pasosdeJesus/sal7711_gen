@@ -9,7 +9,7 @@
 
 ### Requerimientos Tecnológicos
 
-Ver <https://github.com/pasosdeJesus/sip/wiki/Requerimientos>
+Ver <https://gitlab.com/pasosdeJesus/msip/wiki/Requerimientos>
 
 ## Pruebas
 
@@ -24,7 +24,7 @@ otro motor que es análogo a este, ver
   con ```config.x.formato_fecha = 'yyyy-mm-dd'``` o  bien con 
   ```config.x.formato_fecha = 'dd-mm-yyyy'```
 * El directorio donde se almacenan los artículos sin conversión
-  (e.g .tif) es el de anexos configurable en config/initializers/sip.rb
+  (e.g .tif) es el de anexos configurable en config/initializers/msip.rb
   Se creará una estructura de directorios con base en la fecha del
   artículo.
 * El colchón para artículos es un directorio en ```public``` o usable 

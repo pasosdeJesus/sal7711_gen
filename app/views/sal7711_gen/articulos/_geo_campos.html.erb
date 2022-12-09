@@ -1,14 +1,14 @@
-<% paisid = Sip.paisomision ?  Sip.paisomision : 170 %>
+<% paisid = Msip.paisomision ?  Msip.paisomision : 170 %>
 
 <%= f.association :departamento,
-  collection: Sip::Departamento.habilitados.
+  collection: Msip::Departamento.habilitados.
   where(id_pais: paisid),
   label_method: :nombre, 
   value_method: :id 
 %>
   <%= f.association :municipio,
-    collection: Sip::Municipio.habilitados.joins(:departamento).
-    where("sip_departamento.id_pais = ?", paisid),
+    collection: Msip::Municipio.habilitados.joins(:departamento).
+    where("msip_departamento.id_pais = ?", paisid),
     label_method: :nombre, 
     value_method: :id
   %>

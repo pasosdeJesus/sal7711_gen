@@ -1,11 +1,11 @@
-require 'sip/concerns/models/fuenteprensa'
+require 'msip/concerns/models/fuenteprensa'
 
 module Sal7711Gen
   module Concerns
     module Models
       module Fuenteprensa
         extend ActiveSupport::Concern
-        include Sip::Concerns::Models::Fuenteprensa
+        include Msip::Concerns::Models::Fuenteprensa
 
         included do
 

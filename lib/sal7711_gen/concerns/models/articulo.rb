@@ -7,22 +7,22 @@ module Sal7711Gen
 
         included do
 
-          include Sip::Localizacion
-          include Sip::Modelo
+          include Msip::Localizacion
+          include Msip::Modelo
 
           belongs_to :departamento, foreign_key: "departamento_id",
-            validate: true, class_name: "Sip::Departamento", optional: true
+            validate: true, class_name: "Msip::Departamento", optional: true
           belongs_to :municipio, foreign_key: "municipio_id",
-            validate: true, class_name: "Sip::Municipio", optional: true
+            validate: true, class_name: "Msip::Municipio", optional: true
           belongs_to :fuenteprensa, foreign_key: "fuenteprensa_id",
-            validate: true, class_name: "Sip::Fuenteprensa", optional: true
+            validate: true, class_name: "Msip::Fuenteprensa", optional: true
 
           campofecha_localizado :fecha
 
           has_attached_file :adjunto, :path => :ruta_articulo
 
           def ruta_articulo
-            File.join(Sip.ruta_anexos, created_at.year.to_s,
+            File.join(Msip.ruta_anexos, created_at.year.to_s,
             created_at.month.to_s.rjust(2, '0'),
             created_at.day.to_s.rjust(2, '0'),
             "/#{id}_#{adjunto_file_name}")
@@ -37,7 +37,6 @@ module Sal7711Gen
             presence: Rails.application.config.x.sal7711_presencia_adjuntodesc, 
             allow_blank: Rails.application.config.x.sal7711_presencia_adjuntodesc,
             length: { maximum: 1500 } 
-
 
           has_and_belongs_to_many :categoriaprensa,
             class_name: 'Sal7711Gen::Categoriaprensa',
