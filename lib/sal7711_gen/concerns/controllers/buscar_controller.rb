@@ -30,7 +30,8 @@ module Sal7711Gen
               cat = Sal7711Gen::Categoriaprensa.where('codigo=?', ccat).take;
               if cat
                 articulos = articulos.joins(
-                  :articulo_categoriaprensa).where(
+                  "JOIN sal7711_gen_articulo_categoriaprensa ON "\
+                  "sal7711_gen_articulo.id=sal7711_gen_articulo_categoriaprensa.articulo_id").where(
                     "categoriaprensa_id=?", cat)
               end
               return articulos
