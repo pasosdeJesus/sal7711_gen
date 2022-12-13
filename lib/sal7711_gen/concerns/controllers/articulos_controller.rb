@@ -36,9 +36,7 @@ module Sal7711Gen
           end
 
           def self.gen_descripcion_categoria_bd articulo
-            return articulo.articulo_categoriaprensa.to_a.map {|i| 
-              i.categoriaprensa_id 
-            }.uniq.inject("") { 
+            return articulo.categoriaprensa_ids.uniq.inject("") { 
               |memo, i| 
               c = Sal7711Gen::Categoriaprensa.find(i).codigo
               memo == "" ? c : memo + ", " + c 

@@ -18,10 +18,10 @@ module Sal7711Gen
       detalle3 = detalle3 ? detalle3.to_s : ''
       detalle3 = detalle3[0..499] if detalle3 && detalle3.length > 500
       b = Bitacora.new(fecha: Time.now.utc.iso8601,
-                   ip: ip,
+                       ip: ip.to_s,
                    usuario_id: usuario.id,
-                   operacion: operacion,
-                   detalle: detalle,
+                   operacion: operacion.to_s,
+                   detalle: detalle.to_s,
                    detalle2: detalle2,
                    detalle3: detalle3)
       if b.detalle && b.detalle.to_yaml.length > 5000
