@@ -39,7 +39,7 @@ GIT
 PATH
   remote: .
   specs:
-    sal7711_gen (2.1.0.beta1)
+    sal7711_gen (2.2.0.beta1)
       msip
       rails
 
