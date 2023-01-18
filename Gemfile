@@ -71,11 +71,25 @@ gem 'msip', # Motor generico
 
 
 group :development, :test do
-  gem 'debug' # Depurar
+  gem "brakeman"
 
-  gem 'colorize' # Colores en consola
+  gem "bundler-audit"
 
-  gem 'dotenv-rails'
+  gem "code-scanning-rubocop"
+
+  gem "colorize"
+
+  gem "debug"
+
+  gem "dotenv-rails"
+
+  gem "rails-erd"
+
+  gem "rubocop-minitest"
+
+  gem "rubocop-rails"
+
+  gem "rubocop-shopify"
 end
 
 

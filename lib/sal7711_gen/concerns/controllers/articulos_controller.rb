@@ -53,7 +53,6 @@ module Sal7711Gen
           def self.gen_descripcion_bd(articulo)
             ndep = ''
             if articulo.departamento_id
-              dep = Msip::Departamento.find(articulo.departamento_id)
               ndep = articulo.departamento.nombre
             end
             nmun = ''

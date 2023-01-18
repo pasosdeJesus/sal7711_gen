@@ -1,0 +1,75 @@
+{
+  "ignored_warnings": [
+    {
+      "warning_type": "Command Injection",
+      "warning_code": 14,
+      "fingerprint": "4a4f2d92115ead7f9ced0a7f7969716fea137ff72d5facc8d8ba9dfd4b15d554",
+      "check_name": "Execute",
+      "message": "Possible command injection",
+      "file": "app/helpers/sal7711_gen/application_helper.rb",
+      "line": 104,
+      "link": "https://brakemanscanner.org/docs/warning_types/command_injection/",
+      "code": "system(\"/usr/local/bin/convert #{rlocal} /tmp/_sal7711_cinep_mp-%d.jpg\")",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "Sal7711Gen::ApplicationHelper",
+        "method": "prepara_imagenes"
+      },
+      "user_input": "rlocal",
+      "confidence": "Medium",
+      "cwe_id": [
+        77
+      ],
+      "note": ""
+    },
+    {
+      "warning_type": "SQL Injection",
+      "warning_code": 0,
+      "fingerprint": "50a1583ee46a699d5bb1ae24b5db8426d1620731e3018e85acf11e3c150a6ed2",
+      "check_name": "SQL",
+      "message": "Possible SQL injection",
+      "file": "lib/sal7711_gen/concerns/controllers/buscar_controller.rb",
+      "line": 241,
+      "link": "https://brakemanscanner.org/docs/warning_types/sql_injection/",
+      "code": "ActiveRecord::Base.connection.select_all(\"SELECT nombre as label, idlocal as value\\n                FROM public.msip_mundep \\n                WHERE #{\" mundep  @@ to_tsquery('spanish', '#{(Msip::Municipio.connection.quote_string(params[:term]).downcase.strip + \":*\")}')\"} ORDER BY 1;\")",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "Sal7711Gen::Concerns::Controllers::BuscarController",
+        "method": "mundep"
+      },
+      "user_input": "params[:term]",
+      "confidence": "High",
+      "cwe_id": [
+        89
+      ],
+      "note": ""
+    },
+    {
+      "warning_type": "SQL Injection",
+      "warning_code": 0,
+      "fingerprint": "5c8fb1073903de4621bdafd3b25c991eb7d3ef971dd89243617422a96c82e64f",
+      "check_name": "SQL",
+      "message": "Possible SQL injection",
+      "file": "app/controllers/sal7711_gen/buscar_controller.rb",
+      "line": 241,
+      "link": "https://brakemanscanner.org/docs/warning_types/sql_injection/",
+      "code": "ActiveRecord::Base.connection.select_all(\"SELECT nombre as label, idlocal as value\\n                FROM public.msip_mundep \\n                WHERE #{\" mundep  @@ to_tsquery('spanish', '#{(Msip::Municipio.connection.quote_string(params[:term]).downcase.strip + \":*\")}')\"} ORDER BY 1;\")",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "Sal7711Gen::BuscarController",
+        "method": "mundep"
+      },
+      "user_input": "params[:term]",
+      "confidence": "High",
+      "cwe_id": [
+        89
+      ],
+      "note": ""
+    }
+  ],
+  "updated": "2023-01-18 06:36:06 -0500",
+  "brakeman_version": "5.4.0"
+}
