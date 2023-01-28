@@ -50,7 +50,7 @@ module Sal7711Gen
       rutapublic = Rails.root.join('public')
       urlcolchon = Rails.application.config.x.url_colchon.to_s
       rutacolchon = rutapublic.join(urlcolchon)
-      if (!File.exists? rutacolchon.to_s)
+      if (!File.exist? rutacolchon.to_s)
         raise "Crear directorio #{rutacolchon.to_s}"
       end
       titulo = a.adjunto_descripcion
@@ -85,17 +85,17 @@ module Sal7711Gen
       titulo, texto, rlocal, rutajpg, urljpg, rutapdf, urlpdf = 
         datos_articulo(id)
       # Genera JPG
-      if !File.exists? "#{rutajpg.to_s}"
+      if !File.exist? "#{rutajpg.to_s}"
         FileUtils.mkdir_p rutajpg.dirname
         system('convert', '-append', rlocal.to_s, rutajpg.to_s)
       end
-      if !File.exists? "#{rutajpg.to_s}"
+      if !File.exist? "#{rutajpg.to_s}"
         flash[:error] = "No fue posible convertir #{rlocal}"
         render inline: "No fue posible convertir #{rlocal}"
         return
       end
       # Genera PDF
-      if !File.exists? "#{rutapdf.to_s}"
+      if !File.exist? "#{rutapdf.to_s}"
         cmd = "rm -rf /tmp/_sal7711_cinep_mp*"
         puts cmd
         system(cmd)
