@@ -54,7 +54,7 @@ module Sal7711Gen
             if municipio 
               if !departamento 
                 errors.add :departamento, "Municipio sin departamento"
-              elsif municipio.id_departamento != departamento.id
+              elsif municipio.departamento_id != departamento.id
                 errors.add :municipio, "Municipio no corresponda a departamento"
               end
             end

@@ -2,13 +2,13 @@
 
 <%= f.association :departamento,
   collection: Msip::Departamento.habilitados.
-  where(id_pais: paisid),
+  where(pais_id: paisid),
   label_method: :nombre, 
   value_method: :id 
 %>
   <%= f.association :municipio,
     collection: Msip::Municipio.habilitados.joins(:departamento).
-    where("msip_departamento.id_pais = ?", paisid),
+    where("msip_departamento.pais_id = ?", paisid),
     label_method: :nombre, 
     value_method: :id
   %>

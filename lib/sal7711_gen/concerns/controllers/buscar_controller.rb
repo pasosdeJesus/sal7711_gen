@@ -59,7 +59,7 @@ module Sal7711Gen
                 ldep = Msip::Departamento.all.where('nombre=?', pmd[0])
                 if Msip.paisomision 
                   ldep = ldep.where(
-                    'id_pais=?', Msip.paisomision)
+                    'pais_id=?', Msip.paisomision)
                 end
                 dep = ldep.take
                 if dep
@@ -71,12 +71,12 @@ module Sal7711Gen
                 ldep = Msip::Departamento.all.where('nombre=?', pmd[1])
                 if Msip.paisomision
                   ldep = ldep.where(
-                    'id_pais=?', Msip.paisomision)
+                    'pais_id=?', Msip.paisomision)
                 end
                 dep = ldep.take
                 if dep
                   mun = Msip::Municipio.all.where(
-                    'nombre=? AND id_departamento=?', pmd[0], dep.id).take
+                    'nombre=? AND departamento_id=?', pmd[0], dep.id).take
                   if mun
                     @articulos = @articulos.where("municipio_id = ?", mun.id)
                   else
