@@ -14,7 +14,7 @@
 
         <% if can? :manage, Sal7711Gen::Articulo %>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
-            "#", 
+            "#",
             class: 'btn btn-sm',
             id: 'editar-articulo',
             onclick: "$('#modal-imagen').modal('hide');" +
