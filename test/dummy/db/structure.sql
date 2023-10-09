@@ -1746,7 +1746,6 @@ CREATE TABLE public.usuario (
     last_sign_in_ip character varying(255),
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
-    regionsjr_id integer,
     tema_id integer,
     CONSTRAINT usuario_check CHECK (((fechadeshabilitacion IS NULL) OR (fechadeshabilitacion >= fechacreacion))),
     CONSTRAINT usuario_rol_check CHECK ((rol >= 1))
@@ -2994,6 +2993,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20230712163859'),
 ('20230722180204'),
 ('20230723011110'),
-('20230927001422');
+('20230927001422'),
+('20231007095930');
 
 
