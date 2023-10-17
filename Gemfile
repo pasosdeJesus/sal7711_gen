@@ -10,7 +10,7 @@ gem "bcrypt"
 
 gem "bigdecimal"
 
-gem "bootsnap",  ">=1.1.0", require: false
+gem "bootsnap",  require: false
 
 gem "cancancan"
 
@@ -34,13 +34,13 @@ gem "matrix" # requerido por ruby 3.1
 
 gem "net-smtp" # requerido por ruby 3.1
 
-gem "nokogiri", ">=1.11.1"
+gem "nokogiri"
 
 gem "pg" # Postgresql
 
 gem "prawn" # Para generar PDF
 
-gem "rails", ">= 7.0", "<7.1"
+gem "rails", "~> 7.1"
   #git: "https://github.com/rails/rails.git", branch: "6-1-stable"
 
 gem "rails-i18n"
@@ -53,7 +53,7 @@ gem "sprockets-rails"
 
 gem "stimulus-rails"
 
-gem "turbo-rails", "~> 1.0"
+gem "turbo-rails"
 
 gem "twitter_cldr" # ICU con CLDR
 
@@ -66,7 +66,7 @@ gem "will_paginate" # Listados en páginas
 # lógico y no alfabetico como las gemas anteriores)
 
 gem "msip", # Motor generico
-  git: "https://gitlab.com/pasosdeJesus/msip.git", branch: "main"
+  git: "https://gitlab.com/pasosdeJesus/msip.git", branch: "rails7.1"
   #path: "../msip"
 
 
