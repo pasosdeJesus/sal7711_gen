@@ -6,7 +6,7 @@ es:
     formatoregex: Formato (exp. reg)
     municipio_id: Municipio
     departamento_id: Departamento/Estado
-    tclase_id: Tipo de Centro Poblado
+    tcentropoblado_id: Tipo de Centro Poblado
     pais_id: País
     id_supracategoria: Supracategoria
     id_tviolencia: Tipo de Violencia

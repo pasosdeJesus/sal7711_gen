@@ -6,13 +6,13 @@ module Sal7711Gen
     ]
     def tablasbasicas 
       Msip::Ability::BASICAS_PROPIAS + BASICAS_PROPIAS - [
-        ['Msip', 'clase'],
+        ['Msip', 'centropoblado'],
         ['Msip', 'etiqueta'],
         ['Msip', 'grupo'],
         ['Msip', 'oficina'],
         ['Msip', 'perfilorgsocial'],
         ['Msip', 'sectororgsocial'],
-        ['Msip', 'tclase'],
+        ['Msip', 'tcentropoblado'],
         ['Msip', 'tdocumento'],
         ['Msip', 'trelacion'],
         ['Msip', 'trivalente'],
