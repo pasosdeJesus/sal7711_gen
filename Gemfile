@@ -40,7 +40,9 @@ gem "pg" # Postgresql
 
 gem "prawn" # Para generar PDF
 
-gem "rails", ">= 7.0", "<7.1"
+  gem "rack", "~> 2"
+
+  gem "rails", ">= 7.1", "<7.2"
   #git: "https://github.com/rails/rails.git", branch: "6-1-stable"
 
 gem "rails-i18n"

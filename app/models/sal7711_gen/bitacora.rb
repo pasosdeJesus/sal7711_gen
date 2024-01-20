@@ -3,7 +3,7 @@ module Sal7711Gen
 
     include Msip::Localizacion
 
-    serialize :detalle
+    serialize :detalle, coder: YAML
     belongs_to :usuario, foreign_key: 'usuario_id',
       validate: true, class_name: 'Usuario', optional: false
 

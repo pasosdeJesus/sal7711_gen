@@ -109,6 +109,7 @@ module Sal7711Gen
           def edit
             authorize! :edit, Sal7711Gen::Articulo
             prepara_imagenes(@articulo.id)
+            render layout: 'application'
           end
 
           # PATCH/PUT /articulos/1
