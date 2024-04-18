@@ -10,7 +10,7 @@ Gem::Specification.new do |s|
   s.version     = Sal7711Gen::VERSION
   s.authors     = ["Vladimir Támara Patiño"]
   s.email       = ["vtamara@pasosdeJesus.org"]
-  s.homepage    = "http://github.com/pasosdeJesus/sal7711_gen"
+  s.homepage    = "http://gitlab.com/pasosdeJesus/sal7711_gen"
   s.summary     = "Motor para Archivo de Prensa Genérico"
   s.description = "Partes comunes a diversos Archivos de Prensa"
   s.license     = "Dominio Público de acuerdo a Legislación Colombiana"

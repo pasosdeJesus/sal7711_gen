@@ -2,7 +2,7 @@
 
 [![Revisado por Hound](https://img.shields.io/badge/Reviewed_by-Hound-8E64B0.svg)](https://houndci.com) Pruebas y seguridad:[![Estado Construcción](https://gitlab.com/pasosdeJesus/sal7711_gen/badges/main/pipeline.svg)](https://gitlab.com/pasosdeJesus/sal7711_gen/-/pipelines?page=1&scope=all&ref=main) [![Clima del Código](https://codeclimate.com/github/pasosdeJesus/sal7711_gen/badges/gpa.svg)](https://codeclimate.com/github/pasosdeJesus/sal7711_gen) [![Cobertura de Pruebas](https://codeclimate.com/github/pasosdeJesus/sal7711_gen/badges/coverage.svg)](https://codeclimate.com/github/pasosdeJesus/sal7711_gen)
 
-![Logo de sal7711](https://raw.githubusercontent.com/pasosdeJesus/sal7711_gen/master/test/dummy/app/assets/images/logo.jpg)
+![Logo de sal7711](https://gitlab.com/pasosdeJesus/sal7711_gen/-/raw/main/test/dummy/app/assets/images/logo.jpg)
 
 
 ## Uso
@@ -16,7 +16,7 @@ Ver <https://gitlab.com/pasosdeJesus/msip/wiki/Requerimientos>
 Es posible ejecutar una aplicación de prueba incluida con este motor así
 como pruebas de regresión que la usan.  Favor revisar estos aspectos en
 otro motor que es análogo a este, ver 
-<https://github.com/pasosdeJesus/sivel2_gen/
+<https://gitlab.com/pasosdeJesus/sivel2_gen/
 
 ## Configuración 
 
