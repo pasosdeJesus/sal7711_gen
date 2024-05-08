@@ -18,7 +18,7 @@ GIT
 
 GIT
   remote: https://gitlab.com/pasosdeJesus/msip.git
-  revision: c26268bf266ef561dce07aa68e586755c5ace7aa
+  revision: 54f056503d1fe1ca997101585cfa0a6d080ad9af
   branch: v2.2
   specs:
     msip (2.2.0.beta6)
@@ -130,7 +130,7 @@ GEM
       execjs (~> 2.0)
     base64 (0.2.0)
     bcrypt (3.1.20)
-    bigdecimal (3.1.7)
+    bigdecimal (3.1.8)
     bindex (0.8.1)
     bootsnap (1.18.3)
       msgpack (~> 1.2)
@@ -467,4 +467,4 @@ DEPENDENCIES
   will_paginate
 
 BUNDLED WITH
-   2.5.9
+   2.5.10
