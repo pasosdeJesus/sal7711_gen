@@ -15,7 +15,7 @@
     <% end %>
   <% end %>
   <%= grupo_menus :empujar => :derecha do %>
-    <%= opcion_menu "Documentacion", '/acercade' %>
+    <%= opcion_menu "Documentacion", "https://gitlab.com/pasosdeJesus/msip/tree/main/doc" %>
     <% if !current_usuario.nil? %>
       <%= despliega_abajo "Administrar" do %>
         <%= opcion_menu "Clave", main_app.editar_registro_usuario_path,
@@ -32,7 +32,7 @@
       <%= opcion_menu "Salir #{current_usuario.nusuario}", 
         main_app.sign_out_path %>
     <% else %>
-      <%= opcion_menu "Acerca de", '/acercade' %>
+      <%= opcion_menu "Acerca de", msip.acercade_path %>
       <%= opcion_menu "Iniciar Sesión", main_app.new_usuario_session_path %> 
     <% end %>
   <% end %>

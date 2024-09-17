@@ -69,7 +69,7 @@ gem "will_paginate" # Listados en páginas
 
 gem "msip", # Motor generico
   git: "https://gitlab.com/pasosdeJesus/msip.git", branch: "v2.2"
-  #path: "../msip"
+  #path: "../msip-2.2"
 
 
 group :development, :test do
