@@ -18,10 +18,10 @@ GIT
 
 GIT
   remote: https://gitlab.com/pasosdeJesus/msip.git
-  revision: cb2ca677c79f8f386ad45819fd59b0196a1dd04b
+  revision: e80002e10f5b8ee07d7ec15b2c5426ef8aa5348a
   branch: v2.2
   specs:
-    msip (2.2.0.beta6)
+    msip (2.2.0.beta7)
       cancancan (~> 3)
       devise (~> 4)
       devise-i18n (~> 1)
@@ -466,4 +466,4 @@ DEPENDENCIES
   will_paginate
 
 BUNDLED WITH
-   2.5.19
+   2.5.20
